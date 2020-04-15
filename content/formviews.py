@@ -1,0 +1,123 @@
+from django.shortcuts import render , redirect , get_object_or_404 , get_list_or_404
+from requirments.models import *
+from .models import *
+from .forms import *
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group
+from authentication.user_handeling import unauthenticated_user, allowed_users, admin_only
+
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Admin'])
+def ManageClassesCreateView(CreateView):
+    if CreateView.method == 'POST':
+        form = ClassesForm(CreateView.POST)
+        if form.is_valid:
+            form.save()
+            context = {
+                'return': 'Has Been Added SuccessFully'
+            }
+            return render(CreateView,'Forms/Created/classes.html',context)
+        else:
+            context = {
+                'return': 'Is Not Valid'
+            }
+            return render(CreateView,'Forms/Created/classes.html',context)
+    else:
+        form = ClassesForm()
+        context = {
+            'form': form
+        }
+        return render(CreateView , 'Forms/Create/classes.html' , context)
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Admin'])
+def ManageSubjectsCreateView(CreateView):
+    if CreateView.method == 'POST':
+        form = SubjectsForm(CreateView.POST)
+        if form.is_valid:
+            form.save()
+            context = {
+                'return': 'Has Been Added SuccessFully'
+            }
+            return render(CreateView,'Forms/Created/subjects.html',context)
+        else:
+            context = {
+                'return': 'Is Not Valid'
+            }
+            return render(CreateView,'Forms/Created/subjects.html',context)
+    else:
+        form = SubjectsForm()
+        context = {
+            'form': form
+        }
+        return render(CreateView ,'Forms/Create/subjects.html', context)
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Admin'])
+def ManageClassSubjectsCreateView(CreateView):
+    if CreateView.method == 'POST':
+        form = ClassSubjectsForm(CreateView.POST)
+        if form.is_valid:
+            form.save()
+            context = {
+                'return': 'Has Been Added SuccessFully'
+            }
+            return render(CreateView,'Forms/Created/classsubjects.html',context)
+        else:
+            context = {
+                'return': 'Is Not Valid'
+            }
+            return render(CreateView,'Forms/Created/classsubjects.html',context)
+    else:
+        form = ClassSubjectsForm()
+        context = {
+            'form': form
+        }
+        return render(CreateView ,'Forms/Create/classsubjects.html', context)
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Admin'])
+def ManageModuleCreateView(CreateView):
+    if CreateView.method == 'POST':
+        form = ModuleForm(CreateView.POST)
+        if form.is_valid:
+            form.save()
+            context = {
+                'return': 'Has Been Added SuccessFully'
+            }
+            return render(CreateView,'Forms/Created/module.html',context)
+        else:
+            context = {
+                'return': 'Is Not Valid'
+            }
+            return render(CreateView,'Forms/Created/module.html',context)
+    else:
+        form = ModuleForm()
+        context = {
+            'form': form
+        }
+        return render(CreateView ,'Forms/Create/module.html', context)
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Admin'])
+def ManageContentCreateView(CreateView):
+    if CreateView.method == 'POST':
+        form = ContentForm(CreateView.POST)
+        if form.is_valid:
+            form.save()
+            context = {
+                'return': 'Has Been Added SuccessFully'
+            }
+            return render(CreateView,'Forms/Created/content.html',context)
+        else:
+            context = {
+                'return': 'Is Not Valid'
+            }
+            return render(CreateView,'Forms/Created/content.html',context)
+    else:
+        form = ContentForm()
+        context = {
+            'form': form,
+        }
+        return render(CreateView ,'Forms/Create/content.html', context)

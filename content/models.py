@@ -1,0 +1,22 @@
+from django.db import models
+from requirments.models import *
+
+class Module(models.Model):
+    code = models.AutoField(primary_key = True)
+    module = models.CharField(max_length=250)
+    def __str__(self):
+        return self.module
+
+class Content(models.Model):
+    code = models.AutoField(primary_key = True)
+    class_name = models.ForeignKey(Classes , on_delete = models.CASCADE)
+    subject = models.ForeignKey(Subjects , on_delete = models.CASCADE)
+    module = models.ForeignKey(Module , on_delete = models.CASCADE)
+    date = models.DateField()
+    title = models.CharField(max_length=250)
+    text = models.TextField(null = True)
+    url = models.URLField(max_length=500 , null = True)
+    def __str__(self):
+        return self.title
+
+    

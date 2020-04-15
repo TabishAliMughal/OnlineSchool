@@ -1,0 +1,43 @@
+body{
+    margin: 0px;
+}
+.footer{
+    background-color: black;
+    color: white;
+    text-align: center;
+    font-family: sans-serif;
+    padding: 1px 0px;
+    margin-top: 30px;
+    text-transform: capitalize;
+}
+.footer .footer-icons{
+    border-radius: 80px;
+}
+.footer .footer-icons img{
+    width: 50px;
+}
+.footer .footer-anchors{
+    
+}
+.footer .footer-anchors a{
+    margin: 0px 4px;
+    text-decoration: none;
+    color: white;
+}
+.footer .footer-anchors a:hover{
+    color: green;
+}
+.footer .footer-text{
+
+}
+.footer.footer-text p{
+    
+}
+.footer .footer-text p a{
+    text-decoration: none;
+    color: white;
+}
+.footer .footer-text p a:hover{
+    color: green;
+    
+}

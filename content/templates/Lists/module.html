@@ -1,0 +1,28 @@
+{% extends "MainPage.html" %}
+{% load static %}
+{% block content %}
+    <link href="{% static 'css/base.css' %}"/>
+    <div class="container">
+        <h2 class="text-center" style="font-family:sans-serif;">View All Modules</h2><hr/>
+        <a class="btn btn-primary" href="{% url "module_form" %}">Add Another</a>
+        <table class="table table-hover table-sm table-dark">
+            <thead align="center">
+                <tr>
+                    <th>Name</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            {% for i in list %}
+            <tbody align="center">
+                <tr>
+                    <th>{{ i.module }}</th>
+                    <th><a class="btn btn-primary" href="{% url 'module_edit' i.pk %}">Edit</a><a href="{% url 'module_delete' i.pk %}" class="btn btn-primary" href="">Delete</a></th>
+                    </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
+    {% csrf_token %}
+</form>
+
+{% endblock %}

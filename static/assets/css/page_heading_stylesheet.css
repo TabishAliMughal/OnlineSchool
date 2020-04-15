@@ -1,0 +1,54 @@
+.container{
+	width: 80%;
+	margin: auto;
+}
+.section-title {
+    margin: 15px 0px;
+	font-family: 'Roboto', sans-serif;
+    display: table;
+}
+
+.section-title h2 {
+    display: block;
+    font-size: 40px;
+    font-weight: 700;
+    color: #343a40;
+    text-transform: uppercase;
+    white-space: pre;
+    margin: 0;
+}
+
+.section-title h2 span {
+    font-weight: 300!important;
+	color: #404040ad;
+}
+
+.title-border-container {
+    display: table-cell;
+    vertical-align: bottom;
+    width: 100%;
+}
+
+.title-border-container .title-border {
+    width: 100%;
+    height: 4px;
+    position: relative;
+    background-color: #40404073;
+    top: -10px;
+    left: 10px;
+}
+
+@media screen and (max-width: 479px) {
+    .title-border-container .title-border {
+        display: none;
+    }
+
+    .section-title h2 {
+        font-size: 24px;
+    }
+}
+
+
+
+
+

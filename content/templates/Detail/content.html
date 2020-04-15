@@ -1,0 +1,47 @@
+{% extends "MainPage.html" %}
+{% block content %}
+<form action="{% url "gr_create" %}" method="POST">
+    <div class="container">
+        <h2 class="text-center" style="font-family:sans-serif;">Content Detail</h2><hr/>
+        <table class="table table-hover table-sm table-dark">
+            <tbody>
+                <tr>
+                    <td>Class Name</td>
+                    <td>{{ detail.class_name }}</td>
+                </tr>
+                <tr>
+                    <td>Subject Name</td>
+                    <td>{{ detail.subject }}</td>
+                </tr>
+                <tr>
+                    <td>Module Name</td>
+                    <td>{{ detail.module }}</td>
+                </tr>
+                <tr>
+                    <td>Date</td>
+                    <td>{{ detail.date }}</td>
+                </tr>
+                <tr>
+                    <td>Title</td>
+                    <td>{{ detail.title }}</td>
+                </tr>
+                <tr>
+                    <td>Text</td>
+                    <td>{{ detail.text }}</td>
+                </tr>
+                <tr>
+                    <td>File</td>
+                    <td>{{ detail.file }}</td>
+                </tr>
+                <tr>
+                    <td>Youtube Url(Embed)</td>
+                    <td>{{ detail.url }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    {% csrf_token %}
+
+</form>
+
+{% endblock %}
