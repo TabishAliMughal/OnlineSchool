@@ -18,12 +18,15 @@ def ManageClassEditView(EditView,pk):
             return redirect('class')
     else:
         form = ClassesForm(instance=data)
-        return render(EditView , 'Forms/Create/classes.html')
+        context = {
+            'form' : form,
+        }
+        return render(EditView , 'Forms/Edit/classes.html' , context)
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Admin'])
 def ManageSubjectEditView(EditView,pk):
-    data = get_object_or_404(Content, pk = pk)
+    data = get_object_or_404(Subjects, pk = pk)
     if EditView.method == 'POST':
         form = SubjectsForm(EditView.POST or None, instance=data)
         if form.is_valid:
@@ -31,12 +34,15 @@ def ManageSubjectEditView(EditView,pk):
             return redirect('subject')
     else:
         form = SubjectsForm(instance=data)
-        return render(EditView ,'Forms/Create/subjects.html')
+        context = {
+            'form' : form,
+        }
+        return render(EditView ,'Forms/Edit/subjects.html' , context)
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Admin'])
 def ManageClassSubjectsEditView(EditView,pk):
-    data = get_object_or_404(Subjects, pk = pk)
+    data = get_object_or_404(ClassSubjects, pk = pk)
     if EditView.method == 'POST':
         form = ClassSubjectsForm(EditView.POST or None, instance=data)
         if form.is_valid:
@@ -44,7 +50,10 @@ def ManageClassSubjectsEditView(EditView,pk):
             return redirect('class_subject')
     else:
         form = ClassSubjectsForm(instance=data)
-        return render(EditView ,'Forms/Create/classsubjects.html')
+        context = {
+            'form' : form,
+        }
+        return render(EditView ,'Forms/Edit/classsubjects.html' , context)
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Admin'])
@@ -57,12 +66,15 @@ def ManageModuleEditView(EditView,pk):
             return redirect('module')
     else:
         form = ModuleForm(instance=data)
-        return render(EditView ,'Forms/Create/module.html')
+        context = {
+            'form' : form,
+        }
+        return render(EditView ,'Forms/Edit/module.html' , context)
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Admin'])
 def ManageContentEditView(EditView,pk):
-    data = get_object_or_404(ClassSubjects, pk = pk)
+    data = get_object_or_404(Content, pk = pk)
     if EditView.method == 'POST':
         form = ContentForm(EditView.POST or None, instance=data)
         if form.is_valid:
@@ -70,4 +82,7 @@ def ManageContentEditView(EditView,pk):
             return redirect('content')
     else:
         form = ContentForm(instance=data)
-        return render(EditView ,'Forms/Create/content.html')
+        context = {
+            'form' : form,
+        }
+        return render(EditView ,'Forms/Edit/content.html' , context)

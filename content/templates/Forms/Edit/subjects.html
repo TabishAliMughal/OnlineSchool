@@ -1,0 +1,29 @@
+{% extends "MainPage.html" %}
+{% block content %}
+<form method="POST">
+    <div class="container">
+        <h2 class="text-center" style="font-family:sans-serif;">Subjects Add Form</h2><hr/>
+        <table class="table table-hover table-sm table-dark">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Form</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Subject Name</td>
+                    <td>{{ form.subject_name }}</td>
+                </tr>
+                <tr>
+                    <td>Submit</td>
+                    <td><input class="btn btn-primary" type="submit" value="Add to Subjects"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    {% csrf_token %}
+
+</form>
+
+{% endblock %}
