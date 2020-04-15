@@ -4,27 +4,19 @@
     <head>
         <!--bootstrap file "relation stylesheet"-->
         <link rel="stylesheet" type="text/css" href="{% static './bootstrap1.css' %}" />
-        
-        <!--Jquery Calender Files-->
-        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <link rel="stylesheet" href="https://resources/demos/style.css">
-        
-        <!--templates heading files-->
-        <!--FontFamily-->
-		    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,700" rel="stylesheet" type="text/css">
 
 		    <!-- Style CSS -->
 		    <link href="{% static './page_heading_stylesheet.css'%}" rel="stylesheet">
 		
        
         <!--Page Title-->
-        <title>ONLINE SCHOOL</title>
+        <title>POCKET SCHOOL</title>
     </head>
     <body>
 
         <!--Navbar menu-->
               <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a class="navbar-brand" href="{% url "main" %}">Online School</a>
+                <a class="navbar-brand" href="{% url "main" %}">Pocket School</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
@@ -32,7 +24,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav mr-auto">
                     <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Teach
                       </a>
                       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -42,7 +34,7 @@
                       </div>
                     </li>
                     <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Add
                       </a>
                       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -56,7 +48,7 @@
                       </div>
                     </li>
                     <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         View
                       </a>
                       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -84,7 +76,6 @@
               
         <!--Main-Containt-->
               {% block content %}
-                <h1 class="text-center p-3 mb-2 bg-light text-dark">Main Page</h1>
               {% endblock %}
               <br>
               <br>
@@ -102,15 +93,20 @@
               <br>
               <br>
               <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              
               
 
         <!--Footer-->
                 <div class="container-fluid text-light bg-dark">
-                  <p class="text-center ">Recommended</p>
                   <div class="text-center" style="margin:20px 0px">
-                    <img src="{% static './assets/images/social-1.png' %}" alt="facebook-image" class="rounded-circle"/>
-                    <img src="{% static './assets/images/social-2.png' %}" alt="youtube-image" class="rounded-circle"/>
-                    <img src="{% static './assets/images/social-3.png' %}" alt="twitter-image" class="rounded-circle"/>
+                    <img src="{% static './social-1.png' %}" alt="facebook-image" class="rounded-circle"/>
+                    <img src="{% static './social-2.png' %}" alt="youtube-image" class="rounded-circle"/>
+                    <img src="{% static './social-3.png' %}" alt="twitter-image" class="rounded-circle"/>
                   </div>
                   <div class="text-center" style="margin:10px 0px">
                     <a class="btn btn-outline-success" href="#">team</a>
@@ -118,13 +114,11 @@
                     <a class="btn btn-outline-success" href="#">contact</a>
                   </div>
                   <div class="text-center">
-                    <p>© 2020 Online SCHOOL. All Rights Reserved</p>
-                    <p>Terms of Use Privacy Policy</p>
-                    <p>Design By: <span>Tabish Ali Mughal</span></p>
+                    <p>Designed And Developed By: <span><a href="https://www.facebook.com/TabishAliMughal">Tabish Ali Mughal</a></span></p>
                   </div>
                 </div>
-        <script src="{% static './assets/js/jquery.js' %}"></script>
-        <script src="{% static './assets/js/bootstrap.min.js' %}"></script>
+        <script src="{% static './jquery.js' %}"></script>
+        <script src="{% static './bootstrap.min.js' %}"></script>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     </body>
