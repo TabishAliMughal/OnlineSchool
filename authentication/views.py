@@ -7,21 +7,59 @@ from .user_handeling import unauthenticated_user, allowed_users, admin_only
 from .forms import *
 
 @unauthenticated_user
-def registerPage(request):
+def AskRegister(request):
+    return render(request , 'Authentication/RegisterAsk.html')
+
+@unauthenticated_user
+def RegisterSchool(request):
 	form = CreateUserForm()
 	if request.method == 'POST':
 		form = CreateUserForm(request.POST)
 		if form.is_valid():
 			user = form.save()
 			username = form.cleaned_data.get('username')
-			group = Group.objects.get(name='customer')
+			group = Group.objects.get(name='School')
 			user.groups.add(group)
 			messages.success(request, 'Account was created for ' + username)
-			return redirect('')
+			return redirect('login')
 	context = {
         'form':form
         }
-	return render(request, 'Authentication/register.html', context)
+	return render(request, 'Authentication/RegisterSchool.html', context)
+	
+@unauthenticated_user
+def RegisterPairent(request):
+	form = CreateUserForm()
+	if request.method == 'POST':
+		form = CreateUserForm(request.POST)
+		if form.is_valid():
+			user = form.save()
+			username = form.cleaned_data.get('username')
+			group = Group.objects.get(name='Pairents')
+			user.groups.add(group)
+			messages.success(request, 'Account was created for ' + username)
+			return redirect('login')
+	context = {
+        'form':form
+        }
+	return render(request, 'Authentication/RegisterPairent.html', context)
+	
+@unauthenticated_user
+def RegisterVisitor(request):
+	form = CreateUserForm()
+	if request.method == 'POST':
+		form = CreateUserForm(request.POST)
+		if form.is_valid():
+			user = form.save()
+			username = form.cleaned_data.get('username')
+			group = Group.objects.get(name='Visitor')
+			user.groups.add(group)
+			messages.success(request, 'Account was created for ' + username)
+			return redirect('login')
+	context = {
+        'form':form
+        }
+	return render(request, 'Authentication/RegisterVisitor.html', context)
 
 @unauthenticated_user
 def loginPage(request):
