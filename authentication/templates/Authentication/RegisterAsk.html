@@ -1,0 +1,27 @@
+{% load static %}
+<head>
+    <!--bootstrap file "relation stylesheet"-->
+    <link rel="stylesheet" type="text/css" href="{% static './bootstrap1.css' %}" />
+
+    <!-- Style CSS -->
+    <link href="{% static './page_heading_stylesheet.css'%}" rel="stylesheet">
+    
+    <!--Page Title-->
+    <title>POCKET SCHOOL</title>
+</head>
+    <div class="container">
+        <h2 class="text-center" style="font-family:sans-serif;">Select User Type</h2><hr/>
+        <table class="table table-hover table-sm table-dark">
+            <tbody>
+                <tr>
+                    <td style="text-align:center;"><a href="{% url 'register_as_school' %}">School</a></td>
+                </tr>
+                <tr>
+                    <td style="text-align:center;"><a href="{% url 'register_as_pairent' %}">Pairent</a></td>
+                </tr>
+                <tr>
+                    <td style="text-align:center;"><a href="{% url 'register_as_visitor' %}">Visitor</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
