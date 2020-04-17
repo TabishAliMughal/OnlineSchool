@@ -17,8 +17,14 @@
                 </tr>
                 <tr>
                     <td>Subjects</td>
-                    <td>{{ form.subject_name }}</td>
+                    <td>Check To Add</td>
                 </tr>
+                    {% for i in sub %}
+                        <tr>
+                            <td></td>
+                            <td>{{ i }} <input type="checkbox" name="sub" value="{{ i.pk }}"></td>
+                        </tr>
+                    {% endfor %}
                 <tr>
                     <td>Submit</td>
                     <td><input class="btn btn-primary" type="submit" value="Add to ClassSubjects"></td>

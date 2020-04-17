@@ -1,0 +1,25 @@
+{% extends "MainPage.html" %}
+{% block content %}
+    <div class="container">
+        <h2 class="text-center" style="font-family:sans-serif;">My Students</h2><hr/>
+        <a class="btn btn-primary" href="{% url 'add_student' teacher.pk %}">Add New Student</a>
+        <table class="table table-hover table-sm table-dark">
+            <thead align="center">
+                <tr>
+                    <th>Name</th>
+                    <th>Father</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody  align="center">
+                {% for i in class %}
+                <tr>
+                    <th>{{ i.name }}</th>
+                    <th>{{ i.father_name }}</th>
+                    <th><a href="{% url 'edit_student' teacher.pk i.pk %}" class="btn btn-primary">Edit</a><a href="{% url 'delete_student' teacher.pk i.pk %}" class="btn btn-primary">Delete</a></th>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

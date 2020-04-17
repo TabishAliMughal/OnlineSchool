@@ -8,58 +8,34 @@ from .forms import *
 
 @unauthenticated_user
 def AskRegister(request):
-    return render(request , 'Authentication/RegisterAsk.html')
+	if request.method == "POST":
+		data = request.POST.get('type')
+		print(data)
+		return redirect('register',data)
+	else:
+		abc = Group.objects.all()
+		context = {
+			'group' : abc ,
+		}
+		return render(request , 'Authentication/RegisterAsk.html', context)
 
 @unauthenticated_user
-def RegisterSchool(request):
+def Register(request,id):
 	form = CreateUserForm()
 	if request.method == 'POST':
 		form = CreateUserForm(request.POST)
 		if form.is_valid():
 			user = form.save()
 			username = form.cleaned_data.get('username')
-			group = Group.objects.get(name='School')
+			group = Group.objects.get(name=id)
 			user.groups.add(group)
 			messages.success(request, 'Account was created for ' + username)
 			return redirect('login')
 	context = {
-        'form':form
+		'type':id,
+        'form':form,
         }
-	return render(request, 'Authentication/RegisterSchool.html', context)
-	
-@unauthenticated_user
-def RegisterPairent(request):
-	form = CreateUserForm()
-	if request.method == 'POST':
-		form = CreateUserForm(request.POST)
-		if form.is_valid():
-			user = form.save()
-			username = form.cleaned_data.get('username')
-			group = Group.objects.get(name='Pairents')
-			user.groups.add(group)
-			messages.success(request, 'Account was created for ' + username)
-			return redirect('login')
-	context = {
-        'form':form
-        }
-	return render(request, 'Authentication/RegisterPairent.html', context)
-	
-@unauthenticated_user
-def RegisterVisitor(request):
-	form = CreateUserForm()
-	if request.method == 'POST':
-		form = CreateUserForm(request.POST)
-		if form.is_valid():
-			user = form.save()
-			username = form.cleaned_data.get('username')
-			group = Group.objects.get(name='Visitor')
-			user.groups.add(group)
-			messages.success(request, 'Account was created for ' + username)
-			return redirect('login')
-	context = {
-        'form':form
-        }
-	return render(request, 'Authentication/RegisterVisitor.html', context)
+	return render(request, 'Authentication/Register.html', context)
 
 @unauthenticated_user
 def loginPage(request):

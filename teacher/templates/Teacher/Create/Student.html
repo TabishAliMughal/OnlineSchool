@@ -1,0 +1,41 @@
+{% extends "MainPage.html" %}
+{% block content %}
+    {% if limit == 'Reached' %}
+    <h1 class="text-center" style="font-family:sans-serif;">Your Limit Of Students Reached</h1>
+    {% else %}
+    <form method="POST">
+        {% csrf_token %}
+        <div class="container">
+            <h2 class="text-center" style="font-family:sans-serif;">Adding My Student For Class {{ class.clas }} </h2><hr/>
+            <table class="table table-hover table-sm table-dark">
+                <tbody  align="center">
+                    <tr>
+                        <td>Name</td>
+                        <td>{{ form.name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Father</td>
+                        <td>{{ form.father_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Contact</td>
+                        <td>{{ form.contact }}</td>
+                    </tr>
+                    <tr>
+                        <td>Address</td>
+                        <td>{{ form.address }}</td>
+                    </tr>
+                    <tr>
+                        <td>Picture</td>
+                        <td>{{ form.picture }}</td>
+                    </tr>
+                    <tr>
+                        <td>Action</td>
+                        <td><input class="btn btn-primary" type="submit" value="Add Student"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+    {% endif %}
+{% endblock %}

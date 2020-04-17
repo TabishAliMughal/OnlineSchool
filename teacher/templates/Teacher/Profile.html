@@ -1,0 +1,15 @@
+{% extends "MainPage.html" %}
+{% block content %}
+    <div class="container">
+        <h2 class="text-center" style="font-family:sans-serif;">My Classes</h2><hr/>
+        <table class="table table-hover table-sm table-dark">
+            <tbody  align="center">
+                {% for i in class %}
+                    <tr>
+                        <th><a href="{% url 'teacher_class' i.pk %}" >{{ i.clas }}</a></th>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
