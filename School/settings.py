@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'requirments',
     'content',
     'authentication',
+    'teacher',
 ]
 
 MIDDLEWARE = [

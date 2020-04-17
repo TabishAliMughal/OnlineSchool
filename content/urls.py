@@ -41,10 +41,10 @@ urlpatterns = [
     path('classsubject/delete/<pk>/',deleteviews.ManageClassSubjectsDeleteView, name ='class_subject_delete'),
 
     # Select
-    path('date/',selectviews.ManageDateSelectView, name ='date_select'),
-    path('<date>/',selectviews.ManageClassSelectView, name ='class_select'),
-    path('content/<code>/',selectviews.ManageContentView, name ='content'),
-    path('<date>/<Ccode>/',selectviews.ManageSubjectSelectView, name ='subject_select'),
-    path('<date>/<Ccode>/<subject>/',selectviews.ManageContentSelectView, name ='content_select'),
+    path('teach/date/',selectviews.ManageDateSelectView, name ='date_select'),
+    path('teach/<date>/',selectviews.ManageClassSelectView, name ='class_select'),
+    path('teach/content/<code>/',selectviews.ManageContentView, name ='content'),
+    path('teach/<date>/<Ccode>/',selectviews.ManageSubjectSelectView, name ='subject_select'),
+    path('teach/<date>/<Ccode>/<subject>/',selectviews.ManageContentSelectView, name ='content_select'),
 
 ]

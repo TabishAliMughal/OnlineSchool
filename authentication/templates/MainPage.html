@@ -23,53 +23,90 @@
               
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav mr-auto">
-                    <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Teach
+                    {% if request.user.is_authenticated %}
+                      {% for i in user %}
+                        {% if i.name == 'Teacher' or i.name == 'Admin' %}
+                        {% endif %}
+                      {% endfor %}
+                    {% endif %}
+                          <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Teach
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item" href="{% url 'date_select' %}">Start Class</a>
+                              <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                          </li>
+                    {% if request.user.is_authenticated %}
+                      {% for i in user %}
+                        {% if i.name == 'Admin' %}
+                          <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Add
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item" href="{% url 'select_to_add' %}">Add All</a>
+                              <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" href="{% url 'class_form' %}">Add Class</a>
+                              <a class="dropdown-item" href="{% url 'content_form' %}">Add Content</a>
+                              <a class="dropdown-item" href="{% url 'subject_form' %}">Add Subject</a>
+                              <a class="dropdown-item" href="{% url 'module_form' %}">Add Module</a>
+                              <a class="dropdown-item" href="{% url 'class_subject_form' %}">Add Class Subject</a>
+                            </div>
+                          </li>
+                        {% endif %}
+                      {% endfor %}
+                    {% endif %}
+                    {% if request.user.is_authenticated %}
+                      {% for i in user %}
+                        {% if i.name == 'Admin' %}
+                        {% endif %}
+                      {% endfor %}
+                    {% endif %}
+                        <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            View
+                          </a>
+                          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{% url 'all' %}">All</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{% url 'class' %}" >View Class</a>
+                            <a class="dropdown-item" href="{% url 'content' %}" >View Content</a>
+                            <a class="dropdown-item" href="{% url 'subject' %}" >View Subject</a>
+                            <a class="dropdown-item" href="{% url 'module' %}" >View Module</a>
+                            <a class="dropdown-item" href="{% url 'class_subject' %}" >View Class Subject</a>
+                          </div>
+                        </li>
+                      </ul>
+                      <form class="form-inline my-2 my-lg-0">
+                        <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle btn btn-outline-success my-2 my-sm-0" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Account
                       </a>
                       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{% url 'date_select' %}">Start Class</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        {% if request.user.is_authenticated %}
+                          {% for i in user %}
+                            {% if i.name == 'Teacher' %}
+                            <a class="dropdown-item" href="{% url 'teacher_profile' %}">My Profile</a>
+                            <div class="dropdown-divider"></div>
+                            {% elif i.name == 'Admin' %}
+                            <a class="dropdown-item" href="">All Profiles</a>
+                            <div class="dropdown-divider"></div>
+                            {% endif %}
+                          {% endfor %}
+                        {% endif %}
+                        {% if request.user.is_authenticated %}
+                        <a class="dropdown-item" href="{% url "logout" %}">Logout</a>
+                        {% else %}
+                        <a class="dropdown-item" href="{% url "login" %}">Login</a>
+                        <a class="dropdown-item" href="{% url "register_ask" %}">Register</a>
+                        {% endif %}
                       </div>
                     </li>
-                    <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Add
-                      </a>
-                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{% url 'select_to_add' %}">Add All</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{% url 'class_form' %}">Add Class</a>
-                        <a class="dropdown-item" href="{% url 'content_form' %}">Add Content</a>
-                        <a class="dropdown-item" href="{% url 'subject_form' %}">Add Subject</a>
-                        <a class="dropdown-item" href="{% url 'module_form' %}">Add Module</a>
-                        <a class="dropdown-item" href="{% url 'class_subject_form' %}">Add Class Subject</a>
-                      </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        View
-                      </a>
-                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{% url 'all' %}">All</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{% url 'class' %}" >View Class</a>
-                        <a class="dropdown-item" href="{% url 'content' %}" >View Content</a>
-                        <a class="dropdown-item" href="{% url 'subject' %}" >View Subject</a>
-                        <a class="dropdown-item" href="{% url 'module' %}" >View Module</a>
-                        <a class="dropdown-item" href="{% url 'class_subject' %}" >View Class Subject</a>
-                      </div>
-                    </li>
-                  </ul>
-                  <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="margin-left:3px"><a href="{% url "main" %}">Search</a></button>
-                    {% if request.user.is_authenticated %}
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="margin-left:3px"><a href="{% url "logout" %}">Logout</a></button>
-                    {% else %}
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="margin-left:3px"><a href="{% url "login" %}">Login</a></button>
-                    {% endif %}
                   </form>
                 </div>
               </nav>

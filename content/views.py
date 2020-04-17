@@ -6,7 +6,11 @@ from django.contrib.auth.models import Group
 from authentication.user_handeling import unauthenticated_user, allowed_users, admin_only
 
 def ManageMainView(SelectView):
-    return render(SelectView , 'Main.html')
+    user = SelectView.user.groups.values('name')
+    context = {
+        'user':user ,
+    }
+    return render(SelectView , 'Main.html',context)
 
 
 @login_required(login_url='login')

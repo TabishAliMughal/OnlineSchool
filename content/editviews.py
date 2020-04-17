@@ -10,6 +10,7 @@ from authentication.user_handeling import unauthenticated_user, allowed_users, a
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Admin'])
 def ManageClassEditView(EditView,pk):
+    user = EditView.user.groups.values('name')
     data = get_object_or_404(Classes, pk = pk)
     if EditView.method == 'POST':
         form = ClassesForm(EditView.POST or None, instance=data)
@@ -20,12 +21,14 @@ def ManageClassEditView(EditView,pk):
         form = ClassesForm(instance=data)
         context = {
             'form' : form,
+            'user':user ,
         }
         return render(EditView , 'Forms/Edit/classes.html' , context)
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Admin'])
 def ManageSubjectEditView(EditView,pk):
+    user = EditView.user.groups.values('name')
     data = get_object_or_404(Subjects, pk = pk)
     if EditView.method == 'POST':
         form = SubjectsForm(EditView.POST or None, instance=data)
@@ -35,6 +38,7 @@ def ManageSubjectEditView(EditView,pk):
     else:
         form = SubjectsForm(instance=data)
         context = {
+            'user':user ,
             'form' : form,
         }
         return render(EditView ,'Forms/Edit/subjects.html' , context)
@@ -42,6 +46,7 @@ def ManageSubjectEditView(EditView,pk):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Admin'])
 def ManageClassSubjectsEditView(EditView,pk):
+    user = EditView.user.groups.values('name')
     data = get_object_or_404(ClassSubjects, pk = pk)
     if EditView.method == 'POST':
         form = ClassSubjectsForm(EditView.POST or None, instance=data)
@@ -51,6 +56,7 @@ def ManageClassSubjectsEditView(EditView,pk):
     else:
         form = ClassSubjectsForm(instance=data)
         context = {
+            'user':user ,
             'form' : form,
         }
         return render(EditView ,'Forms/Edit/classsubjects.html' , context)
@@ -58,6 +64,7 @@ def ManageClassSubjectsEditView(EditView,pk):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Admin'])
 def ManageModuleEditView(EditView,pk):
+    user = EditView.user.groups.values('name')
     data = get_object_or_404(Module, pk = pk)
     if EditView.method == 'POST':
         form = ModuleForm(EditView.POST or None, instance=data)
@@ -67,6 +74,7 @@ def ManageModuleEditView(EditView,pk):
     else:
         form = ModuleForm(instance=data)
         context = {
+            'user':user ,
             'form' : form,
         }
         return render(EditView ,'Forms/Edit/module.html' , context)
@@ -74,6 +82,7 @@ def ManageModuleEditView(EditView,pk):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Admin'])
 def ManageContentEditView(EditView,pk):
+    user = EditView.user.groups.values('name')
     data = get_object_or_404(Content, pk = pk)
     if EditView.method == 'POST':
         form = ContentForm(EditView.POST or None, instance=data)
@@ -83,6 +92,7 @@ def ManageContentEditView(EditView,pk):
     else:
         form = ContentForm(instance=data)
         context = {
+            'user':user ,
             'form' : form,
         }
         return render(EditView ,'Forms/Edit/content.html' , context)
