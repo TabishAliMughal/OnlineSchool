@@ -69,12 +69,12 @@ def ManageContentSelectView(SelectView,date,Ccode,subject):
                         'user':user ,
                         'content' : FContent,
                         }
-            else:
-                context = {'user':user ,'abc' : 'No Content For This Subject',}
-                return render(SelectView , 'No.html' , context)
-        else:
-            context = {'abc' : 'No Module For This Class',}
-            return render(SelectView , 'No.html' , context)
+        #     else:
+        #         context = {'user':user ,'abc' : 'No Content For This Subject',}
+        #         return render(SelectView , 'No.html' , context)
+        # else:
+        #     context = {'abc' : 'No Module For This Class',}
+        #     return render(SelectView , 'No.html' , context)
     return render(SelectView , 'Select/content_select.html' , context)
 
 def ManageContentView(ContentView, code):
