@@ -89,19 +89,19 @@
                         {% if request.user.is_authenticated %}
                           {% for i in user %}
                             {% if i.name == 'Teacher' %}
-                            <a class="dropdown-item" href="{% url 'teacher_profile' %}">My Profile</a>
-                            <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" href="{% url 'teacher_profile' %}">My Profile</a>
+                              <div class="dropdown-divider"></div>
                             {% elif i.name == 'Admin' %}
-                            <a class="dropdown-item" href="">All Profiles</a>
-                            <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" href="{% url 'profiles' %}">All Profiles</a>
+                              <div class="dropdown-divider"></div>
                             {% endif %}
                           {% endfor %}
                         {% endif %}
                         {% if request.user.is_authenticated %}
-                        <a class="dropdown-item" href="{% url "logout" %}">Logout</a>
+                          <a class="dropdown-item" href="{% url "logout" %}">Logout</a>
                         {% else %}
-                        <a class="dropdown-item" href="{% url "login" %}">Login</a>
-                        <a class="dropdown-item" href="{% url "register_ask" %}">Register</a>
+                          <a class="dropdown-item" href="{% url "login" %}">Login</a>
+                          <a class="dropdown-item" href="{% url "register_ask" %}">Register</a>
                         {% endif %}
                       </div>
                     </li>

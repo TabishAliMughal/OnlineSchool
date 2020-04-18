@@ -5,33 +5,61 @@ from authentication.user_handeling import unauthenticated_user, allowed_users, a
 from .models import *
 from .forms import *
 from content.models import *
+from exam.models import *
 
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Teacher'])
 def ManageTeacherProfileView(ProfileView):
+    exam = []
+    classes = []
     user = ProfileView.user.groups.values('name')
     teacher = ProfileView.user
-    classes = []
     for i in TeacherClass.objects.all():
         if str(i.teacher) == str(teacher):
             classes.append(i)
+    for i in ExamStatus.objects.all():
+        for v in classes:
+            if str(i.class_name.pk) == str(v.clas.pk):
+                if str(i.status) == 'True':
+                    exam.append(i)
+                else:
+                    exam = ['No Active Exams']
+            else:
+                exam = ['No Active Exams']
     context = {
+        'exam': exam ,
         'user': user ,
         'class' : classes ,
     }
     return render(ProfileView,'Teacher/Profile.html',context)
 
 def ManageTeacherClassView(ListView,id):
-    user = ListView.user.groups.values('name')
-    teacher = get_object_or_404(TeacherClass , pk = id)
+    exam = []
     clas = []
+    classes = []
+    user = ListView.user.groups.values('name')
+    tea = ListView.user
+    teacher = get_object_or_404(TeacherClass , pk = id)
+    for i in TeacherClass.objects.all():
+        if str(i.teacher) == str(tea):
+            classes.append(i)
     for i in TeacherClassStudents.objects.all():
         if str(i.clas.pk) == str(id):
             clas.append(i)
+    for i in ExamStatus.objects.all():
+        for v in classes:
+            if str(i.class_name.pk) == str(v.clas.pk):
+                if str(i.status) == 'True':
+                    exam.append(i)
+                else:
+                    exam = ['No Active Exams']
+            else:
+                exam = ['No Active Exams']
     context = {
+        'exam': exam ,
         'teacher': teacher ,
-        'user':user ,
+        'user': user ,
         'class' : clas ,
     }
     return render(ListView,'Teacher/Display/Class.html',context)
@@ -105,5 +133,7 @@ def ManageEditStudentView(EditView,id,pk):
         return render(EditView,'Teacher/Create/Student.html',context)
 
 def ManageDeleteStudentView(DeleteView,id,pk):
-    delete = TeacherClassStudents.objects.filter(pk = pk).delete()
+    TeacherClassStudents.objects.filter(pk = pk).delete()
     return redirect('teacher_class',id)
+
+

@@ -18,6 +18,6 @@ class TeacherClassStudents(models.Model):
     father_name = models.CharField(max_length=30)
     contact = models.CharField(max_length=11)
     address = models.CharField(max_length=250)
-    picture = models.ImageField(upload_to='static/%clas/' , blank=True , null=True)
+    picture = models.ImageField(upload_to='static/%clas/pictures/' , blank=True , null=True)
     def __str__(self):
         return 'Student {} Of {}'.format(self.name,self.clas)

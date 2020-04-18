@@ -16,7 +16,13 @@
                 <tr>
                     <th>{{ i.name }}</th>
                     <th>{{ i.father_name }}</th>
-                    <th><a href="{% url 'edit_student' teacher.pk i.pk %}" class="btn btn-primary">Edit</a><a href="{% url 'delete_student' teacher.pk i.pk %}" class="btn btn-primary">Delete</a></th>
+                    {% for v in exam %}
+                        {% if v == 'No Active Exams' %}
+                            <th><a href="{% url 'edit_student' teacher.pk i.pk %}" class="btn btn-primary">Edit</a><a href="{% url 'delete_student' teacher.pk i.pk %}" class="btn btn-primary">Delete</a></th>
+                        {% else %}
+                            <th><a href="{% url 'edit_student' teacher.pk i.pk %}" class="btn btn-primary">Edit</a><a href="{% url 'delete_student' teacher.pk i.pk %}" class="btn btn-primary">Delete</a><a class="btn btn-primary" href="{% url 'exam_upload_pictures' teacher.pk i.pk %}" >Upload Exam Answer</a></th>
+                        {% endif %}
+                    {% endfor %}
                 </tr>
                 {% endfor %}
             </tbody>
