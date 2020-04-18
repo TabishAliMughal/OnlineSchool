@@ -10,7 +10,6 @@ from .forms import *
 def AskRegister(request):
 	if request.method == "POST":
 		data = request.POST.get('type')
-		print(data)
 		return redirect('register',data)
 	else:
 		abc = Group.objects.all()

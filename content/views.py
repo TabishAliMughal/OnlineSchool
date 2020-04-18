@@ -16,8 +16,16 @@ def ManageMainView(SelectView):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Admin'])
 def ManageSelectToAddView(SelectView):
-    return render(SelectView , 'MainSelect.html')
+    user = SelectView.user.groups.values('name')
+    context = {
+        'user':user ,
+    }
+    return render(SelectView , 'MainSelect.html' , context)
 
 
 def ManageAllView(SelectView):
-    return render(SelectView , 'All.html')
+    user = SelectView.user.groups.values('name')
+    context = {
+        'user':user ,
+    }
+    return render(SelectView , 'All.html' , context)

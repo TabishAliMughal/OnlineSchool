@@ -1,0 +1,24 @@
+{% extends "MainPage.html" %}
+{% block content %}
+    <div class="container">
+        <h2 class="text-center" style="font-family:sans-serif;">Questions</h2><hr/>
+        <h5>Class = {{exam.class_name}} Session = {{exam.session}} Subject = {{exam.subject}}</h5>
+        <table class="table table-hover table-sm table-dark">
+            <tbody  align="center">
+                {% for i in questions %}
+                    {% if i.question == '' %}
+                    <tr>
+                        <th><a href="">File Attached</a></th>
+                    </tr>
+                    <a href="{% url 'exam_print_file' exam.pk %}" class="btn btn-primary">Print File</a>
+                    {% else %}
+                    <tr>
+                        <th><a href="" >{{ i.question }}( {{ i.marks }} )</a></th>
+                    </tr>
+                    <a href="{% url 'exam_print_questions' exam.pk %}" class="btn btn-primary">Print Paper</a>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

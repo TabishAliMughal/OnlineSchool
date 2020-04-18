@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'content',
     'authentication',
     'teacher',
+    'exam',
+    'main',
 ]
 
 MIDDLEWARE = [

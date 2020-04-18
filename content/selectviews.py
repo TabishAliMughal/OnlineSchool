@@ -21,15 +21,14 @@ def ManageClassSelectView(SelectView,date):
                 teacher = SelectView.user
                 teacher = get_object_or_404(TeacherClass , teacher = teacher.pk)
                 return redirect('subject_select',date,teacher.clas.pk)
-    else:
-        FDate = date
-        FClass = Classes.objects.all()
-        context = {
-            'user':user ,
-            'date' : FDate,
-            'class' : FClass,
-        }
-        return render(SelectView , 'Select/class.html' , context)
+    FDate = date
+    FClass = Classes.objects.all()
+    context = {
+        'user':user ,
+        'date' : FDate,
+        'class' : FClass,
+    }
+    return render(SelectView , 'Select/class.html' , context)
 
 def ManageSubjectSelectView(SelectView,date,Ccode):
     user = SelectView.user.groups.values('name')
@@ -42,23 +41,23 @@ def ManageSubjectSelectView(SelectView,date,Ccode):
                     'user':user ,
                 }
                 return render (SelectView,'Lists/content.html',context)
-    else:
-        FDate = date
-        FClass = get_object_or_404(Classes, code = Ccode)
-        FClassSubjects = get_list_or_404(ClassSubjects , class_name = Ccode)
-        context = {
-            'user':user ,
-            'date' : FDate,
-            'class' : FClass,
-            'class_subjects' : FClassSubjects,
-        }
-        return render(SelectView , 'Select/subject.html' , context)
+    FDate = date
+    FClass = get_object_or_404(Classes, code = Ccode)
+    FClassSubjects = get_list_or_404(ClassSubjects , class_name = Ccode)
+    context = {
+        'user':user ,
+        'date' : FDate,
+        'class' : FClass,
+        'class_subjects' : FClassSubjects,
+    }
+    return render(SelectView , 'Select/subject.html' , context)
 
 def ManageContentSelectView(SelectView,date,Ccode,subject):
     for rows in Subjects.objects.all():
         sub = get_object_or_404(Subjects , subject_name = subject)
     con = Content.objects.all()
     user = SelectView.user.groups.values('name')
+    context = {'user':user ,}
     for rows in con:
         Cc = get_object_or_404(Classes, class_name = rows.class_name)
         if str(Cc.code) == str(Ccode):
