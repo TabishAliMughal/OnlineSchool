@@ -17,7 +17,6 @@ def ManageClassesCreateView(CreateView):
             form.save()
             context = { 
                 'user':user ,
-                'user':user ,
                 'return': 'Has Been Added SuccessFully'
             }
             return render(CreateView,'Forms/Created/classes.html',context)
@@ -31,7 +30,6 @@ def ManageClassesCreateView(CreateView):
         form = ClassesForm()
         user = CreateView.user.groups.values('name')
         context = { 
-            'user':user ,
             'user':user ,
             'form': form
         }
