@@ -27,24 +27,24 @@ urlpatterns = [
     path('classsubject/list/',listviews.ManageClassSubjectsListView, name ='class_subject'),
 
     # Edit
-    path('class/edit/<pk>/',editviews.ManageClassEditView, name ='class_edit'),
-    path('content/edit/<pk>/',editviews.ManageContentEditView, name ='content_edit'),
-    path('subject/edit/<pk>/',editviews.ManageSubjectEditView, name ='subject_edit'),
-    path('module/edit/<pk>/',editviews.ManageModuleEditView, name ='module_edit'),
-    path('classsubject/edit/<pk>/',editviews.ManageClassSubjectsEditView, name ='class_subject_edit'),
+    path(r'class/edit/\d12345<pk>910\d/',editviews.ManageClassEditView, name ='class_edit'),
+    path(r'content/edit/\d12345<pk>910\d/',editviews.ManageContentEditView, name ='content_edit'),
+    path(r'subject/edit/\d12345<pk>910\d/',editviews.ManageSubjectEditView, name ='subject_edit'),
+    path(r'module/edit/\d12345<pk>910\d/',editviews.ManageModuleEditView, name ='module_edit'),
+    path(r'classsubject/edit/\d12345<pk>910\d/',editviews.ManageClassSubjectsEditView, name ='class_subject_edit'),
 
     # Delete
-    path('class/delete/<pk>/',deleteviews.ManageClassDeleteView, name ='class_delete'),
-    path('content/delete/<pk>/',deleteviews.ManageContentDeleteView, name ='content_delete'),
-    path('subject/delete/<pk>/',deleteviews.ManageSubjectDeleteView, name ='subject_delete'),
-    path('module/delete/<pk>/',deleteviews.ManageModuleDeleteView, name ='module_delete'),
-    path('classsubject/delete/<pk>/',deleteviews.ManageClassSubjectsDeleteView, name ='class_subject_delete'),
+    path(r'class/delete/\d12345<pk>910\d/',deleteviews.ManageClassDeleteView, name ='class_delete'),
+    path(r'content/delete/\d12345<pk>910\d/',deleteviews.ManageContentDeleteView, name ='content_delete'),
+    path(r'subject/delete/\d12345<pk>910\d/',deleteviews.ManageSubjectDeleteView, name ='subject_delete'),
+    path(r'module/delete/\d12345<pk>910\d/',deleteviews.ManageModuleDeleteView, name ='module_delete'),
+    path(r'classsubject/delete/\d12345<pk>910\d/',deleteviews.ManageClassSubjectsDeleteView, name ='class_subject_delete'),
 
     # Select
     path('teach/date/',selectviews.ManageDateSelectView, name ='date_select'),
-    path('teach/<date>/',selectviews.ManageClassSelectView, name ='class_select'),
-    path('teach/content/<code>/',selectviews.ManageContentView, name ='content'),
-    path('teach/<date>/<Ccode>/',selectviews.ManageSubjectSelectView, name ='subject_select'),
-    path('teach/<date>/<Ccode>/<subject>/',selectviews.ManageContentSelectView, name ='content_select'),
+    path(r'teach/\d12345<date>910\d/',selectviews.ManageClassSelectView, name ='class_select'),
+    path(r'teach/content/\d12345<code>910\d/',selectviews.ManageContentView, name ='content'),
+    path(r'teach/\d12345<date>910\d/\d12345<Ccode>910\d/',selectviews.ManageSubjectSelectView, name ='subject_select'),
+    path(r'teach/\d12345<date>910\d/\d12345<Ccode>910\d/\d12345<subject>910\d/',selectviews.ManageContentSelectView, name ='content_select'),
 
 ]

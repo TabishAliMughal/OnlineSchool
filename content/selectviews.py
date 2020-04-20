@@ -15,11 +15,14 @@ def ManageDateSelectView(SelectView):
 
 def ManageClassSelectView(SelectView,date):
     user = SelectView.user.groups.values('name')
+    teacher = []
     if SelectView.user.is_authenticated:
         for i in user:
             if str(i.get('name')) == 'Teacher':
                 teacher = SelectView.user
-                teacher = get_object_or_404(TeacherClass , teacher = teacher.pk)
+                for i in TeacherClass.objects.all():
+                    if str(i.teacher) == str(teacher.pk):
+                        teacher.append(i)
                 return redirect('subject_select',date,teacher.clas.pk)
     FDate = date
     FClass = Classes.objects.all()
@@ -32,10 +35,15 @@ def ManageClassSelectView(SelectView,date):
 
 def ManageSubjectSelectView(SelectView,date,Ccode):
     user = SelectView.user.groups.values('name')
+    list_ = []
+    FClassSubjects = []
     if SelectView.user.is_authenticated:
         for i in user:
             if str(i.get('name')) == 'Teacher':
-                list_ = get_list_or_404(Content , date = date , class_name = Ccode )
+                for i in Content.objects.all():
+                    if str(i.date) == str(date) and str(i.class_name) == str(Ccode):
+                        list_.append(i)
+                # list_ = get_list_or_404(Content , date = date , class_name = Ccode )
                 context = {
                     'list':list_,
                     'user':user ,
@@ -43,7 +51,10 @@ def ManageSubjectSelectView(SelectView,date,Ccode):
                 return render (SelectView,'Lists/content.html',context)
     FDate = date
     FClass = get_object_or_404(Classes, code = Ccode)
-    FClassSubjects = get_list_or_404(ClassSubjects , class_name = Ccode)
+    for i in ClassSubjects.objects.all():
+        if str(i.class_name) == str(Ccode):
+            FClassSubjects.append(i)
+    # FClassSubjects = get_list_or_404(ClassSubjects , class_name = Ccode)
     context = {
         'user':user ,
         'date' : FDate,
