@@ -52,7 +52,7 @@ def ManageSubjectSelectView(SelectView,date,Ccode):
     FDate = date
     FClass = get_object_or_404(Classes, code = Ccode)
     for i in ClassSubjects.objects.all():
-        if str(i.class_name) == str(Ccode):
+        if str(i.class_name.pk) == str(Ccode):
             FClassSubjects.append(i)
     # FClassSubjects = get_list_or_404(ClassSubjects , class_name = Ccode)
     context = {
