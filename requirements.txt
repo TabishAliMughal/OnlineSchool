@@ -6,4 +6,5 @@ whitenoise==5.0.1
 gunicorn
 django-multiselectfield
 html5lib
+xhtml2pdf
 pillow
