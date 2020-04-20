@@ -38,4 +38,4 @@ def ManageProfilesDatailView(DetailView , id):
         'user': user ,
         'teacher' : teacher
     }
-    return render(DetailView,'Admin/ProfileDetail.html',context)
+    return render(DetailView,'Teacher/ProfileDetail.html',context)

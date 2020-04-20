@@ -5,76 +5,75 @@
     <div class="container">
         <h2 class="text-center" style="font-family:sans-serif;">View All Contents</h2><hr/>
         {% if request.user.is_authenticated %}
-        <a class="btn btn-primary" href="{% url "content_form" %}">Add Another</a>
+          {% for i in user %}
+            {% if i.name == 'Admin' %}
+              <a class="btn btn-primary" href="{% url "content_form" %}">Add Another</a>
+            {% endif %}
+          {% endfor %}
         {% endif %}
         <a><button class="btn btn-primary" onclick="sortTable()">Sort</button></a>
-        <table class="table table-hover table-sm table-dark" id="myTable">
+        <table id="results" class="table table-hover table-sm table-dark" id="myTable">
             <thead align="center">
                 <tr>
+                    <th>Date</th>
                     <th>Class Name</th>
                     <th>Subject Name</th>
                     <th>Module Name</th>
                     <th>Detail</th>
-                    <th>Date</th>
                     {% if request.user.is_authenticated %}
-                    <th>Action</th>
+                      {% for i in user %}
+                        {% if i.name == 'Admin' %}
+                          <th>Action</th>
+                        {% endif %}
+                      {% endfor %}
                     {% endif %}
                 </tr>
             </thead>
             {% for i in list %}
-            <tbody align="center">
+            <tbody id="myTable" align="center">
                 <tr>
-                    <td hidden>{{ i.pk }}</td>
+                    <!-- <td hidden>{{ i.pk }}</td> -->
+                    <td>{{ i.date }}</td>
                     <td><a href="{% url 'content' i.pk %}">{{ i.class_name }}</a></td>
                     <td>{{ i.subject }}</td>
                     <td>{{ i.module }}</td>
                     <td><font size="-1">{{ i.text }}</font></td>
-                    <td>{{ i.date }}</td>
                     {% if request.user.is_authenticated %}
-                    <td><a class="btn btn-primary" href="{% url 'content_edit' i.pk %}">Edit</a><a href="{% url 'content_delete' i.pk %}" class="btn btn-primary">Delete</a></td>
+                      {% for i in user %}
+                        {% if i.name == 'Admin' %}
+                          <td><a class="btn btn-primary" href="{% url 'content_edit' i.pk %}">Edit</a><a href="{% url 'content_delete' i.pk %}" class="btn btn-primary">Delete</a></td>
+                        {% endif %}
+                      {% endfor %}
                     {% endif %}
                 </tr>
             </tbody>
             {% endfor %}
         </table>
+        <button>Sort by date</button>
     </div>
     {% csrf_token %}
 </form>
 <script>
-    function sortTable() {
-      var table, rows, switching, i, x, y, shouldSwitch;
-      table = document.getElementById("myTable");
-      switching = true;
-      /*Make a loop that will continue until
-      no switching has been done:*/
-      while (switching) {
-        //start by saying: no switching is done:
-        switching = false;
-        rows = table.rows;
-        /*Loop through all table rows (except the
-        first, which contains table headers):*/
-        for (i = 1; i < (rows.length - 1); i++) {
-          //start by saying there should be no switching:
-          shouldSwitch = false;
-          /*Get the two elements you want to compare,
-          one from current row and one from the next:*/
-          x = rows[i].getElementsByTagName("TD")[0];
-          y = rows[i + 1].getElementsByTagName("TD")[0];
-          //check if the two rows should switch place:
-          if (Number(x.innerHTML) > Number(y.innerHTML)) {
-            //if so, mark as a switch and break the loop:
-            shouldSwitch = true;
-            break;
-          }
-        }
-        if (shouldSwitch) {
-          /*If a switch has been marked, make the switch
-          and mark that a switch has been done:*/
-          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-          switching = true;
-        }
-      }
-    }
-</script>
+function convertDate(d) {
+  var p = d.parse("March 21, 2012");
+  document.getElementById("demo").innerHTML = p;
+  return +(p[2]+p[1]+p[0]);
+}
+
+function sortByDate() {
+  var tbody = document.querySelector("#results tbody");
+  // get trs as array for ease of use
+  var rows = [].slice.call(tbody.querySelectorAll("tr"));
+  
+  rows.sort(function(a,b) {
+    return convertDate(a.cells[0].innerHTML) - convertDate(b.cells[0].innerHTML);
+  });
+  
+  rows.forEach(function(v) {
+    tbody.appendChild(v); // note that .appendChild() *moves* elements
+  });
+}
+
+document.querySelector("button").addEventListener("click", sortByDate);</script>
 
 {% endblock %}
