@@ -64,27 +64,20 @@ def ManageSubjectSelectView(SelectView,date,Ccode):
     return render(SelectView , 'Select/subject.html' , context)
 
 def ManageContentSelectView(SelectView,date,Ccode,subject):
+    cont = []
     for rows in Subjects.objects.all():
         sub = get_object_or_404(Subjects , subject_name = subject)
     con = Content.objects.all()
     user = SelectView.user.groups.values('name')
-    context = {'user':user ,}
     for rows in con:
         Cc = get_object_or_404(Classes, class_name = rows.class_name)
         if str(Cc.code) == str(Ccode):
             if rows.subject == sub:
                 if str(rows.date) == str(date):
                     FContent = get_list_or_404(Content , date = date , class_name = Ccode , subject = sub)
-                    context = {
-                        'user':user ,
-                        'content' : FContent,
-                        }
-        #     else:
-        #         context = {'user':user ,'abc' : 'No Content For This Subject',}
-        #         return render(SelectView , 'No.html' , context)
-        # else:
-        #     context = {'abc' : 'No Module For This Class',}
-        #     return render(SelectView , 'No.html' , context)
+                    cont.append(FContent)
+    print(cont)
+    context = {'user':user ,'content' : cont,}
     return render(SelectView , 'Select/content_select.html' , context)
 
 def ManageContentView(ContentView, code):
