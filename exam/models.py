@@ -41,4 +41,14 @@ class ExamAnswers(models.Model):
     exam = models.ForeignKey(ExamStatus , on_delete = models.CASCADE)
     picture = models.ImageField(upload_to='static/exam/papers/answers/')
     checked = models.BooleanField()
+    def __str__(self):
+        return 'Answer Of {}'.format(self.student)
 
+class QuestionsChecked(models.Model):
+    code = models.AutoField(primary_key=True)
+    checker = models.ForeignKey(User , on_delete = models.CASCADE)
+    question = models.ForeignKey(ExamQuestions , on_delete=models.CASCADE)
+    student = models.ForeignKey(TeacherClassStudents , on_delete=models.CASCADE)
+    obtained = models.IntegerField()
+    def __str__(self):
+        return 'Answer Of {} , Checked By {}'.format(self.student,self.checker)

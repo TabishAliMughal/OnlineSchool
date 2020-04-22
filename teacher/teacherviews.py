@@ -102,24 +102,23 @@ def ManageAddStudentView(CreateView,id):
 def ManageEditStudentView(EditView,id,pk):
     student = get_object_or_404(TeacherClassStudents, pk = pk)
     if EditView.method == 'POST':
-        # student.delete()
-        # clas = id
-        # name = EditView.POST.get('name')
-        # father = EditView.POST.get('father_name')
-        # contact = EditView.POST.get('contact')
-        # address = EditView.POST.get('address')
-        # picture = EditView.POST.get('picture')
-        # if str(picture) == '':
-        #     picture = 'null'
-        # form = TeacherClassStudentCreateForm({
-        #     'clas' : clas ,
-        #     'name' : name ,
-        #     'father_name' : father ,
-        #     'contact' : contact ,
-        #     'address' : address ,
-        #     'picture' : picture ,
-        # })
-        form = TeacherClassStudentCreateForm(EditView.POST)
+        clas = id
+        name = EditView.POST.get('name')
+        father = EditView.POST.get('father_name')
+        contact = EditView.POST.get('contact')
+        address = EditView.POST.get('address')
+        picture = EditView.POST.get('picture')
+        if str(picture) == '':
+            picture = 'null'
+        form = TeacherClassStudentCreateForm({
+            'clas' : clas ,
+            'name' : name ,
+            'father_name' : father ,
+            'contact' : contact ,
+            'address' : address ,
+            'picture' : picture ,
+        }or None , instance=student)
+        # form = TeacherClassStudentCreateForm(EditView.POST)
         print(form)
         form.save()
         return redirect('teacher_class',id)

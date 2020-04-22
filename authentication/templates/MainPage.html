@@ -10,13 +10,13 @@
 		
        
         <!--Page Title-->
-        <title>POCKET SCHOOL</title>
+        <title>Digital SCHOOL</title>
     </head>
     <body>
 
         <!--Navbar menu-->
               <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a class="navbar-brand" href="{% url "main" %}">Pocket School</a>
+                <a class="navbar-brand" href="{% url "main" %}">Digital School</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
@@ -171,10 +171,11 @@
           });
           </script>
           <script>
-          document.getElementById('btnnext').onclick = myFunction;
+          document.getElementById('btnnext').onclick = next;
+          document.getElementById('btnprev').onclick = prev;
             // If the user clicks in the window, set the background color of <body> to yellow
             var counter = 0;
-            function myFunction() {
+            function next() {
               
               var div = document.getElementById('slideshow');
               var img = div.getElementsByTagName('img')[counter].src;//.childNodes[2];
@@ -183,7 +184,18 @@
               
               
               counter++;
-              if (counter==3) counter = 0;
+              if (counter==10) counter = 0;
+            }
+            function prev() {
+              
+              var div = document.getElementById('slideshow');
+              var img = div.getElementsByTagName('img')[counter].src;//.childNodes[2];
+              
+              document.getElementById("imgprev").src=img;//document.getElementById("imgprev").src;
+              
+              
+              counter--;
+              if (counter==0) counter = 10;
             }
             </script>
     </body>
