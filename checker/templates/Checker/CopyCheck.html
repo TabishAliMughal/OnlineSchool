@@ -1,0 +1,66 @@
+{% extends "MainPage.html" %}
+{% block content %}
+{% load static %}
+<form method="POST">
+    <div>
+        <h3 class="text-center" style="font-family:sans-serif;">Checking Copy Of {{ student.name }}</h3><hr/>
+        <table>
+            <tr>
+                <th>
+                    <h4 class="text-center" style="font-family:sans-serif;">Questions</h4><hr/>
+                    <h5>Total Marks = {{ marks }}</h5>
+                    <table class="table table-hover table-sm table-dark">
+                        <tbody id="myTable">
+                            {% for i in questions %}
+                                {% if i.question == '' %}
+                                    {% for v in file %}
+                                        {% if v == '' %}
+                                        {% else %}
+                                            <tr><iframe src="{% static './' %}{{v}}" style="height: 300px; width: 700px; overflow: auto; margin-left: 0px;">>
+                                                <embed src="{% static './' %}{{v}}" width="500px" height="270px" />
+                                            </iframe></tr>
+                                            <tr>
+                                                <th>File Attached <a href="{% url 'student_copy_check_file' i.pk %}"> Open</a></th>
+                                            </tr>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                    <tr>
+                                        <th><a>{{ i.question }} ( {{ i.marks }} )</a></th>
+                                        <th><input class="" type="number" name='{{i.pk}}' /></th>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </th>
+                <th>
+                    <h4 class="text-center" style="font-family:sans-serif;">Answers</h4><hr/>
+                    <h5 class="text-center" style="font-family:sans-serif;">Save</h5><hr/>
+                    <div style="height: 545px; width: 700px; overflow: auto; text-align: left; margin-left: 0px;";>
+                        <div>
+                            <img id="imgprev" width="500px" style="align-items: left; margin-left: 20px; margin-top: 30px;"/>
+                        </div>
+                    </div>
+                    <div id="slideshow">
+                        {% for i in answers %}
+                            <img src="{% static '' %}{{i}}" width="300px" hidden/>
+                        {% endfor %}
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th></th>
+                <th>
+                    <div id="btnnext">
+                        <a class="btn btn-primary" style="align-items: bottom: 0px;; margin-left: 20px; margin-bottom: 20px;">Next</a>
+                    </div>
+                </th>
+            </tr>
+        </table>
+    </div>
+</form>
+{% endblock %}
+
+
+

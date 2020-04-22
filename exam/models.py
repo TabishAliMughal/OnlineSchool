@@ -29,7 +29,7 @@ class ExamStatus(models.Model):
 class ExamQuestions(models.Model):
     code = models.AutoField(primary_key = True)
     exam = models.ForeignKey(ExamStatus , on_delete = models.CASCADE)
-    file = models.FileField(upload_to='static/%exam/papers/', blank = True)
+    file = models.FileField(upload_to='static/exam/papers/', blank = True)
     question = models.CharField(max_length = 250, blank = True)
     marks = models.IntegerField(blank = True)
     def __str__(self):
@@ -39,5 +39,6 @@ class ExamAnswers(models.Model):
     code = models.AutoField(primary_key=True)
     student = models.ForeignKey(TeacherClassStudents , on_delete=models.CASCADE)
     exam = models.ForeignKey(ExamStatus , on_delete = models.CASCADE)
-    picture = models.ImageField(upload_to='static/%exam/papers/answers/',blank = True)
+    picture = models.ImageField(upload_to='static/exam/papers/answers/')
+    checked = models.BooleanField()
 

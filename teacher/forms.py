@@ -6,6 +6,7 @@ class TeacherClassStudentCreateForm(forms.ModelForm):
     class Meta:
         model = TeacherClassStudents
         fields = [
+            'id' ,
             'clas' ,
             'name' ,
             'father_name' ,

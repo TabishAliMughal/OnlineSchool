@@ -96,6 +96,9 @@
                           {% elif i.name == 'Admin' %}
                             <a class="dropdown-item" href="{% url 'profiles' %}">All Profiles</a>
                             <div class="dropdown-divider"></div>
+                          {% elif i.name == 'Checker' %}
+                            <a class="dropdown-item" href="{% url 'checker_profile' %}">My Profile</a>
+                            <div class="dropdown-divider"></div>
                           {% endif %}
                         {% endfor %}
                       {% endif %}
@@ -167,6 +170,22 @@
             });
           });
           </script>
+          <script>
+          document.getElementById('btnnext').onclick = myFunction;
+            // If the user clicks in the window, set the background color of <body> to yellow
+            var counter = 0;
+            function myFunction() {
+              
+              var div = document.getElementById('slideshow');
+              var img = div.getElementsByTagName('img')[counter].src;//.childNodes[2];
+              
+              document.getElementById("imgprev").src=img;//document.getElementById("imgprev").src;
+              
+              
+              counter++;
+              if (counter==3) counter = 0;
+            }
+            </script>
     </body>
     
 </html>

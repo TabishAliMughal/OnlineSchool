@@ -29,12 +29,13 @@ def ManageClassExamQuestionPrintView(PrintView,id):
 
 def ManageClassExamFilePrintView(ExamView,id):
     file = get_object_or_404(ExamQuestions , exam = id)
-    print(file.file)
     path = file.file
     return HttpResponse(path , 'application/pdf')
 
 
 def ManageAddStudentExamPictureView(UploadView,id,pk):
+    user = UploadView.user.groups.values('name')
+    form = ManageExamAnswersForm()
     tea = UploadView.user
     classes = []
     exam = []
@@ -50,28 +51,33 @@ def ManageAddStudentExamPictureView(UploadView,id,pk):
                     exam = ['No Active Exams']
             else:
                 exam = ['No Active Exams']
-    user = UploadView.user.groups.values('name')
     if UploadView.method == 'POST':
-        form = ManageExamAnswersForm(UploadView.POST)
+        # filled_form = ManageExamAnswersForm(UploadView.POST)
         for i in exam:
             exampk = i
+        v = ExamAnswers.objects.count()
+        print(v)
         pic = UploadView.POST.get('pic')
-        form  = ManageExamAnswersForm({
-            'student' : int(pk) ,
-            'exam' : int(exampk) ,
-            'picture' : pic ,
-        })
-        # form.save()
+        filled_form  = ExamAnswers(
+            int(v) +1 ,
+            int(pk) ,
+            int(exampk) ,
+            pic ,
+            'False' ,
+        )
+        # if filled_form.is_valid:
+        filled_form.save()
+        student = get_object_or_404(TeacherClassStudents, pk = pk)
         context = {
+            'student': student ,
             'user': user ,
-            'form' : 'Can not Save Data'
+            'form' : form ,
         }
         return render(UploadView,'Exam/PapersUpload.html',context)
     else:
         student = get_object_or_404(TeacherClassStudents, pk = pk)
-        form = ManageExamAnswersForm()
         context = {
-            'form': 'Can not Save Data' ,
+            'form': form ,
             'student': student ,
             'user': user ,
         }
