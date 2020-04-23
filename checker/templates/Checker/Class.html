@@ -4,9 +4,45 @@
         <h2 class="text-center" style="font-family:sans-serif;">Current Students</h2><hr/>
         <table class="table table-hover table-sm table-dark">
             <tbody id="myTable" align="center">
+                <tr>
+                    <th>Name</th>
+                    <th>Number Of Copies</th>
+                    <th>Status</th>
+                    <th>Obtained</th>
+                    <th>Pick</th>
+                </tr>
                 {% for i in students %}
                     <tr>
-                        <th><a href="{% url 'student_copy_check' i.pk  %}">{{ i.name }}</a></th>
+                        <td><a>{{ i.name }}</a></td>
+                        {% if i.count == '0' %}
+                            <td></td><!0>
+                            <td></td><!Not Checked>
+                            <td></td><!0>
+                            <td></td><!Cant Check>
+                        {% else %}
+                            <td>{{ i.count }}</td>
+                            {% if i.status == '' %}
+                                <td></td><!Not Checked>
+                                <td></td><!0>
+                                <td><a href="{% url 'student_copy_check' i.pk abc  %}">Check</a></td>
+                            {% elif i.status == 'Pending' %}
+                                <td>Pending</td>
+                                <td></td><!0>
+                                {% if i.checker == checker %}
+                                    <td><a href="{% url 'student_copy_check' i.pk abc  %}">Check</a></td>
+                                {% else %}
+                                    <td><a></a></td><!Cant Check>
+                                {% endif %}
+                            {% else %}
+                                <td>{{ i.status }}</td>
+                                <td>{{i.numbers}}</td>
+                                {% if i.checker == checker %}
+                                    <td><a href="{% url 'student_copy_check' i.pk abc  %}">ReCheck</a></td>
+                                {% else %}
+                                    <td><a></a></td><!Cant Recheck>
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
                     </tr>
                 {% endfor %}
             </tbody>

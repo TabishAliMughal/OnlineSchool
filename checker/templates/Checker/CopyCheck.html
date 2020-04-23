@@ -1,9 +1,12 @@
 {% extends "MainPage.html" %}
 {% load static %}
 {% block content %}
-{% for i in answers %}
-{% if i == 'No Answers' %}
+{% if answers == 'No Answers' %}
 <h1>No Answers Submitted</h1>
+{% elif answers == 'Copies Already Checked' %}
+<h1>Copies Already Checked</h1>
+{% elif answers == 'Copies Checking Already Pending' %}
+<h1>Some Other Person Checking</h1>
 {% else %}
 <form method="POST">
     {% csrf_token %}
@@ -36,8 +39,9 @@
                                     {% endfor %}
                                 {% else %}
                                     <tr>
-                                        <th><a>{{ i.question }} ( {{ i.marks }} )</a></th>
-                                        <th><input class="" type="number" name='{{i.pk}}' required/></th>
+                                        <th style="width: 400px;"><a>{{ i.question }} ( {{ i.marks }} )</a></th>
+                                        <th><input type="number" name='{{i.pk}}' min="0" max="{{i.marks}}" value='{{i.mar}}' required/></th>
+                                        <input type='text' name="d" value="{{i.che}}" hidden/>
                                     </tr>
                                 {% endif %}
                             {% endfor %}
@@ -65,7 +69,6 @@
     </div>
 </form>
 {% endif %}
-{% endfor %}
 {% endblock %}
 
 

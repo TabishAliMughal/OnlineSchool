@@ -40,7 +40,8 @@ class ExamAnswers(models.Model):
     student = models.ForeignKey(TeacherClassStudents , on_delete=models.CASCADE)
     exam = models.ForeignKey(ExamStatus , on_delete = models.CASCADE)
     picture = models.ImageField(upload_to='static/exam/papers/answers/')
-    checked = models.BooleanField()
+    checker = models.ForeignKey(User , on_delete=models.CASCADE,blank=True,null=True)
+    checked = models.CharField(max_length=8)
     def __str__(self):
         return 'Answer Of {}'.format(self.student)
 

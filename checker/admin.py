@@ -3,3 +3,4 @@ from .models import *
 
 
 admin.site.register(CheckerClass)
+admin.site.register(CheckedCount)

@@ -119,7 +119,7 @@ def ManageEditStudentView(EditView,id,pk):
             'picture' : picture ,
         }or None , instance=student)
         # form = TeacherClassStudentCreateForm(EditView.POST)
-        print(form)
+        # print(form)
         form.save()
         return redirect('teacher_class',id)
     else:

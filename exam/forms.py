@@ -21,6 +21,7 @@ class ManageExamAnswersForm(forms.ModelForm):
             'student' ,
             'exam' ,
             'picture' ,
+            'checker' ,
             'checked' ,
         })
 

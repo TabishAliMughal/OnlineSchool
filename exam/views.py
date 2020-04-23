@@ -52,21 +52,17 @@ def ManageAddStudentExamPictureView(UploadView,id,pk):
             else:
                 exam = ['No Active Exams']
     if UploadView.method == 'POST':
-        # filled_form = ManageExamAnswersForm(UploadView.POST)
+        # filled_form = ManageExamAnswersForm(UploadView.POST,UploadView.FILES)
         for i in exam:
             exampk = i
         v = ExamAnswers.objects.count()
-        print(v)
-        pic = UploadView.POST.get('pic')
-        filled_form  = ExamAnswers(
-            int(v) +1 ,
-            int(pk) ,
-            int(exampk) ,
-            pic ,
-            'False' ,
-        )
-        # if filled_form.is_valid:
-        filled_form.save()
+        filled_form  = ManageExamAnswersForm({
+            'student' : int(pk) ,
+            'exam' : int(exampk) ,
+            'checked' : 'False' ,
+        },UploadView.FILES)
+        if filled_form.is_valid:
+            filled_form.save()
         student = get_object_or_404(TeacherClassStudents, pk = pk)
         context = {
             'student': student ,
