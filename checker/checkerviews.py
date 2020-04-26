@@ -21,8 +21,8 @@ def ManageCheckerProfileView(ProfileView):
     for i in CheckerClass.objects.all():
         if str(i.checker) == str(checker):
             classes.append(i)
-    print(classes)
     context = {
+        'checker': checker ,
         'user': user ,
         'class' : classes ,
     }
@@ -30,43 +30,44 @@ def ManageCheckerProfileView(ProfileView):
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Checker'])
-def ManageCheckerClassView(ClassView,pk):
+def ManageCheckerClassView(ClassView,pk,id):
     user = ClassView.user.groups.values('name')
     checker = ClassView.user
-    classes = []
-    for i in CheckerClass.objects.all():
-        if str(checker.pk) == str(pk):
-            if str(i.checker) == str(checker):
-                classes.append(i.subject)
+    classes = get_object_or_404(CheckerClass , pk = id)
     students = []
     for i in ClassSubjects.objects.all():
-        for c in classes:
-            if str(i.class_name) == str(c.class_name) and str(i.subject_name) == str(c.subject_name):
-                for s in TeacherClassStudents.objects.all():
-                    if str(s.clas.clas) == str(c.class_name):
-                        status = ''
-                        count = '0'
-                        checked = '0'
-                        for a in ExamAnswers.objects.all():
-                            if s.pk == a.student.pk:
+        if str(i.class_name) == str(classes.subject.class_name) and str(i.subject_name) == str(classes.subject.subject_name):
+            for s in TeacherClassStudents.objects.all():
+                if str(s.clas.clas) == str(classes.subject.class_name):
+                    status = ''
+                    count = '0'
+                    checked = '0'
+                    exam_checker = ''
+                    for a in ExamAnswers.objects.all():
+                        if s.pk == a.student.pk:
+                            if str(a.exam.subject) == str(classes.subject.subject_name):
                                 count = int(count) + 1
                                 if str(a.checked) == 'True':
                                     checked = int(checked) + 1
                                     if count == checked:
                                         status = 'Checked'
+                                if str(a.checked) == 'False':
+                                        exam_checker = a.checker
                                 elif str(a.checked) == 'Pending':
                                     checked = int(checked) + 1
                                     if count == checked:
                                         status = 'Pending'
-                        numbers = '0'
-                        for x in QuestionsChecked.objects.all():
-                            if str(x.student.pk) == str(s.pk):
+                                        exam_checker = a.checker
+                    numbers = '0'
+                    for x in QuestionsChecked.objects.all():
+                        if str(x.student.pk) == str(s.pk):
+                            if str(x.question.exam.subject) == str(classes.subject.subject_name):
                                 numbers = int(numbers) + x.obtained
                                 exam_checker = x.checker
-                        students.append({'pk':s.pk,'name':s.name,'count':count,'status':status,'numbers':numbers,'checker':exam_checker})
+                    students.append({'pk':s.pk,'name':s.name,'count':count,'status':status,'numbers':numbers,'checker':exam_checker})
     context = {
-        'checker': checker ,
-        'abc' : pk ,
+        'class' : classes ,
+        'checker' : checker ,
         'user': user ,
         'students':students,
     }
@@ -74,10 +75,34 @@ def ManageCheckerClassView(ClassView,pk):
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Checker'])
-def ManageCheckerCheckView(CheckView,pk,id):
+def ManageCheckerClassCreateView(CreateView,pk):
+    user = CreateView.user.groups.values('name')
+    checker = CreateView.user
+    if CreateView.method == 'POST':
+        subject = CreateView.POST.get('subject')
+        for i in CheckerClass.objects.all():
+            if str(i.subject.pk) != str(subject) and str(i.checker.pk) != str(checker.pk):
+                form = ManageCheckerClassCreateForm({
+                    'checker': checker.pk ,
+                    'subject': subject ,
+                })
+                form.save()
+        return redirect('checker_profile')
+    else:
+        form = ManageCheckerClassCreateForm()
+        context = {
+            'form': form ,
+            'user': user ,
+        }
+        return render(CreateView,'Checker/ClassCreate.html',context)
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Checker'])
+def ManageCheckerCheckView(CheckView,pk,id,clas):
     user = CheckView.user.groups.values('name')
     checker = CheckView.user.pk
     student = get_object_or_404(TeacherClassStudents , pk = pk)
+    checker_class = get_object_or_404(CheckerClass , pk = clas)
     if CheckView.method == 'POST':
         rawdata = CheckView.POST
         v = '0'
@@ -108,14 +133,15 @@ def ManageCheckerCheckView(CheckView,pk,id):
                     form.save()
                 for ea in ExamAnswers.objects.all():
                     if str(ea.student.pk) == str(student.pk):
-                        if str(ea.checked) == 'False' or str(ea.checked) == 'Pending':
-                            ans_form = ManageExamAnswersForm({
-                                'student' : ea.student ,
-                                'exam' : ea.exam ,
-                                'picture' : ea.picture ,
-                                'checked' : 'True' ,
-                            } or None , instance = ea)
-                            ans_form.save()
+                        if str(ea.exam.subject) == str(checker_class.subject.subject_name):
+                            if str(ea.checked) == 'False' or str(ea.checked) == 'Pending':
+                                ans_form = ManageExamAnswersForm({
+                                    'student' : ea.student ,
+                                    'exam' : ea.exam ,
+                                    'picture' : ea.picture ,
+                                    'checked' : 'True' ,
+                                } or None , instance = ea)
+                                ans_form.save()
             else:
                 v = int(v) + 1
         for i in CheckedCount.objects.all():
@@ -129,7 +155,7 @@ def ManageCheckerCheckView(CheckView,pk,id):
                     'count' : int('1') ,
                 })
                 form.save()
-        return redirect('full_class',id)
+        return redirect('full_class',id,clas)
     else:
         marks = '0'
         file = []
@@ -138,57 +164,21 @@ def ManageCheckerCheckView(CheckView,pk,id):
         mar = []
         for d in ExamQuestions.objects.all():
             if str(student.clas.clas) == str(d.exam.class_name):
-                questions.append({
-                    'pk': d.pk ,
-                    'exam' : d.exam ,
-                    'file' : d.file ,
-                    'question' : d.question ,
-                    'marks' : d.marks ,
-                })
-                marks = int(marks) + int(d.marks)
-                v = str(d.file)
-                file.append(v[7:])
+                if str(d.exam.subject.pk) == str(checker_class.subject.subject_name.pk):
+                    questions.append({
+                        'pk': d.pk ,
+                        'exam' : d.exam ,
+                        'file' : d.file ,
+                        'question' : d.question ,
+                        'marks' : d.marks ,
+                    })
+                    marks = int(marks) + int(d.marks)
+                    v = str(d.file)
+                    file.append(v[7:])
         for i in ExamAnswers.objects.all():
             if str(i.student.pk) == str(pk):
-                if str(i.checked) == 'False' :
-                    a = str(i.picture)
-                    answers.append(a[7:])
-                    ans_form = ManageExamAnswersForm({
-                        'student' : i.student ,
-                        'exam' : i.exam ,
-                        'picture' : i.picture ,
-                        'checker' : checker ,
-                        'checked' : 'Pending' ,
-                    } or None , instance = i)
-                    ans_form.save()
-                elif str(i.checked) == 'True':
-                    marks = '0'
-                    file = []
-                    questions = []
-                    for x in QuestionsChecked.objects.all():
-                        if str(x.student.pk) == str(pk):
-                            if str(checker) == str(x.checker.pk):
-                                a = str(i.picture)
-                                answers.append(a[7:])
-                                mar.append(x.obtained)
-                    m = '0'
-                    for i in ExamQuestions.objects.all():
-                        if str(student.clas.clas) == str(i.exam.class_name):
-                            questions.append({
-                                'pk' : i.pk ,
-                                'exam' : i.exam ,
-                                'file' : i.file ,
-                                'question' : i.question ,
-                                'marks' : i.marks ,
-                                'mar' : mar[int(m)] ,
-                                'che': 'recheck' ,
-                            })
-                            marks = int(marks) + int(i.marks)
-                            v = str(i.file)
-                            file.append(v[7:])
-                            m = int(m) + 1
-                elif str(i.checked) == 'Pending' :
-                    if str(i.checker.pk) == str(checker):
+                if str(i.exam.subject) == str(checker_class.subject.subject_name):
+                    if str(i.checked) == 'False' :
                         a = str(i.picture)
                         answers.append(a[7:])
                         ans_form = ManageExamAnswersForm({
@@ -199,8 +189,48 @@ def ManageCheckerCheckView(CheckView,pk,id):
                             'checked' : 'Pending' ,
                         } or None , instance = i)
                         ans_form.save()
-                    else:
-                        answers = 'Copies Checking Already Pending'
+                    elif str(i.checked) == 'True':
+                        marks = '0'
+                        file = []
+                        questions = []
+                        for x in QuestionsChecked.objects.all():
+                            if str(x.student.pk) == str(pk):
+                                if str(checker) == str(x.checker.pk):
+                                    if str(x.question.exam.subject) == str(checker_class.subject.subject_name):
+                                        a = str(i.picture)
+                                        answers.append(a[7:])
+                                        mar.append(x.obtained)
+                        m = '0'
+                        for v in ExamQuestions.objects.all():
+                            if str(student.clas.clas) == str(i.exam.class_name):
+                                if str(v.exam.subject) == str(checker_class.subject.subject_name):
+                                    questions.append({
+                                        'pk' : i.pk ,
+                                        'exam' : i.exam ,
+                                        'file' : v.file ,
+                                        'question' : v.question ,
+                                        'marks' : v.marks ,
+                                        'mar' : mar[int(m)] ,
+                                        'che': 'recheck' ,
+                                    })
+                                    marks = int(marks) + int(v.marks)
+                                    v = str(v.file)
+                                    file.append(v[7:])
+                                    m = int(m) + 1
+                    elif str(i.checked) == 'Pending' :
+                        if str(i.checker.pk) == str(checker):
+                            a = str(i.picture)
+                            answers.append(a[7:])
+                            ans_form = ManageExamAnswersForm({
+                                'student' : i.student ,
+                                'exam' : i.exam ,
+                                'picture' : i.picture ,
+                                'checker' : checker ,
+                                'checked' : 'Pending' ,
+                            } or None , instance = i)
+                            ans_form.save()
+                        else:
+                            answers = 'Copies Checking Already Pending'
         if answers == []:
             answers = 'No Answers'
         context = {
@@ -213,4 +243,5 @@ def ManageCheckerCheckView(CheckView,pk,id):
             'user': user ,
         }
         return render(CheckView,'Checker/CopyCheck.html',context)
+
 

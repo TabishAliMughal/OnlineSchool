@@ -2,8 +2,13 @@ from django.shortcuts import render , get_object_or_404 , get_list_or_404 , redi
 from .models import *
 from static.renderer import PdfMaker
 from .forms import *
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group , User
+from authentication.user_handeling import unauthenticated_user, allowed_users, admin_only
 
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Teacher'])
 def ManageClassExamView(ExamView,id):
     user = ExamView.user.groups.values('name')
     exam = get_object_or_404(ExamStatus,pk = id)
@@ -15,6 +20,8 @@ def ManageClassExamView(ExamView,id):
     }
     return render(ExamView,'Exam/Exam.html',context)
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Teacher'])
 def ManageClassExamQuestionPrintView(PrintView,id):
     user = PrintView.user.groups.values('name')
     exam = get_object_or_404(ExamStatus,pk = id)
@@ -27,13 +34,58 @@ def ManageClassExamQuestionPrintView(PrintView,id):
     pdf = PdfMaker('Exam/ExamQuestionsPrint.html', context)
     return HttpResponse(pdf, content_type='application/pdf')
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Teacher'])
 def ManageClassExamFilePrintView(ExamView,id):
     file = get_object_or_404(ExamQuestions , exam = id)
     path = file.file
     return HttpResponse(path , 'application/pdf')
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Teacher'])
+def ManageTeacherClassExamAnswersStudentSelectView(SelectView,id,pk):
+    exam = get_object_or_404(ExamStatus, pk = id)
+    teacher = get_object_or_404(User , pk = pk)
+    students = []
+    classtud = []
+    classes = []
+    addedpics = []
+    user = SelectView.user.groups.values('name')
+    tea = SelectView.user
+    for i in TeacherClass.objects.all():
+        if str(i.teacher) == str(tea):
+            if str(i.clas) == str(exam.class_name):
+                classes.append(i)
+    for c in classes:
+        for i in TeacherClassStudents.objects.all():
+            if str(i.clas.clas) == str(c.clas):
+                classtud.append(i)
+    for e in ExamAnswers.objects.all():
+        for c in classtud:
+            if str(e.student.pk) == str(c.pk) and str(e.exam.pk) == str(exam.pk) :
+                addedpics.append(str(c.pk))
+    for i in classtud:
+        pics = addedpics.count(str(i.pk))
+        students.append({
+            'pk': i.pk ,
+            'clas': i.clas ,
+            'name': i.name ,
+            'father_name': i.father_name ,
+            'picsqty': pics ,
+        })
+    context = {
+        'teacher': teacher ,
+        'user': user ,
+        'exam': exam ,
+        'class' : students ,
+    }
+    return render(SelectView,'Exam/Class.html',context)
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Teacher'])
 def ManageAddStudentExamPictureView(UploadView,id,pk):
+    student = get_object_or_404(TeacherClassStudents, pk = pk)
+    selectedexam = get_object_or_404(ExamStatus , pk = id)
     user = UploadView.user.groups.values('name')
     form = ManageExamAnswersForm()
     tea = UploadView.user
@@ -42,39 +94,30 @@ def ManageAddStudentExamPictureView(UploadView,id,pk):
     for i in TeacherClass.objects.all():
         if str(i.teacher) == str(tea):
             classes.append(i)
-    for i in ExamStatus.objects.all():
-        for v in classes:
-            if str(i.class_name.pk) == str(v.clas.pk):
-                if str(i.status) == 'True':
-                    exam.append(i.pk)
-                else:
-                    exam = ['No Active Exams']
-            else:
-                exam = ['No Active Exams']
     if UploadView.method == 'POST':
-        # filled_form = ManageExamAnswersForm(UploadView.POST,UploadView.FILES)
-        for i in exam:
-            exampk = i
         v = ExamAnswers.objects.count()
         filled_form  = ManageExamAnswersForm({
             'student' : int(pk) ,
-            'exam' : int(exampk) ,
+            'exam' : int(selectedexam.pk) ,
             'checked' : 'False' ,
         },UploadView.FILES)
         if filled_form.is_valid:
             filled_form.save()
-        student = get_object_or_404(TeacherClassStudents, pk = pk)
         context = {
+            'teacher': tea ,
+            'student':student ,
+            'exam': selectedexam ,
+            'form' : form ,
             'student': student ,
             'user': user ,
-            'form' : form ,
         }
-        return render(UploadView,'Exam/PapersUpload.html',context)
+        return render(UploadView,'Exam/PapersUploaded.html',context)
     else:
-        student = get_object_or_404(TeacherClassStudents, pk = pk)
         context = {
+            'exam': selectedexam ,
             'form': form ,
             'student': student ,
             'user': user ,
         }
         return render(UploadView,'Exam/PapersUpload.html',context)
+

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'exam',
     'main',
     'checker',
+    'result'
 ]
 
 MIDDLEWARE = [

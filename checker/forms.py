@@ -11,3 +11,11 @@ class ManageCheckerCountForm(forms.ModelForm):
             'exam',
             'count',
         ]
+
+class ManageCheckerClassCreateForm(forms.ModelForm):
+    class Meta:
+        model = CheckerClass
+        fields = [
+            'checker' ,
+            'subject' ,
+        ]

@@ -3,6 +3,7 @@ from . import checkerviews
 
 urlpatterns = [
     path('',checkerviews.ManageCheckerProfileView, name='checker_profile'),
-    path('class/<pk>',checkerviews.ManageCheckerClassView, name='full_class'),
-    path('class/check/<pk>/<id>',checkerviews.ManageCheckerCheckView, name='student_copy_check'),
+    path(r'class/full/\d12345<pk>910\d/\d12345<id>910\d/',checkerviews.ManageCheckerClassView, name='full_class'),
+    path(r'class/create/\d12345<pk>910\d',checkerviews.ManageCheckerClassCreateView, name='checker_class_create'),
+    path(r'class/check/\d12345<pk>910\d/\d12345<id>910\d/\d12345<clas>910\d',checkerviews.ManageCheckerCheckView, name='student_copy_check'),
 ]

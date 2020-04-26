@@ -24,4 +24,5 @@ urlpatterns = [
     path('exam/', include('exam.urls')),
     path('admin/log/', include('main.urls')),
     path('checker/', include('checker.urls')),
+    path('result/', include('result.urls')),
 ]
