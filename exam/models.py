@@ -29,7 +29,7 @@ class ExamStatus(models.Model):
 class ExamQuestions(models.Model):
     code = models.AutoField(primary_key = True)
     exam = models.ForeignKey(ExamStatus , on_delete = models.CASCADE)
-    file = models.FileField(upload_to='static/%exam/papers/', blank = True)
+    file = models.FileField(upload_to='static/exam/papers/', blank = True)
     question = models.CharField(max_length = 250, blank = True)
     marks = models.IntegerField(blank = True)
     def __str__(self):
@@ -39,5 +39,17 @@ class ExamAnswers(models.Model):
     code = models.AutoField(primary_key=True)
     student = models.ForeignKey(TeacherClassStudents , on_delete=models.CASCADE)
     exam = models.ForeignKey(ExamStatus , on_delete = models.CASCADE)
-    picture = models.ImageField(upload_to='static/%exam/papers/answers/',blank = True)
+    picture = models.ImageField(upload_to='static/exam/papers/answers/')
+    checker = models.ForeignKey(User , on_delete=models.CASCADE,blank=True,null=True)
+    checked = models.CharField(max_length=8)
+    def __str__(self):
+        return 'Answer Of {}'.format(self.student)
 
+class QuestionsChecked(models.Model):
+    code = models.AutoField(primary_key=True)
+    checker = models.ForeignKey(User , on_delete = models.CASCADE)
+    question = models.ForeignKey(ExamQuestions , on_delete=models.CASCADE)
+    student = models.ForeignKey(TeacherClassStudents , on_delete=models.CASCADE)
+    obtained = models.IntegerField()
+    def __str__(self):
+        return 'Answer Of {} , Checked By {}'.format(self.student,self.checker)

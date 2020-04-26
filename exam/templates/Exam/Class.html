@@ -1,0 +1,27 @@
+{% extends "MainPage.html" %}
+{% block content %}
+    <div class="container">
+        <h2 class="text-center" style="font-family:sans-serif;">My Students</h2><hr/>
+        <h5 class="text-center" style="font-family:sans-serif;">{{ exam }}</h5><hr/>
+        <table class="table table-hover table-sm table-dark">
+            <thead align="center">
+                <tr>
+                    <th>Name</th>
+                    <th>Father</th>
+                    <th>Action</th>
+                    <th>Pics</th>
+                </tr>
+            </thead>
+            <tbody id="myTable" align="center">
+                {% for i in class %}
+                    <tr>
+                        <th>{{ i.name }}</th>
+                        <th>{{ i.father_name }}</th>
+                        <th><a class='btn' href="{% url 'exam_upload_pictures' exam.pk i.pk %}">Upload Answers</a></th>
+                        <th>{{ i.picsqty }} Uploaded</th>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

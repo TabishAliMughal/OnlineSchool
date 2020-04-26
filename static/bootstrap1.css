@@ -10223,11 +10223,3 @@ a.text-dark:hover, a.text-dark:focus {
 }
 /*# sourceMappingURL=bootstrap.css.map */
 
-
-.editable{
-  border-radius: 20px;
-  background-color: #343a40;
-  color : white;
-  text-align : center;
-  border : 1px solid #ff818140;
-}

@@ -11,13 +11,18 @@ from exam.models import *
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Teacher'])
 def ManageTeacherProfileView(ProfileView):
+    equal = ''
     exam = []
     classes = []
     user = ProfileView.user.groups.values('name')
     teacher = ProfileView.user
+    # Classes
     for i in TeacherClass.objects.all():
         if str(i.teacher) == str(teacher):
             classes.append(i)
+    if classes == []:
+        classes = 'No Class'
+    # Exams
     for i in ExamStatus.objects.all():
         for v in classes:
             if str(i.class_name.pk) == str(v.clas.pk):
@@ -27,43 +32,74 @@ def ManageTeacherProfileView(ProfileView):
                     exam = ['No Active Exams']
             else:
                 exam = ['No Active Exams']
+    # -------------------
     context = {
         'exam': exam ,
         'user': user ,
         'class' : classes ,
+        'teacher': teacher ,
+        'equal' : equal ,
     }
     return render(ProfileView,'Teacher/Profile.html',context)
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Teacher'])
 def ManageTeacherClassView(ListView,id):
-    exam = []
-    clas = []
+    exam = ''
+    classtud = []
     classes = []
     user = ListView.user.groups.values('name')
     tea = ListView.user
-    teacher = get_object_or_404(TeacherClass , pk = id)
+    teacherclass = get_object_or_404(TeacherClass , pk = id)
     for i in TeacherClass.objects.all():
         if str(i.teacher) == str(tea):
             classes.append(i)
     for i in TeacherClassStudents.objects.all():
         if str(i.clas.pk) == str(id):
-            clas.append(i)
+            classtud.append(i)
     for i in ExamStatus.objects.all():
         for v in classes:
             if str(i.class_name.pk) == str(v.clas.pk):
                 if str(i.status) == 'True':
-                    exam.append(i)
+                    exam = 'Active'
                 else:
-                    exam = ['No Active Exams']
+                    exam = 'No Active Exams'
             else:
-                exam = ['No Active Exams']
+                exam = 'No Active Exams'
     context = {
         'exam': exam ,
-        'teacher': teacher ,
+        'teacherclass': teacherclass ,
         'user': user ,
-        'class' : clas ,
+        'class' : classtud ,
     }
     return render(ListView,'Teacher/Display/Class.html',context)
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Teacher'])
+def TeacherClassCreateView(CreateView,id):
+    user = CreateView.user.groups.values('name')
+    teacher = CreateView.user
+    if CreateView.method == 'POST':
+        rawdata = CreateView.POST
+        clas = rawdata.get("clas")
+        form = TeacherClassCreateForm({
+            'teacher' : teacher ,
+            'clas' : clas ,
+            'limit' : 5 ,
+        })
+        form.save()
+        return redirect('teacher_profile')
+    else:
+        form = TeacherClassCreateForm()
+        context = {
+            'user': user ,
+            'form': form ,
+            'teacher': teacher ,
+        }
+        return render(CreateView,'Teacher/Create/Class.html',context)
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Teacher'])
 def ManageAddStudentView(CreateView,id):
     if CreateView.method == 'POST':
         clas = id
@@ -99,10 +135,11 @@ def ManageAddStudentView(CreateView,id):
         }
         return render(CreateView,'Teacher/Create/Student.html',context)
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Teacher'])
 def ManageEditStudentView(EditView,id,pk):
     student = get_object_or_404(TeacherClassStudents, pk = pk)
     if EditView.method == 'POST':
-        student.delete()
         clas = id
         name = EditView.POST.get('name')
         father = EditView.POST.get('father_name')
@@ -118,7 +155,7 @@ def ManageEditStudentView(EditView,id,pk):
             'contact' : contact ,
             'address' : address ,
             'picture' : picture ,
-        })
+        }or None , instance=student)
         form.save()
         return redirect('teacher_class',id)
     else:
@@ -130,8 +167,10 @@ def ManageEditStudentView(EditView,id,pk):
             'form': form ,
             'user': user ,
         }
-        return render(EditView,'Teacher/Create/Student.html',context)
+        return render(EditView,'Teacher/Edit/Student.html',context)
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Teacher'])
 def ManageDeleteStudentView(DeleteView,id,pk):
     TeacherClassStudents.objects.filter(pk = pk).delete()
     return redirect('teacher_class',id)

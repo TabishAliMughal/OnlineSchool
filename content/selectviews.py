@@ -76,7 +76,6 @@ def ManageContentSelectView(SelectView,date,Ccode,subject):
                 if str(rows.date) == str(date):
                     FContent = get_list_or_404(Content , date = date , class_name = Ccode , subject = sub)
                     cont.append(FContent)
-    print(cont)
     context = {'user':user ,'content' : cont,}
     return render(SelectView , 'Select/content_select.html' , context)
 

@@ -4,11 +4,28 @@
         <h2 class="text-center" style="font-family:sans-serif;">My Classes</h2><hr/>
         <table class="table table-hover table-sm table-dark">
             <tbody id="myTable" align="center">
-                {% for i in class %}
+                {% if equal == 'equal' %}
                     <tr>
-                        <th><a href="{% url 'teacher_class' i.pk %}" >{{ i.clas }}</a></th>
+                        <th><a class="btn btn-primary" href="{% url 'teacher_class_create' teacher.pk %}" >Add New Class</a></th>
                     </tr>
-                {% endfor %}
+                    {% for i in class %}
+                        <tr>
+                            <th><a href="{% url 'teacher_class' i.pk %}" >{{ i.clas }}</a></th>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    {% if class == 'No Class' %}
+                        <tr>
+                            <th><a href="{% url 'teacher_class_create' teacher.pk %}" >Select Class</a></th>
+                        </tr>
+                    {% else %}
+                        {% for i in class %}
+                            <tr>
+                                <th><a href="{% url 'teacher_class' i.pk %}" >{{ i.clas }}</a></th>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                {% endif %}
             </tbody>
         </table>
     </div>
@@ -23,10 +40,22 @@
                         </tr>
                     {% else %}
                         <tr>
-                            <th><a href="{% url 'teacher_class_exam' i.pk %}" >{{ i }}</a></th>
+                            <th><a>{{ i.subject }}</a></th>
+                            <th><a>{{ i.class_name }}</a></th>
+                            <th><a class="btn" href="{% url 'teacher_class_exam' i.pk %}">See Questions</a><a class="btn"  href="{% url 'teacher_class_exam_answers_student_select' i.pk teacher.pk %}">Upload Answers</a></th>
                         </tr>
                     {% endif %}
                 {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="container">
+        <h2 class="text-center" style="font-family:sans-serif;">Upload Answers</h2><hr/>
+        <table class="table table-hover table-sm table-dark">
+            <tbody id="myTable" align="center">
+                <tr>
+                    <th><a>No Active Exams</a></th>
+                </tr>
             </tbody>
         </table>
     </div>

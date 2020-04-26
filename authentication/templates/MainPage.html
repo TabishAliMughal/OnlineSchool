@@ -10,13 +10,13 @@
 		
        
         <!--Page Title-->
-        <title>POCKET SCHOOL</title>
+        <title>Digital SCHOOL</title>
     </head>
     <body>
 
         <!--Navbar menu-->
               <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a class="navbar-brand" href="{% url "main" %}">Pocket School</a>
+                <a class="navbar-brand" href="{% url "main" %}">Digital School</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
@@ -96,6 +96,9 @@
                           {% elif i.name == 'Admin' %}
                             <a class="dropdown-item" href="{% url 'profiles' %}">All Profiles</a>
                             <div class="dropdown-divider"></div>
+                          {% elif i.name == 'Checker' %}
+                            <a class="dropdown-item" href="{% url 'checker_profile' %}">My Profile</a>
+                            <div class="dropdown-divider"></div>
                           {% endif %}
                         {% endfor %}
                       {% endif %}
@@ -147,7 +150,7 @@
                   <div class="text-center" style="margin:10px 0px">
                     <a class="btn btn-outline-success" href="#">Team</a>
                     <a class="btn btn-outline-success" href="#">About</a>
-                    <a class="btn btn-outline-success" href="#">Contact</a>
+                    <a class="btn btn-outline-success" href="http://web.whatsapp.com/send?phone=+923162810366&text=I Saw Your Web Application Its Awsome">Contact</a>
                   </div>
                   <div class="text-center">
                     <p>Designed And Developed By: <span><a href="https://www.facebook.com/TabishAliMughal">Tabish Ali Mughal</a></span></p>
@@ -167,6 +170,34 @@
             });
           });
           </script>
+          <script>
+          document.getElementById('btnnext').onclick = next;
+          document.getElementById('btnprev').onclick = prev;
+            // If the user clicks in the window, set the background color of <body> to yellow
+            var counter = 0;
+            function next() {
+              
+              var div = document.getElementById('slideshow');
+              var img = div.getElementsByTagName('img')[counter].src;//.childNodes[2];
+              
+              document.getElementById("imgprev").src=img;//document.getElementById("imgprev").src;
+              
+              
+              counter++;
+              if (counter==10) counter = 0;
+            }
+            function prev() {
+              
+              var div = document.getElementById('slideshow');
+              var img = div.getElementsByTagName('img')[counter].src;//.childNodes[2];
+              
+              document.getElementById("imgprev").src=img;//document.getElementById("imgprev").src;
+              
+              
+              counter--;
+              if (counter==0) counter = 10;
+            }
+            </script>
     </body>
     
 </html>
