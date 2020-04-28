@@ -1,0 +1,36 @@
+{% extends "MainPage.html" %}
+{% block content %}
+    <div class="container">
+        <h2 class="text-center" style="font-family:sans-serif;">My School</h2><hr/>
+        <table class="table table-hover table-sm table-dark">
+            <tbody id="myTable" align="center">
+                {% if school == 'No' %}
+                <tr>
+                    <th><a href="{% url 'school_create' %}">Add School Info</a></th>
+                </tr>
+                {% else %}
+                {% for i in school %}
+                        <tr>
+                            <th><a>{{ i.school }}</a></th>
+                        </tr>
+                        <tr>
+                            <th><a>{{ i.address }}</a></th>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+        <h2 class="text-center" style="font-family:sans-serif;">All Registered Teachers</h2><hr/>
+        <a class="btn btn-primary" href="{% url 'register' group %}">Add Teachers</a>
+        <table class="table table-hover table-sm table-dark">
+            <tbody id="myTable" align="center">
+                {% for i in teachers %}
+                    <tr>
+                        <th><a href="{% url 'teacher_profile_detail' i.teacher.pk %}" >{{ i.teacher }}</a></th>
+                        <th><a>{{ i.clas }}</a></th>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

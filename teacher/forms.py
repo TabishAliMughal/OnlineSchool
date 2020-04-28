@@ -22,4 +22,5 @@ class TeacherClassCreateForm(forms.ModelForm):
             'teacher' ,
             'clas' ,
             'limit' ,
+            'school',
         ]

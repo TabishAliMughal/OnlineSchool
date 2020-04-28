@@ -99,6 +99,9 @@
                           {% elif i.name == 'Checker' %}
                             <a class="dropdown-item" href="{% url 'checker_profile' %}">My Profile</a>
                             <div class="dropdown-divider"></div>
+                          {% elif i.name == 'School' %}
+                            <a class="dropdown-item" href="{% url 'school_profile' %}">My Profile</a>
+                            <div class="dropdown-divider"></div>
                           {% endif %}
                         {% endfor %}
                       {% endif %}
