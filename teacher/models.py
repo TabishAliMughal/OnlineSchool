@@ -1,5 +1,6 @@
 from django.db import models
 from content.models import *
+from reg_school.models import *
 from django.contrib.auth.models import User
 
 
@@ -8,6 +9,7 @@ class TeacherClass(models.Model):
     teacher = models.ForeignKey(User , on_delete = models.CASCADE)
     clas = models.ForeignKey(Classes , on_delete = models.CASCADE)
     limit = models.CharField(max_length=2)
+    school = models.ForeignKey(School , on_delete = models.CASCADE , null=True,blank = True)
     def __str__(self):
         return 'Class {} Of {}'.format(self.clas,self.teacher)
 

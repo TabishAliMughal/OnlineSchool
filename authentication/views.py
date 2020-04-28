@@ -18,7 +18,7 @@ def AskRegister(request):
 		}
 		return render(request , 'Authentication/RegisterAsk.html', context)
 
-@unauthenticated_user
+# @unauthenticated_user
 def Register(request,id):
 	form = CreateUserForm()
 	if request.method == 'POST':

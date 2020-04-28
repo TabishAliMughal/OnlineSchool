@@ -20,8 +20,6 @@ def ManageTeacherProfileView(ProfileView):
     for i in TeacherClass.objects.all():
         if str(i.teacher) == str(teacher):
             classes.append(i)
-    if classes == []:
-        classes = 'No Class'
     # Exams
     for i in ExamStatus.objects.all():
         for v in classes:
@@ -33,6 +31,8 @@ def ManageTeacherProfileView(ProfileView):
             else:
                 exam = ['No Active Exams']
     # -------------------
+    if classes == []:
+        classes = 'No Class'
     context = {
         'exam': exam ,
         'user': user ,
@@ -82,10 +82,12 @@ def TeacherClassCreateView(CreateView,id):
     if CreateView.method == 'POST':
         rawdata = CreateView.POST
         clas = rawdata.get("clas")
+        school = rawdata.get("school")
         form = TeacherClassCreateForm({
             'teacher' : teacher ,
             'clas' : clas ,
             'limit' : 5 ,
+            'school' : school ,
         })
         form.save()
         return redirect('teacher_profile')
