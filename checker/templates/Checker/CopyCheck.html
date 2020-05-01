@@ -39,7 +39,7 @@
                                     {% endfor %}
                                 {% else %}
                                     <tr>
-                                        <th style="width: 400px;"><a>{{ i.question }} ( {{ i.marks }} )</a></th>
+                                        <th style="width: 400px;"><a>{{ i.question }} ( {{ i.marks }} ){{i.pk}}</a></th>
                                         <th><input type="number" name='{{i.pk}}' min="0" max="{{i.marks}}" value='{{i.mar}}' required/></th>
                                         <input type='text' name="d" value="{{i.che}}" hidden/>
                                     </tr>

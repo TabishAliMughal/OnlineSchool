@@ -7,7 +7,7 @@ from authentication.user_handeling import unauthenticated_user, allowed_users, a
 
 
 @login_required(login_url='login')
-@allowed_users(allowed_roles=['Teacher'])
+@allowed_users(allowed_roles=['Teacher','Student','Parent'])
 def ManageTeacherClassStudentResultView(ResultView,id,pk):
     user = ResultView.user.groups.values('name')
     clas = get_object_or_404(TeacherClass , pk = id)
@@ -143,4 +143,24 @@ def ManageTeacherClassResultView(ResultView,id):
     }
     return render(ResultView,'Result/Class.html',context)
 
-
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Teacher','Student','Parent'])
+def ManageTeacherClassStudentResultAnswersView(AnswersView,exam,student):
+    user = AnswersView.user.groups.values('name')
+    data = []
+    ans = []
+    exam = get_object_or_404(ExamStatus , pk = exam)
+    student = get_object_or_404(TeacherClassStudents , pk = student)
+    for i in ExamAnswers.objects.all():
+        if str(i.student.pk) == str(student.pk):
+            if str(i.exam.pk) == str(exam.pk):
+                ans.append(str(i.picture)[7:])
+                d = {'name' : i.student.name ,'class' : i.student.clas.clas ,'teacher' : i.student.clas.teacher ,'subject' : i.exam.subject}
+                if d not in data:
+                    data.append(d)
+    context = {
+        'data': data ,
+        'ans': ans ,
+        'user': user ,
+    }
+    return render(AnswersView,'Result/StudentAnswers.html',context)

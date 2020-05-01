@@ -178,3 +178,12 @@ def ManageDeleteStudentView(DeleteView,id,pk):
     return redirect('teacher_class',id)
 
 
+def abc(request):
+    user = request.user.groups.values('name')
+
+    form = Address()
+    context = {
+        'form': form ,
+        'user': user ,
+    }
+    return render(request,'Teacher/Create/Students.html',context)

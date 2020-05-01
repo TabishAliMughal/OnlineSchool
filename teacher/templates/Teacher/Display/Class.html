@@ -7,17 +7,25 @@
         <table class="table table-hover table-sm table-dark">
             <thead align="center">
                 <tr>
+                    <th>Profile</th>
                     <th>Name</th>
                     <th>Father</th>
                     <th>Action</th>
+                    {% if exam == 'Active' %}
+                        <th>Result</th>
+                    {% endif %}
                 </tr>
             </thead>{{ teacher }}
             <tbody id="myTable" align="center">
                 {% for i in class %}
                     <tr>
+                        <th><a class="btn btn-primary" href="{% url 'student_profile' i.pk %}"></a></th>
                         <th>{{ i.name }}</th>
                         <th>{{ i.father_name }}</th>
-                        <th><a href="{% url 'edit_student' teacherclass.pk i.pk %}" class="btn btn-primary">Edit</a><a href="{% url 'delete_student' teacherclass.pk i.pk %}" class="btn btn-primary">Delete</a>{% if exam == 'Active' %}<a  href="{% url 'teacher_class_student_result' teacherclass.pk i.pk %}" class="btn btn-primary">View Result</a>{% endif %}</th>
+                        <th><a href="{% url 'edit_student' teacherclass.pk i.pk %}" class="btn btn-primary">Edit</a><a href="{% url 'delete_student' teacherclass.pk i.pk %}" class="btn btn-primary">Delete</a></th>
+                        {% if exam == 'Active' %}
+                            <th><a  href="{% url 'teacher_class_student_result' teacherclass.pk i.pk %}" class="btn btn-primary">View Result</a></th>
+                        {% endif %}
                     </tr>
                 {% endfor %}
             </tbody>

@@ -15,23 +15,31 @@
                     <tr>
                         <td><a>{{ i.name }}</a></td>
                         {% if i.count == '0' %}
-                            <td></td><!0>
-                            <td></td><!Not Checked>
-                            <td></td><!0>
-                            <td></td><!Cant Check>
+                            <td>0</td><!>
+                            <td>Not Checked</td><!>
+                            <td>0</td><!>
+                            <td>Cant Check</td><!>
                         {% else %}
                             <td>{{ i.count }}</td>
                             {% if i.status == '' %}
-                                <td></td><!Not Checked>
-                                <td></td><!0>
+                                <td>Not Checked</td><!>
+                                <td>0</td><!>
                                 <td><a href="{% url 'student_copy_check' i.pk checker.pk class.pk %}">Check</a></td>
                             {% elif i.status == 'Pending' %}
                                 <td>Pending</td>
-                                <td></td><!0>
+                                <td>0</td><!>
                                 {% if i.checker == checker %}
                                     <td><a href="{% url 'student_copy_check' i.pk checker.pk class.pk %}">Check</a></td>
                                 {% else %}
-                                    <td><a></a></td><!Cant Check>
+                                    <td><a>Cant Check</a></td><!>
+                                {% endif %}
+                            {% elif i.status == 'Claimed' %}
+                                <td>Claimed</td>
+                                <td>{{i.numbers}}</td>
+                                {% if i.checker == checker %}
+                                    <td><a href="{% url 'student_copy_check' i.pk checker.pk class.pk %}">Check</a></td>
+                                {% else %}
+                                    <td><a>Cant Check</a></td><!>
                                 {% endif %}
                             {% else %}
                                 <td>{{ i.status }}</td>
@@ -39,7 +47,7 @@
                                 {% if i.checker == checker %}
                                     <td><a href="{% url 'student_copy_check' i.pk checker.pk class.pk  %}">ReCheck</a></td>
                                 {% else %}
-                                    <td><a></a></td><!Cant Recheck>
+                                    <td><a>Cant Recheck</a></td><!>
                                 {% endif %}
                             {% endif %}
                         {% endif %}
