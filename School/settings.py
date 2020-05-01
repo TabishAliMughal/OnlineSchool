@@ -46,7 +46,15 @@ INSTALLED_APPS = [
     'checker',
     'result',
     'reg_school',
+    'parents',
+    'student',
+    'location_field.apps.DefaultConfig',
 ]
+
+LOCATION_FIELD = {
+'map.provider': 'openstreetmap',
+'search.provider': 'nominatim',
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
