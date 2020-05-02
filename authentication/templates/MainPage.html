@@ -6,7 +6,26 @@
         <link rel="stylesheet" type="text/css" href="{% static './bootstrap1.css' %}" />
 
 		    <!-- Style CSS -->
-		    <link href="{% static './page_heading_stylesheet.css'%}" rel="stylesheet">
+        <link href="{% static './page_heading_stylesheet.css'%}" rel="stylesheet">
+        
+
+        
+		    <!-- Maps -->
+        <link href="/static/mapwidgets/css/map_widgets.css" type="text/css" media="all" rel="stylesheet">
+        <script type="text/javascript" src="/static/admin/js/vendor/jquery/jquery.js"></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;language=en&amp;key=AIzaSyACgTHo7SLBqnZANd406ZF6h2xNMH58Flw"></script>
+        <script type="text/javascript" src="/static/mapwidgets/js/jquery_class.js"></script>
+        <script type="text/javascript" src="/static/mapwidgets/js/django_mw_base.js"></script>
+        <script type="text/javascript" src="/static/mapwidgets/js/mw_google_point_field.js"></script>
+        
+        <!-- Test -->
+        <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="/static/admin/css/responsive.css">
+            
+        
+        <meta name="robots" content="NONE,NOARCHIVE">
+
+        
 		
        
         <!--Page Title-->
@@ -152,9 +171,9 @@
         <!--Footer-->
                 <div class="container-fluid text-light bg-dark">
                   <div class="text-center" style="margin:20px 0px">
-                    <img src="{% static './social-1.png' %}" alt="facebook-image" class="rounded-circle"/>
-                    <img src="{% static './social-2.png' %}" alt="youtube-image" class="rounded-circle"/>
-                    <img src="{% static './social-3.png' %}" alt="twitter-image" class="rounded-circle"/>
+                    <img src="{% static './Images/social-1.png' %}" alt="facebook-image" class="rounded-circle"/>
+                    <img src="{% static './Images/social-2.png' %}" alt="youtube-image" class="rounded-circle"/>
+                    <img src="{% static './Images/social-3.png' %}" alt="twitter-image" class="rounded-circle"/>
                   </div>
                   <div class="text-center" style="margin:10px 0px">
                     <a class="btn btn-outline-success" href="#">Team</a>

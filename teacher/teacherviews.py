@@ -83,11 +83,13 @@ def TeacherClassCreateView(CreateView,id):
         rawdata = CreateView.POST
         clas = rawdata.get("clas")
         school = rawdata.get("school")
+        geolocation = rawdata.get("location")
         form = TeacherClassCreateForm({
             'teacher' : teacher ,
             'clas' : clas ,
             'limit' : 5 ,
             'school' : school ,
+            'location' : geolocation ,
         })
         form.save()
         return redirect('teacher_profile')
@@ -126,9 +128,13 @@ def ManageAddStudentView(CreateView,id):
         clas = get_object_or_404(TeacherClass,pk = id)
         user = CreateView.user.groups.values('name')
         limit = ''
+        count = '0'
         form = TeacherClassStudentCreateForm()
-        if str(TeacherClassStudents.objects.count()) >= str(clas.limit):
-            limit = 'Reached'
+        for i in TeacherClassStudents.objects.all():
+            if str(i.clas.teacher.pk) == str(CreateView.user.pk):
+                count = int(count) + 1
+                if str(count) >= str(clas.limit):
+                    limit = 'Reached'
         context = {
             'limit': limit ,
             'class': clas ,
@@ -178,12 +184,3 @@ def ManageDeleteStudentView(DeleteView,id,pk):
     return redirect('teacher_class',id)
 
 
-def abc(request):
-    user = request.user.groups.values('name')
-
-    form = Address()
-    context = {
-        'form': form ,
-        'user': user ,
-    }
-    return render(request,'Teacher/Create/Students.html',context)

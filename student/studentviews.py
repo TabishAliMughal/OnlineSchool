@@ -10,6 +10,7 @@ from .models import *
 @allowed_users(allowed_roles=['Student','Parent','Teacher'])
 def ManageProfileView(ProfileView,id):
     user = ProfileView.user.groups.values('name')
+    student = ''
     for i in Student.objects.all():
         if str(ProfileView.user.pk) == str(i.profile.pk) :
             student = get_object_or_404(TeacherClassStudents , pk = i.student.pk)
@@ -24,6 +25,7 @@ def ManageProfileView(ProfileView,id):
     if abc != []:
         for e in abc:
             answers = '0'
+            status = ''
             for i in ExamAnswers.objects.all():
                 if str(i.student.pk) == str(student.pk):
                     if str(e.subject) == str(i.exam.subject):

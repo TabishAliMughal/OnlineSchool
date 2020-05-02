@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.gis',
     'requirments',
     'content',
     'authentication',
@@ -48,13 +49,22 @@ INSTALLED_APPS = [
     'reg_school',
     'parents',
     'student',
-    'location_field.apps.DefaultConfig',
+    'mapwidgets',
+    'leaflet',
 ]
 
-LOCATION_FIELD = {
-'map.provider': 'openstreetmap',
-'search.provider': 'nominatim',
+MAP_WIDGETS = {
+    "GooglePointFieldWidget": (
+        ("zoom", 15),
+        ("mapCenterLocationName", "london"),
+        ("GooglePlaceAutocompleteOptions", {'componentRestrictions': {'country': 'uk'}}),
+        ("markerFitZoom", 12),
+    ),
+    "GOOGLE_MAP_API_KEY": "AIzaSyACgTHo7SLBqnZANd406ZF6h2xNMH58Flw"
 }
+
+GOOGLE_MAPS_API_KEY =  "AIzaSyACgTHo7SLBqnZANd406ZF6h2xNMH58Flw"
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -92,7 +102,7 @@ WSGI_APPLICATION = 'School.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'OSchool',
         'USER': 'postgres',
         'PASSWORD': 'Admin@123',
