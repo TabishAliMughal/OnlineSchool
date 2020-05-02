@@ -50,7 +50,6 @@ INSTALLED_APPS = [
     'parents',
     'student',
     'mapwidgets',
-    'leaflet',
 ]
 
 MAP_WIDGETS = {
