@@ -1,0 +1,15 @@
+{% extends "MainPage.html" %}
+{% block content %}
+    <div class="container">
+        <h2 class="text-center" style="font-family:sans-serif;">My Childrens</h2><hr/>
+        <table class="table table-hover table-sm table-dark">
+            <tbody id="myTable" align="center">
+                {% for i in student %}
+                    <tr> 
+                        <td><a href="{% url 'student_profile' i.pk %}">{{ i.name }}</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

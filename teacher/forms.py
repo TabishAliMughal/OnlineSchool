@@ -1,6 +1,10 @@
 from django.forms import *
 from django import forms
 from .models import *
+from mapwidgets.widgets import GooglePointFieldWidget
+
+
+
 
 class TeacherClassStudentCreateForm(forms.ModelForm):
     class Meta:
@@ -18,9 +22,13 @@ class TeacherClassStudentCreateForm(forms.ModelForm):
 class TeacherClassCreateForm(forms.ModelForm):
     class Meta:
         model = TeacherClass
-        fields = [
+        fields = (
             'teacher' ,
             'clas' ,
             'limit' ,
             'school',
-        ]
+            'location',
+        )
+        widgets = {
+            'location': GooglePointFieldWidget,
+        }

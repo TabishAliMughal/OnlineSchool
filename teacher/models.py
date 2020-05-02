@@ -2,6 +2,7 @@ from django.db import models
 from content.models import *
 from reg_school.models import *
 from django.contrib.auth.models import User
+from django.contrib.gis.db import models as p
 
 
 class TeacherClass(models.Model):
@@ -10,6 +11,7 @@ class TeacherClass(models.Model):
     clas = models.ForeignKey(Classes , on_delete = models.CASCADE)
     limit = models.CharField(max_length=2)
     school = models.ForeignKey(School , on_delete = models.CASCADE , null=True,blank = True)
+    location = p.PointField()
     def __str__(self):
         return 'Class {} Of {}'.format(self.clas,self.teacher)
 

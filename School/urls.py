@@ -26,4 +26,6 @@ urlpatterns = [
     path('checker/', include('checker.urls')),
     path('result/', include('result.urls')),
     path('school/', include('reg_school.urls')),
+    path('parents/', include('parents.urls')),
+    path('students/', include('student.urls')),
 ]

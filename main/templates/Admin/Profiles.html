@@ -6,7 +6,7 @@
             <tbody id="myTable" align="center">
                 {% for i in teachers %}
                     <tr>
-                        <th><a href="{% url 'profile_detail' i.pk %}" >{{ i }}</a></th>
+                        <th><a href="{% url 'teacher_profile_detail' i.pk %}" >{{ i }}</a></th>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -16,7 +16,7 @@
             <tbody id="myTable" align="center">
                 {% for i in checkers %}
                     <tr>
-                        <th><a href="{% url 'profile_detail' i.pk %}" >{{ i }}</a></th>
+                        <th><a href="{% url 'teacher_profile_detail' i.pk %}" >{{ i }}</a></th>
                     </tr>
                 {% endfor %}
             </tbody>

@@ -4,10 +4,21 @@ from .models import *
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from authentication.user_handeling import unauthenticated_user, allowed_users, admin_only
+from teacher.models import *
 
 def ManageMainView(SelectView):
     user = SelectView.user.groups.values('name')
+    v = '1'
+    tea = []
+    for i in TeacherClass.objects.all():
+        loc = []
+        map = i.location
+        for m in map:
+            loc.append(m)
+        tea.append({'num':int(v),'teacher':i,'lat':loc[1],'lon':loc[0]})
+        v = int(v) + 1
     context = {
+        'locator':tea ,
         'user':user ,
     }
     return render(SelectView , 'Main.html',context)

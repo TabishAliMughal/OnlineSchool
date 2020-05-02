@@ -37,8 +37,8 @@ def ManageSchoolProfileView(ProfileView):
     }
     return render(ProfileView,'School/Profile.html',context)
 
-@login_required(login_url='login')
-@allowed_users(allowed_roles=['School'])
+# @login_required(login_url='login')
+# @allowed_users(allowed_roles=['School'])
 def ManageTeacherProfileDatailView(DetailView , id):
     user = DetailView.user.groups.values('name')
     asked = get_object_or_404(User,pk = id)
