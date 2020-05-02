@@ -16,4 +16,3 @@ geographiclib==1.50
 geopandas==0.7.0
 google-api-core==1.16.0
 gdal==2.3.0
-GDAL
