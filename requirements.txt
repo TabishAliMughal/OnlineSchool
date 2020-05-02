@@ -9,3 +9,4 @@ html5lib
 xhtml2pdf
 pillow
 django-map-widgets
+git+git://github.com/erdem/django-map-widgets.git
