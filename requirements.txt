@@ -15,4 +15,4 @@ django-map-widgets==0.3.0
 geographiclib==1.50
 geopandas==0.7.0
 google-api-core==1.16.0
-gdal==2.3.0
+--no-deps https://github.com/shaharkadmiel/pySW4/archive/master.zip
