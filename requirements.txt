@@ -8,7 +8,7 @@ django-multiselectfield
 html5lib
 xhtml2pdf
 pillow
-django-map-widgets
-git+git://github.com/erdem/django-map-widgets.git
-postgis
-django-google-maps
+django-google-maps==0.12.1
+django-leaflet==0.26.0
+django-location==2.1.1
+django-map-widgets==0.3.0
