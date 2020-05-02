@@ -12,4 +12,3 @@ django-map-widgets
 git+git://github.com/erdem/django-map-widgets.git
 postgis
 django-google-maps
-postgresql-12.2-postgis-scripts
