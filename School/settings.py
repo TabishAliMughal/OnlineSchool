@@ -104,7 +104,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'OSchool',
-        'USER': 'postgres',
+        'USER': 'Tabish',
         'PASSWORD': 'Admin@123',
         'HOST': '127.0.0.1',
         'PORT': '5432'
