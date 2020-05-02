@@ -8,3 +8,4 @@ django-multiselectfield
 html5lib
 xhtml2pdf
 pillow
+django-map-widgets
