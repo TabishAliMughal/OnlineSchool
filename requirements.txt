@@ -9,9 +9,3 @@ html5lib
 xhtml2pdf
 pillow
 django-google-maps==0.12.1
-django-leaflet==0.26.0
-django-location==2.1.1
-django-map-widgets==0.3.0
-geographiclib==1.50
-geopandas==0.7.0
-google-api-core==1.16.0
