@@ -7,3 +7,6 @@ gunicorn
 dj-database-url
 pillow
 django-multiselectfield
+django-map-widgets
+django-google-maps
+django-location
