@@ -188,6 +188,61 @@
         <script src="{% static './bootstrap.min.js' %}"></script>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script type="text/javascript">
+                    
+          function addEvent(obj, evType, fn){ 
+          if (obj.addEventListener){ 
+          obj.addEventListener(evType, fn, false); 
+          return true; 
+          } else if (obj.attachEvent){ 
+          var r = obj.attachEvent("on"+evType, fn); 
+          return r; 
+          } else { 
+          return false; 
+          } 
+          }
+          addEvent(window, 'load', gmap_load);	
+              
+              
+          var map_gmap;
+          var geocoder_gmap = new GClientGeocoder();
+          var marker_gmap = [];
+          
+              
+          function openMarkerInfoWindow_gmap(num) { GEvent.trigger(marker_gmap[num],"click"); }
+          
+          function gmap_load() {
+          var center_marker = false;
+          var drag_marker;
+          var drag_point;
+              var bounds = new GLatLngBounds();
+              
+          if (GBrowserIsCompatible()) {
+              var div = document.getElementById("gmap");
+              if (!div) return;
+              map_gmap = new GMap2(div);    map_gmap.setCenter(new GLatLng(0,0),13);	
+              map_gmap.addControl(new GLargeMapControl());
+          map_gmap.addControl(new GMapTypeControl());
+          {% for i in locator %}
+          icon{{ i.num }} = new GIcon();
+          icon{{ i.num }}.image = "{% static './Images/1.png' %}";
+          icon{{ i.num }}.iconSize = new GSize(30,40);
+          icon{{ i.num }}.iconAnchor = new GPoint(1,18);
+          icon{{ i.num }}.infoWindowAnchor = new GPoint(15,1);
+                  
+              var point = new GLatLng({{i.lat}},{{i.lon}});
+              marker_gmap{{ i.num }}	= new GMarker(point,{icon:icon{{ i.num }},title:"{{ i.num }}"});
+                  bounds.extend(point);
+                      GEvent.addListener(marker_gmap{{ i.num }}, "click", function() { marker_gmap{{ i.num }}.openInfoWindowHtml('{{ i.teacher.teacher }} ( {{ i.teacher.clas }} )');});			  				
+                  map_gmap.addOverlay(marker_gmap{{ i.num }});
+          {% endfor %}
+              
+                  map_gmap.setCenter(bounds.getCenter(),map_gmap.getBoundsZoomLevel(bounds));					
+                  
+          }
+          }
+          
+      </script>
         <script>
           $(document).ready(function(){
             $("#myInput").on("keyup", function() {
