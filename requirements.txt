@@ -10,3 +10,4 @@ django-multiselectfield
 django-map-widgets
 django-google-maps
 django-location
+xhtml2pdf
