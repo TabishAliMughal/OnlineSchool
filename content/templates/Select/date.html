@@ -5,13 +5,16 @@
 {% csrf_token %}
     <div class="container">
         <h2 class="text-center" style="font-family:sans-serif;">Select Date</h2><hr/>
-        <table class="table table-hover table-sm table-dark">
+       <table  class="table table-hover table-sm res-table">
             <tbody  align="center">
                 <tr>
-                    <th><input type="date" name="date"/></th>
+                    <th> </th>
                 </tr>
                 <tr>
-                    <th><input class="btn btn-primary" type="submit" value="Next"></th>
+                    <td><input type="date" name="date"/></td>
+                </tr>
+                <tr>
+                    <td><input class="btn btn-primary" type="submit" value="Next"></td>
                 </tr>
             </tbody>
         </table>

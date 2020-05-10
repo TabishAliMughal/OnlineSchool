@@ -2,7 +2,7 @@
 {% block content %}
     <div class="container">
         <h5>Answer Paper Of {{student.name}} Added Successfully </h5>
-        <table class="table table-hover table-sm table-dark">
+       <table  class="table table-hover table-sm res-table">
             <tbody  align="center">
                 <tr>
                     <th><a href="{% url 'exam_upload_pictures' exam.pk student.pk %}">Upload Another</a></th>

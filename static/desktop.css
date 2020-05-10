@@ -1,0 +1,62 @@
+
+.res-table{
+    border: 5px solid;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: gray;
+    background-color: #fff;
+}
+
+thead{
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+th{
+    font-family: Montserrat-Medium;
+    font-size: 20px;
+    color: white;
+    font-family: initial !important;
+    font-weight: bold;
+    line-height: 1.4;
+    text-transform: uppercase;
+    background-color: gray;
+}
+
+
+td{
+    font-family: Montserrat-Regular;
+    font-size: 16px;
+    color: black;
+    line-height: 1.4;
+    width: 265px;
+    padding-left: 42px;
+    padding-top: 18px;
+    padding-bottom: 14px;
+}
+
+.footer{
+    position: absolute;
+    width: 100%;
+    margin-top: 20%;
+    /* margin-bottom: 0; */
+    
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: skyblue;
+}
+
+.res-navbar{
+    background-color:skyblue;
+}
+
+.btn-primary{
+    border-left: 5px;
+    background-color: skyblue;
+    color: black;
+    border: black;
+    
+}

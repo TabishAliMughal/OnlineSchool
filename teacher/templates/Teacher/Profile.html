@@ -2,7 +2,7 @@
 {% block content %}
     <div class="container">
         <h2 class="text-center" style="font-family:sans-serif;">My Classes</h2><hr/>
-        <table class="table table-hover table-sm table-dark">
+       <table  class="table table-hover table-sm res-table">
             <tbody id="myTable" align="center">
                 {% if equal == 'equal' %}
                     <tr>
@@ -31,7 +31,7 @@
     </div>
     <div class="container">
         <h2 class="text-center" style="font-family:sans-serif;">Current Exams</h2><hr/>
-        <table class="table table-hover table-sm table-dark">
+       <table  class="table table-hover table-sm res-table">
             <tbody id="myTable" align="center">
                 {% for i in exam %}
                     {% if i == 'No Active Exams' %}
@@ -51,7 +51,7 @@
     </div>
     <div class="container">
         <h2 class="text-center" style="font-family:sans-serif;">Upload Answers</h2><hr/>
-        <table class="table table-hover table-sm table-dark">
+       <table  class="table table-hover table-sm res-table">
             <tbody id="myTable" align="center">
                 <tr>
                     <th><a>No Active Exams</a></th>
