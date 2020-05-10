@@ -10,6 +10,8 @@ urlpatterns = [
     # Main
     path('',views.ManageMainView, name ='main'),
     path('view/',views.ManageAllView, name ='all'),
+    path('demo',views.ManageDemoView, name ='demo'),
+    path('demo/<date>',views.ManageDemoListView, name ='demo_list'),
     path('select/add',views.ManageSelectToAddView, name ='select_to_add'),
 
     # Create

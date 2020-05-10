@@ -40,3 +40,36 @@ def ManageAllView(SelectView):
         'user':user ,
     }
     return render(SelectView , 'All.html' , context)
+
+
+def ManageDemoView(DemoView):
+    user = DemoView.user.groups.values('name')
+    f = []
+    for i in range(1,32):
+        f.append(i)
+    context = {
+        'date': f ,
+        'user': user ,
+    }
+    return render(DemoView , 'Demo.html' , context)
+
+def ManageDemoListView(ListView,date):
+    user = ListView.user.groups.values('name')
+    v = '0'
+    for i in date:
+        v = int(v) + 1
+    if str(v) == '1':
+        date = str("2020-07-0{}".format(date))
+    elif str(v) == '2':
+        date = str("2020-07-{}".format(date))
+    content = []
+    for i in Content.objects.all():
+        print(i.date)
+        print(date)
+        if str(i.date) == str(date):
+            content.append(i)
+    context = {
+        'list' : content,
+        'user': user ,
+    }
+    return render(ListView , 'Lists/content.html' , context)

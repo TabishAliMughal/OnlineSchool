@@ -2885,6 +2885,8 @@ fieldset:disabled a.btn {
 }
 
 .btn-outline-secondary {
+  margin-top: 10px;
+  margin-bottom: 10px;
   margin-left: 20px;
   color: #6c757d;
   border-color: #6c757d;
