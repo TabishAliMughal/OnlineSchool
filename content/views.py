@@ -64,8 +64,6 @@ def ManageDemoListView(ListView,date):
         date = str("2020-07-{}".format(date))
     content = []
     for i in Content.objects.all():
-        print(i.date)
-        print(date)
         if str(i.date) == str(date):
             content.append(i)
     context = {

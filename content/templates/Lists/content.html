@@ -15,10 +15,9 @@
        <table class="table table-hover table-sm res-table " id="results"   id="myTable">
             <thead align="center">
                 <tr>
-                    <th>Date</th>
-                    <th>Class Name</th>
-                    <th>Subject Name</th>
-                    <th>Module Name</th>
+                    <th>Class</th>
+                    <th>Subject</th>
+                    <th>Module</th>
                     <th>Detail</th>
                     {% if request.user.is_authenticated %}
                       {% for i in user %}
@@ -32,8 +31,6 @@
             {% for i in list %}
             <tbody id="myTable" align="center">
                 <tr>
-                    <!-- <td>{{ i.pk }}</td> -->
-                    <td>{{ i.date }}</td>
                     <td><a href="{% url 'content' i.pk %}">{{ i.class_name }}</a></td>
                     <td>{{ i.subject }}</td>
                     <td>{{ i.module }}</td>
