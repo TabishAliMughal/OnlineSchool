@@ -43,5 +43,41 @@
     .footer{
         position: relative;
     }
+
+
+    .calander{
+        align-items: center;
+        background-color: gray;
+        border: 5px;
+        margin: inherit;
+    }
+
+    .block{
+        width: 0px;
+    }
+    .abc{
+        width: 70%;
+        margin: auto;
+    }
+
+    .calanderhead{
+        width: 60px;
+        padding-right: 12px;
+        padding-left: 12px;
+        font-size: 18px;
+        background-color: gray;
+        border-radius: 35px;
+        text-align: center;
+    }
+    .calanderpoints{
+        width: 60px;
+        padding-right: 12px;
+        padding-left: 12px;
+        font-size: 18px;
+        background-color: bisque;
+        border-radius: 35px;
+        text-align: center;
+    }
+
 }
 

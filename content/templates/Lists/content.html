@@ -32,15 +32,15 @@
             {% for i in list %}
             <tbody id="myTable" align="center">
                 <tr>
-                    <!-- <td hidden>{{ i.pk }}</td> -->
+                    <!-- <td>{{ i.pk }}</td> -->
                     <td>{{ i.date }}</td>
                     <td><a href="{% url 'content' i.pk %}">{{ i.class_name }}</a></td>
                     <td>{{ i.subject }}</td>
                     <td>{{ i.module }}</td>
                     <td><font size="-1">{{ i.text }}</font></td>
                     {% if request.user.is_authenticated %}
-                      {% for i in user %}
-                        {% if i.name == 'Admin' %}
+                      {% for v in user %}
+                        {% if v.name == 'Admin' %}
                           <td><a class="btn btn-primary" href="{% url 'content_edit' i.pk %}">Edit</a><a href="{% url 'content_delete' i.pk %}" class="btn btn-primary">Delete</a></td>
                         {% endif %}
                       {% endfor %}

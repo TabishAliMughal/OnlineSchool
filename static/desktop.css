@@ -60,3 +60,31 @@ td{
     border: black;
     
 }
+
+
+
+.wc-calendar__days-names__item,
+.wc-calendar__days-list__item {
+  width: 14.2%;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.wc-calendar__days-names,
+.wc-calendar__days-list {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+}
+
+.wc-calendar__days-list__item {
+    height: 60px;
+    line-height: 60px;
+    cursor: pointer;
+  }
+
+.wc-calendar__days-list__item:hover:not(.active) {
+background-color: blue;
+color: white;
+}
