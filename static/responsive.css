@@ -1,0 +1,47 @@
+@media (max-width: 1024px) {
+    /* Basic */
+
+    html {
+        -webkit-text-size-adjust: 100%;
+    }
+
+    .container{
+        width: 100%;
+    }
+    
+    .res-table{
+        border: 5px solid;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #989898 !important;
+        background-color: #989898 !important;
+    }
+    
+    th{
+        font-family: Montserrat-Medium;
+        font-size: 18px !important;
+        color: black !important;
+        font-family: initial !important;
+        font-weight: bold;
+        line-height: 1.4;
+        text-transform: uppercase;
+        background-color: #989898 !important;
+    }
+
+    td{
+        background-color: skyblue;
+        font-size: 15px !important;
+    }
+
+    .heading{
+        font-size: 20px;
+    }
+    .main-heading{
+        font-size: 25px;
+    }
+    .footer{
+        position: relative;
+    }
+}
+

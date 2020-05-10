@@ -3,7 +3,7 @@
 {% block content %}
     <div class="container">
         <h2 class="text-center" style="font-family:sans-serif;">Student Detail</h2><hr/>
-        <table class="table table-hover table-sm table-dark">
+       <table  class="table table-hover table-sm res-table">
             <tbody id="myTable" align="center">
                 <tr>
                     <th>Name</th>
@@ -22,7 +22,7 @@
             </tbody>
         </table>
         <h2 class="text-center" style="font-family:sans-serif;">Answer Sheets</h2><hr/>
-        <table class="table table-hover table-sm table-dark">
+       <table  class="table table-hover table-sm res-table">
             <tbody id="myTable" align="center">
                 {% for i in ans %}
                     <img src="{% static '' %}{{i}}" width="300px" /><a> </a>

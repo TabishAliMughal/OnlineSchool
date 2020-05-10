@@ -12,7 +12,7 @@
           {% endfor %}
         {% endif %}
         <h4 class="text-center" style="font-family:sans-serif;">Details</h4><hr/>
-        <table class="table table-hover table-sm table-dark">
+       <table  class="table table-hover table-sm res-table">
             <tbody id="myTable" align="center">
                 <tr>
                     <th><a>Name</a></th>
@@ -38,7 +38,7 @@
         {% if exam == 'No Active Exams' %}
         {% else %}
         <h4 class="text-center" style="font-family:sans-serif;">Exams</h4><hr/>
-        <table class="table table-hover table-sm table-dark">
+       <table  class="table table-hover table-sm res-table">
             <tbody id="myTable" align="center">
                 <a href="{% url 'teacher_class_student_result' student.clas.pk student.pk %}">View Result</a>
                 <tr>

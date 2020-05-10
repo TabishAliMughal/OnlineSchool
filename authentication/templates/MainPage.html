@@ -8,6 +8,10 @@
 		    <!-- Style CSS -->
         <link href="{% static './page_heading_stylesheet.css'%}" rel="stylesheet">
         
+        <!-- Responsive -->
+        <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="{% static './responsive.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static './desktop.css' %}">
 
         
 		    <!-- Maps -->
@@ -18,12 +22,8 @@
         <script type="text/javascript" src="/static/mapwidgets/js/django_mw_base.js"></script>
         <script type="text/javascript" src="/static/mapwidgets/js/mw_google_point_field.js"></script>
         
-        <!-- Test -->
-        <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="/static/admin/css/responsive.css">
             
         
-        <meta name="robots" content="NONE,NOARCHIVE">
 
         
 		
@@ -34,8 +34,8 @@
     <body>
 
         <!--Navbar menu-->
-              <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a class="navbar-brand" href="{% url "main" %}">Digital School</a>
+              <nav class="navbar navbar-expand-lg navbar-dark res-navbar">
+                <a class="navbar-brand" href="{% url 'main' %}" style="color:black;">Digital School</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
@@ -49,7 +49,7 @@
                       {% endfor %}
                     {% endif %}
                           <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="btn btn-outline-secondary nav-link dropdown-toggle d-sm-inline-block" style="margin-left: 15px;color: black;" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               Teach
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -62,7 +62,7 @@
                       {% for i in user %}
                         {% if i.name == 'Admin' %}
                           <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="btn btn-outline-secondary nav-link dropdown-toggle d-sm-inline-block" style="margin-left: 15px;color: black;" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               Add
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -85,7 +85,7 @@
                       {% endfor %}
                     {% endif %}
                         <li class="nav-item dropdown">
-                          <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <a class="btn btn-outline-secondary nav-link dropdown-toggle d-sm-inline-block" style="margin-left: 15px;color: black;" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             View
                           </a>
                           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -98,88 +98,69 @@
                             <a class="dropdown-item" href="{% url 'class_subject' %}" >View Class Subject</a>
                           </div>
                         </li>
-                  </ul>
-                  <form class="form-inline my-2 my-lg-0">
-                    <input id="myInput" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                  </form>
-                  <li class="nav-item dropdown">
-                    <a class="dropdown-toggle btn btn-outline-success my-2 my-sm-0" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Account
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      {% if request.user.is_authenticated %}
-                        {% for i in user %}
-                          {% if i.name == 'Teacher' %}
-                            <a class="dropdown-item" href="{% url 'teacher_profile' %}">My Profile</a>
-                            <div class="dropdown-divider"></div>
-                          {% elif i.name == 'Admin' %}
-                            <a class="dropdown-item" href="{% url 'profiles' %}">All Profiles</a>
-                            <div class="dropdown-divider"></div>
-                          {% elif i.name == 'Checker' %}
-                            <a class="dropdown-item" href="{% url 'checker_profile' %}">My Profile</a>
-                            <div class="dropdown-divider"></div>
-                          {% elif i.name == 'School' %}
-                            <a class="dropdown-item" href="{% url 'school_profile' %}">My Profile</a>
-                            <div class="dropdown-divider"></div>
-                          {% elif i.name == 'Parent' %}
-                            <a class="dropdown-item" href="{% url 'parent_profile' %}">My Profile</a>
-                            <div class="dropdown-divider"></div>
-                          {% elif i.name == 'Student' %}
-                            <a class="dropdown-item" href="{% url 'student_profile' request.user.pk %}">My Profile</a>
-                            <div class="dropdown-divider"></div>
-                          {% endif %}
-                        {% endfor %}
-                      {% endif %}
-                      {% if request.user.is_authenticated %}
-                          <a class="dropdown-item" href="{% url "logout" %}">Logout</a>
-                        {% else %}
-                          <a class="dropdown-item" href="{% url "login" %}">Login</a>
-                          <a class="dropdown-item" href="{% url "register_ask" %}">Register</a>
-                      {% endif %}
-                    </div>
-                  </li>
+                      </ul>
+                        <form class="form-inline my-2 my-lg-0">
+                          <input id="myInput" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                        </form>
+                        <li class="nav-item dropdown">
+                          <a class="btn btn-outline-secondary nav-link dropdown-toggle d-sm-inline-block" style="margin-left: 15px;color: black;" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Account
+                          </a>
+                          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            {% if request.user.is_authenticated %}
+                              {% for i in user %}
+                                {% if i.name == 'Teacher' %}
+                                  <a class="dropdown-item" href="{% url 'teacher_profile' %}">My Profile</a>
+                                  <div class="dropdown-divider"></div>
+                                {% elif i.name == 'Admin' %}
+                                  <a class="dropdown-item" href="{% url 'profiles' %}">All Profiles</a>
+                                  <div class="dropdown-divider"></div>
+                                {% elif i.name == 'Checker' %}
+                                  <a class="dropdown-item" href="{% url 'checker_profile' %}">My Profile</a>
+                                  <div class="dropdown-divider"></div>
+                                {% elif i.name == 'School' %}
+                                  <a class="dropdown-item" href="{% url 'school_profile' %}">My Profile</a>
+                                  <div class="dropdown-divider"></div>
+                                {% elif i.name == 'Parent' %}
+                                  <a class="dropdown-item" href="{% url 'parent_profile' %}">My Profile</a>
+                                  <div class="dropdown-divider"></div>
+                                {% elif i.name == 'Student' %}
+                                  <a class="dropdown-item" href="{% url 'student_profile' request.user.pk %}">My Profile</a>
+                                  <div class="dropdown-divider"></div>
+                                {% endif %}
+                              {% endfor %}
+                            {% endif %}
+                            {% if request.user.is_authenticated %}
+                                <a class="dropdown-item" href="{% url "logout" %}">Logout</a>
+                              {% else %}
+                                <a class="dropdown-item" href="{% url "login" %}">Login</a>
+                                <a class="dropdown-item" href="{% url "register_ask" %}">Register</a>
+                            {% endif %}
+                          </div>
+                        </li>
                 </div>
               </nav>
               
         <!--Main-Containt-->
               {% block content %}
               {% endblock %}
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
               
-              
-
+              <br>
+              <br>
         <!--Footer-->
-                <div class="container-fluid text-light bg-dark">
+                <div class="footer">
                   <div class="text-center" style="margin:20px 0px">
-                    <img src="{% static './Images/social-1.png' %}" alt="facebook-image" class="rounded-circle"/>
-                    <img src="{% static './Images/social-2.png' %}" alt="youtube-image" class="rounded-circle"/>
-                    <img src="{% static './Images/social-3.png' %}" alt="twitter-image" class="rounded-circle"/>
+                    <!-- <img src="{% static './Images/social-1.png' %}" alt="facebook-image" class="rounded-circle"/> -->
+                    <!-- <img src="{% static './Images/social-2.png' %}" alt="youtube-image" class="rounded-circle"/> -->
+                    <!-- <img src="{% static './Images/social-3.png' %}" alt="twitter-image" class="rounded-circle"/> -->
+                    <img src="{% static './LoginFormOtherFiles/images/img-01.png' %}" alt="logo" style="height: 100px;" class="rounded-circle"/>
+
                   </div>
-                  <div class="text-center" style="margin:10px 0px">
+                  <!-- <div class="text-center" style="margin:10px 0px">
                     <a class="btn btn-outline-success" href="#">Team</a>
                     <a class="btn btn-outline-success" href="#">About</a>
-                    <a class="btn btn-outline-success" href="http://web.whatsapp.com/send?phone=+923162810366&text=I Saw Your Web Application Its Awsome">Contact</a>
-                  </div>
+                    <a class="btn btn-outline-success" href="#">Contact</a>
+                  </div> -->
                   <div class="text-center">
                     <p>Designed And Developed By: <span><a href="https://www.facebook.com/TabishAliMughal">Tabish Ali Mughal</a></span></p>
                   </div>

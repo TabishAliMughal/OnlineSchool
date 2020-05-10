@@ -2885,6 +2885,7 @@ fieldset:disabled a.btn {
 }
 
 .btn-outline-secondary {
+  margin-left: 20px;
   color: #6c757d;
   border-color: #6c757d;
 }
@@ -2896,16 +2897,18 @@ fieldset:disabled a.btn {
 }
 
 .btn-outline-secondary:focus, .btn-outline-secondary.focus {
+  margin-left:20px;
   box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5);
 }
 
 .btn-outline-secondary.disabled, .btn-outline-secondary:disabled {
+  margin-left:20px;
   color: #6c757d;
   background-color: transparent;
 }
 
 .btn-outline-secondary:not(:disabled):not(.disabled):active, .btn-outline-secondary:not(:disabled):not(.disabled).active,
-.show > .btn-outline-secondary.dropdown-toggle {
+.show > .btn-outline-secondary.dropdown-toggle { 
   color: #fff;
   background-color: #6c757d;
   border-color: #6c757d;
@@ -3388,6 +3391,7 @@ input[type="button"].btn-block {
 }
 
 .dropdown-item {
+  /* margin-left: 15px; */
   display: block;
   width: 100%;
   padding: 0.25rem 1.5rem;
@@ -4521,6 +4525,7 @@ input[type="button"].btn-block {
   }
   .navbar-expand-lg .navbar-nav .dropdown-menu {
     position: absolute;
+    margin-left: 15px;
   }
   .navbar-expand-lg .navbar-nav .nav-link {
     padding-right: 0.5rem;
@@ -9944,6 +9949,10 @@ button.bg-dark:focus {
 
 .text-center {
   text-align: center !important;
+  font-family: initial !important;
+  font-weight: bold;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 @media (min-width: 576px) {

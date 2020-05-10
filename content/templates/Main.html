@@ -1,11 +1,11 @@
 {% extends "MainPage.html" %}
 {% load static %}
 {% block content %}
-<div class="container" style="background-color: gray;">
-    <h1 class="text-center" style="font-family:sans-initial;font-style: oblique;">Online Helping Tool For All Schools And Parents</h1><br>
+<div class="container" style="background-color: gray;"><br>
+    <h1 class="text-center main-heading" style="font-family:sans-initial;font-style: oblique;">Online Helping Tool For All Schools And Parents</h1>
     <script src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;key=AIzaSyACgTHo7SLBqnZANd406ZF6h2xNMH58Flw" type="text/javascript"></script>
 
-        <h3 class="text-center" style="font-family:sans-inherit;">Our Available Teachers</h3><br>
+        <h3 class="text-center heading" style="font-family:sans-inherit;">Our Available Teachers</h3>
         <script type="text/javascript">
                     
             function addEvent(obj, evType, fn){ 
@@ -62,11 +62,11 @@
             
         </script>
 
-        <div align="center" id="gmap" style="width:100%; height:750px"></div>
+        <div align="center" id="gmap" class="mw-map"></div>
 
         <br>
 
-        <table class="table table-hover table-sm table-dark">
+       <table class="table table-hover table-sm res-table " class="table table-hover table-sm">
             <tbody id="myTable" align="center">
                 <tr>
                     <th>Teacher</th>
