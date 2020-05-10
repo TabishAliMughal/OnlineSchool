@@ -6,27 +6,27 @@
         <tbody id="myTable" align="center">
                 <tr>
                     <th><a>User Name</a></th>
-                    <th><a>{{ teacher.username }}</a></th>
+                    <td><a>{{ teacher.username }}</a></td>
                 </tr>
                 <tr>
                     <th><a>Email Address</a></th>
-                    <th><a>{{ teacher.email }}</a></th>
+                    <td><a>{{ teacher.email }}</a></td>
                 </tr>
                 <tr>
                     <th><a>Date Joined</a></th>
-                    <th><a>{{ teacher.date_joined }}</a></th>
+                    <td><a>{{ teacher.date_joined }}</a></td>
                 </tr>
                 <tr>
                     <th><a>Last Login</a></th>
-                    <th><a>{{ teacher.last_login }}</a></th>
+                    <td><a>{{ teacher.last_login }}</a></td>
                 </tr>
                 <tr>
                     <th><a>Class</a></th>
-                    <th>{% for i in classes %}<a> ({{ i }}) </a>{% endfor %}</th>
+                    <td>{% for i in classes %}<a> ({{ i }}) </a>{% endfor %}</td>
                 </tr>
                 <tr>
                     <th><a>Total Students</a></th>
-                    <th><a>{{ students }}</a></th>
+                    <td><a>{{ students }}</a></td>
                 </tr>
         </tbody>
     </table>
