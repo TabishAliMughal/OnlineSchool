@@ -89,9 +89,11 @@ background-color: blue;
 color: white;
 }
 
-
-.video{
-    width : 751px ;
-    height : 422px ;
-    border: 3px black ;
+iframe {
+    height: 565px;
+    border-width: 2px;
+    border-style: inset;
+    border-color: initial;
+    border-image: initial;
+    width: 1000px;
 }
