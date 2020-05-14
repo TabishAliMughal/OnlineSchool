@@ -45,9 +45,6 @@
                     {% if request.user.is_authenticated %}
                       {% for i in user %}
                         {% if i.name == 'Teacher' or i.name == 'Admin' %}
-                        {% endif %}
-                      {% endfor %}
-                    {% endif %}
                           <li class="nav-item dropdown">
                             <a class="btn btn-outline-secondary nav-link dropdown-toggle d-sm-inline-block" style="margin-left: 15px;color: black;" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               Teach
@@ -58,6 +55,9 @@
                               <a class="dropdown-item" href="#">Something else here</a>
                             </div>
                           </li>
+                        {% endif %}
+                      {% endfor %}
+                    {% endif %}
                     {% if request.user.is_authenticated %}
                       {% for i in user %}
                         {% if i.name == 'Admin' %}
@@ -81,9 +81,6 @@
                     {% if request.user.is_authenticated %}
                       {% for i in user %}
                         {% if i.name == 'Admin' %}
-                        {% endif %}
-                      {% endfor %}
-                    {% endif %}
                         <li class="nav-item dropdown">
                           <a class="btn btn-outline-secondary nav-link dropdown-toggle d-sm-inline-block" style="margin-left: 15px;color: black;" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             View
@@ -99,6 +96,9 @@
                           </div>
                         </li>
                       </ul>
+                      {% endif %}
+                    {% endfor %}
+                  {% endif %}
                         <form class="form-inline my-2 my-lg-0">
                           <input id="myInput" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
                         </form>
@@ -134,7 +134,7 @@
                                 <a class="dropdown-item" href="{% url "logout" %}">Logout</a>
                               {% else %}
                                 <a class="dropdown-item" href="{% url "login" %}">Login</a>
-                                <a class="dropdown-item" href="{% url "register_ask" %}">Register</a>
+                                {% comment %} <a class="dropdown-item" href="{% url "register_ask" %}">Register</a> {% endcomment %}
                             {% endif %}
                           </div>
                         </li>
