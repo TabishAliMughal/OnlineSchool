@@ -79,5 +79,13 @@
         text-align: center;
     }
 
+    iframe {
+        height: 274px !important;
+        border-width: 2px;
+        border-style: inset;
+        border-color: initial;
+        border-image: initial;
+        width: 481px !important;
+    }
 }
 
