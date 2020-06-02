@@ -15,8 +15,12 @@ class Content(models.Model):
     date = models.DateField()
     title = models.CharField(max_length=250)
     text = models.TextField(null = True)
-    url = models.URLField(max_length=500 , null = True)
     def __str__(self):
         return self.title
+
+class Videos(models.Model):
+    content = models.ForeignKey(Content , on_delete = models.CASCADE)
+    url = models.URLField(max_length=500 , null = True)
+
 
     

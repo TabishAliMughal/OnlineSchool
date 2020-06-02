@@ -82,8 +82,14 @@ def ManageContentSelectView(SelectView,date,Ccode,subject):
 def ManageContentView(ContentView, code):
     Contents = get_object_or_404(Content,code = code)
     user = ContentView.user.groups.values('name')
+    videos = []
+    for i in Videos.objects.all():
+        if str(i.content.pk) == str(Contents.pk):
+            videos.append(i)
+    print(videos)
     context = {
         'user':user ,
-        'content' : Contents,
+        'content' : Contents ,
+        'videos' : videos ,
     }
     return render(ContentView , 'Select/content.html' , context)

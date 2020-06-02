@@ -25,7 +25,7 @@
                 </tr>
                 <tr>
                     <td>Date</td>
-                    <td><input type="date" name="date" /></td>
+                    <td><input type="date" name="date" value="{{ date }}" /></td>
                 </tr>
                 <tr>
                     <td>Title</td>
@@ -37,7 +37,18 @@
                 </tr>
                 <tr>
                     <td>Youtube Url(Embed)</td>
-                    <td>{{ form.url }}</td>
+                    <td></td>
+                </tr>
+                {% for i in videos %}
+                <tr>
+                    <td></td>
+                    <td><input style="width: 80%;" type="url" value="{{ i.url }}" name="url" /></td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td></td>
+                    <td><div id="div-to-add"></div><button type="button" onClick="clone()" id="add-row">+</button></td>
+                    <input type="hidden" value="1" id="total_chq">
                 </tr>
                 <tr>
                     <td>Submit</td>
@@ -49,5 +60,12 @@
     {% csrf_token %}
 
 </form>
+<script>
+    function clone(){
+        var new_chq_no = parseInt($('#total_chq').val()) + 1;
+        var new_input = "<input type='text' name='url' id=" + new_chq_no + " />";
+        $('#div-to-add').append(new_input+'<br><br>');
+    };        
+</script>
 
 {% endblock %}

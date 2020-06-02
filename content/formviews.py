@@ -124,9 +124,20 @@ def ManageModuleCreateView(CreateView):
 def ManageContentCreateView(CreateView):
     user = CreateView.user.groups.values('name')
     if CreateView.method == 'POST':
-        form = ContentForm(CreateView.POST)
-        if form.is_valid:
-            form.save()
+        data = CreateView.POST
+        form1 = ContentForm(CreateView.POST)
+        k = ''
+        if form1.is_valid:
+            k = form1.save()
+            url = data.getlist('url')
+            v = int('0')
+            for i in url:
+                form2 = VideoForm({
+                    'content' : k ,
+                    'url' : url[v]
+                })
+                v = v + 1
+                form2.save()
             context = { 
                 'user':user ,
                 'return': 'Has Been Added SuccessFully'
@@ -139,9 +150,11 @@ def ManageContentCreateView(CreateView):
             }
             return render(CreateView,'Forms/Created/content.html',context)
     else:
-        form = ContentForm()
+        form1 = ContentForm()
+        form2 = VideoForm()
         context = { 
             'user':user ,
-            'form': form,
+            'form1': form1,
+            'form2': form2,
         }
         return render(CreateView ,'Forms/Create/content.html', context)

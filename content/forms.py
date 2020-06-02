@@ -44,5 +44,13 @@ class ContentForm(forms.ModelForm):
             'date',
             'title',
             'text',
-            'url',
         ]
+
+class VideoForm(forms.ModelForm):
+    class Meta:
+        model = Videos
+        fields = [
+            'content' ,
+            'url' ,
+        ]
+
