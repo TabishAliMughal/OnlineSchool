@@ -84,15 +84,32 @@ def ManageModuleEditView(EditView,pk):
 def ManageContentEditView(EditView,pk):
     user = EditView.user.groups.values('name')
     data = get_object_or_404(Content, pk = pk)
+    videos = []
+    for i in Videos.objects.all():
+        if str(i.content.pk) == str(data.pk):
+            videos.append(i)
     if EditView.method == 'POST':
+        vid = EditView.POST
         form = ContentForm(EditView.POST or None, instance=data)
         if form.is_valid:
             form.save()
+            url = vid.getlist('url')
+            v = int('0')
+            for i in url:
+                form2 = VideoForm({
+                    'content' : data.pk ,
+                    'url' : url[v]
+                } or None , instance=videos[v])
+                v = v + 1
+                form2.save()
             return redirect('content')
     else:
         form = ContentForm(instance=data)
+        date = str(data.date)
         context = {
+            'date' : date ,
             'user':user ,
-            'form' : form,
+            'form' : form ,
+            'videos' : videos ,
         }
         return render(EditView ,'Forms/Edit/content.html' , context)

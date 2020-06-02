@@ -3,3 +3,6 @@ from .models import *
 
 admin.site.register(Content)
 admin.site.register(Module)
+admin.site.register(Videos)
+
+
