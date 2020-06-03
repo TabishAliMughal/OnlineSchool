@@ -97,3 +97,12 @@ iframe {
     border-image: initial;
     width: 1000px;
 }
+
+.account{
+    margin-left: -58px !important;
+}
+
+.mar{
+    margin-left: 20px;
+    color: black !important;
+}

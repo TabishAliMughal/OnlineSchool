@@ -21,6 +21,21 @@ def ManageMainView(SelectView):
         'locator':tea ,
         'user':user ,
     }
+    for i in user:
+        if str(i.get('name')) == 'Teacher':
+            return redirect('teacher_profile')
+        elif str(i.get('name')) == 'Admin':
+            return redirect('profiles')
+        elif str(i.get('name')) == 'Checker':
+            return redirect('checker_profile')
+        elif str(i.get('name')) == 'School':
+            return redirect('school_profile')
+        elif str(i.get('name')) == 'Parent':
+            return redirect('parent_profile')
+        elif str(i.get('name')) == 'Student':
+            return redirect('student_profile',SelectView.user.pk)
+        elif str(i.get('name')) == 'Individuals':
+            return redirect('indivisual_profile')
     return render(SelectView , 'Main.html',context)
 
 

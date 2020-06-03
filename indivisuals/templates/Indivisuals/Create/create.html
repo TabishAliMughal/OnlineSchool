@@ -1,0 +1,55 @@
+{% extends "MainPage.html" %}
+{% block content %}
+<form method="POST">
+    <div class="container">
+        <h2 class="text-center" style="font-family:sans-serif;">Indivisual Add Form</h2><hr/>
+       <table  class="table table-hover table-sm res-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Form</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Name</td>
+                    <td>{{ form.name }}</td>
+                </tr>
+                <tr>
+                    <td>Father Name</td>
+                    <td>{{ form.father_name }}</td>
+                </tr>
+                <tr>
+                    <td>School</td>
+                    {% if school != 'No'%}
+                        <td><input type='text' name='school' value='{{ school }}' readonly /></td>
+                    {% else %}
+                        <td>{{ form.school }}</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td>Mobile</td>
+                    <td>{{ form.mobile }}</td>
+                </tr>
+                <tr>
+                    <td>Class</td>
+                    <td>{{ form.clas }}</td>
+                </tr>
+                <tr>
+                    <td>Fees</td>
+                    <td>{{ form.fees }}</td>
+                </tr>
+                <tr>
+                    <td>Active</td>
+                    <td>{{ form.active }}</td>
+                </tr>
+                <tr>
+                    <td>Submit</td>
+                    <td><input class="btn btn-primary" type="submit" value="Add to Classes"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    {% csrf_token %}
+</form>
+{% endblock %}

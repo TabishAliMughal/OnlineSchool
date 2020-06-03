@@ -1,0 +1,17 @@
+{% extends "MainPage.html" %}
+{% load static %}
+{% block content %}
+{% csrf_token %}
+    <div class="container">
+        <h2 class="text-center" style="font-family:sans-serif;">Content</h2><hr/>
+        <table  class="table table-hover table-sm res-table">
+            <tbody id="myTable" align="center">
+                {% for i in content %}
+                    <tr>
+                        <td><a onclick="window.open('{% url 'indivisual_content' i.content.pk %}','newwindow','width=1000,height=800');" href="">Period : {{ i.period }}</a><br><br></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -41,3 +41,5 @@ def ManageProfileView(ProfileView,id):
     }
     return render(ProfileView,'Student/Profile.html',context)
 
+
+

@@ -20,9 +20,23 @@
                 {% endif %}
             </tbody>
         </table>
+        <h2 class="text-center" style="font-family:sans-serif;">All Registered Students</h2><hr/>
+        {% for i in school %}
+            <a class="btn btn-primary" href="{% url 'indivisuals_create' i.pk %}">Add Students</a>
+        {% endfor %}
+       <table  class="table table-hover table-sm res-table">
+            <tbody id="myTable" align="center">
+                {% for i in teachers %}
+                    <tr>
+                        <th><a href="{% url 'teacher_profile_detail' i.teacher.pk %}" >{{ i.teacher }}</a></th>
+                        <th><a>{{ i.clas }}</a></th>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
         <h2 class="text-center" style="font-family:sans-serif;">All Registered Teachers</h2><hr/>
         <a class="btn btn-primary" href="{% url 'register' group %}">Add Teachers</a>
-       <table  class="table table-hover table-sm res-table">
+        <table  class="table table-hover table-sm res-table">
             <tbody id="myTable" align="center">
                 {% for i in teachers %}
                     <tr>

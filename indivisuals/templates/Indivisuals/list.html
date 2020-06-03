@@ -1,0 +1,50 @@
+{% extends "MainPage.html" %}
+{% load static %}
+{% block content %}
+    <link href="{% static 'css/base.css' %}"/>
+    <div class="container">
+        <h2 class="text-center" style="font-family:sans-serif;">View All Indivisuals</h2><hr/>
+        {% if request.user.is_authenticated %}
+          {% for i in user %}
+            {% if i.name == 'Admin' %}
+              <a class="btn btn-primary" href="{% url 'indivisuals_create' %}">Add Another</a>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+        <table class="table table-hover table-sm res-table " id="results"   id="myTable">
+            <thead align="center">
+                <tr>
+                    <th>Name</th>
+                    <th>Class</th>
+                    <th>Active</th>
+                    {% if request.user.is_authenticated %}
+                      {% for i in user %}
+                        {% if i.name == 'Admin' %}
+                          <th>Action</th>
+                        {% endif %}
+                      {% endfor %}
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody id="myTable" align="center">
+                {% for i in indivisual %}
+                    <tr>
+                        <td><a href="{% url 'indivisuals_detail' i.pk %}">{{ i.name }}</a></td>
+                        <td>{{ i.clas }}</td>
+                        <td>{{ i.active }}</td>
+                        {% if request.user.is_authenticated %}
+                            {% for v in user %}
+                                {% if v.name == 'Admin' %}
+                                    <td><a class="btn btn-primary" href="{% url 'indivisuals_edit' i.pk %}">Edit</a><a href="{% url 'indivisuals_delete' i.pk %}" class="btn btn-primary">Delete</a></td>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% csrf_token %}
+</form>
+
+{% endblock %}

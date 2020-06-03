@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'reg_school',
     'parents',
     'student',
+    'indivisuals',
     'mapwidgets',
 ]
 
