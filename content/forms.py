@@ -44,6 +44,7 @@ class ContentForm(forms.ModelForm):
             'date',
             'title',
             'text',
+            'therefor',
         ]
 
 class VideoForm(forms.ModelForm):

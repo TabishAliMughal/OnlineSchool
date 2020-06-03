@@ -1,212 +1,219 @@
 <!DOCTYPE html>
 {% load static %}
 <html>
-    <head>
-        <!--bootstrap file "relation stylesheet"-->
-        <link rel="stylesheet" type="text/css" href="{% static './bootstrap1.css' %}" />
+  <head>
+      <!--bootstrap file "relation stylesheet"-->
+      <link rel="stylesheet" type="text/css" href="{% static './bootstrap1.css' %}" />
 
-		    <!-- Style CSS -->
-        <link href="{% static './page_heading_stylesheet.css'%}" rel="stylesheet">
-        
-        <!-- Responsive -->
-        <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="{% static './responsive.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static './desktop.css' %}">
+      <!-- Style CSS -->
+      <link href="{% static './page_heading_stylesheet.css'%}" rel="stylesheet">
+      
+      <!-- Responsive -->
+      <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+      <link rel="stylesheet" type="text/css" href="{% static './desktop.css' %}">
+      <link rel="stylesheet" type="text/css" href="{% static './responsive.css' %}">
 
-        
-		    <!-- Maps -->
-        <link href="/static/mapwidgets/css/map_widgets.css" type="text/css" media="all" rel="stylesheet">
-        <script type="text/javascript" src="/static/admin/js/vendor/jquery/jquery.js"></script>
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;language=en&amp;key=AIzaSyACgTHo7SLBqnZANd406ZF6h2xNMH58Flw"></script>
-        <script type="text/javascript" src="/static/mapwidgets/js/jquery_class.js"></script>
-        <script type="text/javascript" src="/static/mapwidgets/js/django_mw_base.js"></script>
-        <script type="text/javascript" src="/static/mapwidgets/js/mw_google_point_field.js"></script>
-        
-            
-        
+      
+      <!-- Maps -->
+      <link href="/static/mapwidgets/css/map_widgets.css" type="text/css" media="all" rel="stylesheet">
+      <script type="text/javascript" src="/static/admin/js/vendor/jquery/jquery.js"></script>
+      <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;language=en&amp;key=AIzaSyACgTHo7SLBqnZANd406ZF6h2xNMH58Flw"></script>
+      <script type="text/javascript" src="/static/mapwidgets/js/jquery_class.js"></script>
+      <script type="text/javascript" src="/static/mapwidgets/js/django_mw_base.js"></script>
+      <script type="text/javascript" src="/static/mapwidgets/js/mw_google_point_field.js"></script>
+      
+          
+      
 
-        
-		
-       
-        <!--Page Title-->
-        <title>Digital SCHOOL</title>
-    </head>
-    <body>
-
-        <!--Navbar menu-->
-              <nav class="navbar navbar-expand-lg navbar-dark res-navbar">
-                <a class="navbar-brand" href="{% url 'main' %}" style="color:black; font-size: 30px;"><img src="{% static './LoginFormOtherFiles/images/img-01.png' %}" alt="logo" height="50px" class="rounded-circle"/> Digital School</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-                </button>
-              
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                  <ul class="navbar-nav mr-auto">
-                    {% if request.user.is_authenticated %}
-                      {% for i in user %}
-                        {% if i.name == 'Teacher' or i.name == 'Admin' %}
-                          <li class="nav-item dropdown">
-                            <a class="btn btn-outline-secondary nav-link dropdown-toggle d-sm-inline-block" style="margin-left: 15px;color: black;" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Teach
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                              <a class="dropdown-item" href="{% url 'date_select' %}">Start Class</a>
-                              <div class="dropdown-divider"></div>
-                              <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                          </li>
-                        {% endif %}
-                      {% endfor %}
-                    {% endif %}
-                    {% if request.user.is_authenticated %}
-                      {% for i in user %}
-                        {% if i.name == 'Admin' %}
-                          <li class="nav-item dropdown">
-                            <a class="btn btn-outline-secondary nav-link dropdown-toggle d-sm-inline-block" style="margin-left: 15px;color: black;" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Add
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                              <a class="dropdown-item" href="{% url 'select_to_add' %}">Add All</a>
-                              <div class="dropdown-divider"></div>
-                              <a class="dropdown-item" href="{% url 'class_form' %}">Add Class</a>
-                              <a class="dropdown-item" href="{% url 'content_form' %}">Add Content</a>
-                              <a class="dropdown-item" href="{% url 'subject_form' %}">Add Subject</a>
-                              <a class="dropdown-item" href="{% url 'module_form' %}">Add Module</a>
-                              <a class="dropdown-item" href="{% url 'class_subject_form' %}">Add Class Subject</a>
-                            </div>
-                          </li>
-                        {% endif %}
-                      {% endfor %}
-                    {% endif %}
-                    {% if request.user.is_authenticated %}
-                      {% for i in user %}
-                        {% if i.name == 'Admin' %}
-                        <li class="nav-item dropdown">
-                          <a class="btn btn-outline-secondary nav-link dropdown-toggle d-sm-inline-block" style="margin-left: 15px;color: black;" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            View
-                          </a>
-                          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{% url 'all' %}">All</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{% url 'class' %}" >View Class</a>
-                            <a class="dropdown-item" href="{% url 'content' %}" >View Content</a>
-                            <a class="dropdown-item" href="{% url 'subject' %}" >View Subject</a>
-                            <a class="dropdown-item" href="{% url 'module' %}" >View Module</a>
-                            <a class="dropdown-item" href="{% url 'class_subject' %}" >View Class Subject</a>
-                          </div>
-                        </li>
-                      </ul>
-                      {% endif %}
-                    {% endfor %}
-                  {% endif %}
-                        <form class="form-inline my-2 my-lg-0">
-                          <input id="myInput" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                        </form>
-                        <li class="nav-item dropdown">
-                          <a class="btn btn-outline-secondary nav-link dropdown-toggle d-sm-inline-block" style="margin-left: 15px;color: black;" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Account
-                          </a>
-                          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            {% if request.user.is_authenticated %}
-                              {% for i in user %}
-                                {% if i.name == 'Teacher' %}
-                                  <a class="dropdown-item" href="{% url 'teacher_profile' %}">My Profile</a>
-                                  <div class="dropdown-divider"></div>
-                                {% elif i.name == 'Admin' %}
-                                  <a class="dropdown-item" href="{% url 'profiles' %}">All Profiles</a>
-                                  <div class="dropdown-divider"></div>
-                                {% elif i.name == 'Checker' %}
-                                  <a class="dropdown-item" href="{% url 'checker_profile' %}">My Profile</a>
-                                  <div class="dropdown-divider"></div>
-                                {% elif i.name == 'School' %}
-                                  <a class="dropdown-item" href="{% url 'school_profile' %}">My Profile</a>
-                                  <div class="dropdown-divider"></div>
-                                {% elif i.name == 'Parent' %}
-                                  <a class="dropdown-item" href="{% url 'parent_profile' %}">My Profile</a>
-                                  <div class="dropdown-divider"></div>
-                                {% elif i.name == 'Student' %}
-                                  <a class="dropdown-item" href="{% url 'student_profile' request.user.pk %}">My Profile</a>
-                                  <div class="dropdown-divider"></div>
-                                {% endif %}
-                              {% endfor %}
-                            {% endif %}
-                            {% if request.user.is_authenticated %}
-                                <a class="dropdown-item" href="{% url "logout" %}">Logout</a>
-                              {% else %}
-                                <a class="dropdown-item" href="{% url "login" %}">Login</a>
-                                {% comment %} <a class="dropdown-item" href="{% url "register_ask" %}">Register</a> {% endcomment %}
-                            {% endif %}
-                          </div>
-                        </li>
-                </div>
-              </nav>
-              
-        <!--Main-Containt-->
-              {% block content %}
-              {% endblock %}
-              
-              <br>
-              <br>
-        <!--Footer-->
-                <div class="footer">
-                  <div class="text-center" style="margin:20px 0px">
-                    <!-- <img src="{% static './Images/social-1.png' %}" alt="facebook-image" class="rounded-circle"/> -->
-                    <!-- <img src="{% static './Images/social-2.png' %}" alt="youtube-image" class="rounded-circle"/> -->
-                    <!-- <img src="{% static './Images/social-3.png' %}" alt="twitter-image" class="rounded-circle"/> -->
-                    <img src="{% static './LoginFormOtherFiles/images/img-01.png' %}" alt="logo" style="height: 100px;" class="rounded-circle"/>
-
-                  </div>
-                  <!-- <div class="text-center" style="margin:10px 0px">
-                    <a class="btn btn-outline-success" href="#">Team</a>
-                    <a class="btn btn-outline-success" href="#">About</a>
-                    <a class="btn btn-outline-success" href="#">Contact</a>
-                  </div> -->
-                  <div class="text-center">
-                    <p>Designed And Developed By: <span><a href="https://www.facebook.com/TabishAliMughal">Tabish Ali Mughal</a></span></p>
-                  </div>
-                </div>
-        <script src="{% static './jquery.js' %}"></script>
-        <script src="{% static './bootstrap.min.js' %}"></script>
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script>
-          $(document).ready(function(){
-            $("#myInput").on("keyup", function() {
-              var value = $(this).val().toLowerCase();
-              $("#myTable tr").filter(function() {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-              });
-            });
-          });
-          </script>
-          <script>
-          document.getElementById('btnnext').onclick = next;
-          document.getElementById('btnprev').onclick = prev;
-            // If the user clicks in the window, set the background color of <body> to yellow
-            var counter = 0;
-            function next() {
-              
-              var div = document.getElementById('slideshow');
-              var img = div.getElementsByTagName('img')[counter].src;//.childNodes[2];
-              
-              document.getElementById("imgprev").src=img;//document.getElementById("imgprev").src;
-              
-              
-              counter++;
-              if (counter==10) counter = 0;
-            }
-            function prev() {
-              
-              var div = document.getElementById('slideshow');
-              var img = div.getElementsByTagName('img')[counter].src;//.childNodes[2];
-              
-              document.getElementById("imgprev").src=img;//document.getElementById("imgprev").src;
-              
-              
-              counter--;
-              if (counter==0) counter = 10;
-            }
-            </script>
-    </body>
+      
+  
+      
+      <!--Page Title-->
+      <title>Digital SCHOOL</title>
+  </head>
+  <body>
+    <!--Navbar menu-->
+    <nav class="navbar navbar-expand-lg navbar-dark res-navbar">
+      <a class="navbar-brand" href="{% url 'main' %}" style="color:black; font-size: 30px;"><img src="{% static './LoginFormOtherFiles/images/img-01.png' %}" alt="logo" height="50px" class="rounded-circle"/> Digital School</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
     
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div style="width: 100%;">
+        <ul class="navbar-nav mr-auto">
+          {% if request.user.is_authenticated %}
+            {% for i in user %}
+              {% if i.name == 'Teacher' or i.name == 'Admin' %}
+                <li class="nav-item dropdown">
+                  <a class="btn btn-outline-secondary nav-link dropdown-toggle d-sm-inline-block mar" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Teach
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'date_select' %}">Start Class</a>
+                    <!-- <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a> -->
+                  </div>
+                </li>
+              {% endif %}
+              {% if i.name == 'Admin' %}
+                <li class="nav-item dropdown">
+                  <a class="btn btn-outline-secondary nav-link dropdown-toggle d-sm-inline-block mar" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Add
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'select_to_add' %}">Add All</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'class_form' %}">Add Class</a>
+                    <a class="dropdown-item" href="{% url 'content_form' %}">Add Content</a>
+                    <a class="dropdown-item" href="{% url 'subject_form' %}">Add Subject</a>
+                    <a class="dropdown-item" href="{% url 'module_form' %}">Add Module</a>
+                    <a class="dropdown-item" href="{% url 'class_subject_form' %}">Add Class Subject</a>
+                  </div>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="btn btn-outline-secondary nav-link dropdown-toggle d-sm-inline-block mar" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    View
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'all' %}">All</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'class' %}" >View Class</a>
+                    <a class="dropdown-item" href="{% url 'content' %}" >View Content</a>
+                    <a class="dropdown-item" href="{% url 'subject' %}" >View Subject</a>
+                    <a class="dropdown-item" href="{% url 'module' %}" >View Module</a>
+                    <a class="dropdown-item" href="{% url 'class_subject' %}" >View Class Subject</a>
+                  </div>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="btn btn-outline-secondary nav-link dropdown-toggle d-sm-inline-block mar" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Individual
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'indivisuals_list' %}">All</a>
+                    <!-- <div class="dropdown-divider"></div> -->
+                  </div>
+                </li>
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        </ul>
+        </div>
+        <form class="form-inline my-2 my-lg-0" style="margin-left:auto;margin-right:auto">
+          <input id="myInput" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+        </form>
+        <div>
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown" >
+              <a class="btn btn-outline-secondary nav-link dropdown-toggle d-sm-inline-block mar" style="margin-left: 5px;color: black;" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Account
+              </a>
+              <div class="dropdown-menu account" aria-labelledby="navbarDropdown">
+                {% if request.user.is_authenticated %}
+                  {% for i in user %}
+                    {% if i.name == 'Teacher' %}
+                      <a class="dropdown-item" href="{% url 'teacher_profile' %}">My Profile</a>
+                      <div class="dropdown-divider"></div>
+                    {% elif i.name == 'Admin' %}
+                      <a class="dropdown-item" href="{% url 'profiles' %}">All Profiles</a>
+                      <div class="dropdown-divider"></div>
+                    {% elif i.name == 'Checker' %}
+                      <a class="dropdown-item" href="{% url 'checker_profile' %}">My Profile</a>
+                      <div class="dropdown-divider"></div>
+                    {% elif i.name == 'School' %}
+                      <a class="dropdown-item" href="{% url 'school_profile' %}">My Profile</a>
+                      <div class="dropdown-divider"></div>
+                    {% elif i.name == 'Parent' %}
+                      <a class="dropdown-item" href="{% url 'parent_profile' %}">My Profile</a>
+                      <div class="dropdown-divider"></div>
+                    {% elif i.name == 'Student' %}
+                      <a class="dropdown-item" href="{% url 'student_profile' request.user.pk %}">My Profile</a>
+                      <div class="dropdown-divider"></div>
+                    {% elif i.name == 'Individuals' %}
+                      <a class="dropdown-item" href="{% url 'indivisual_profile' %}">My Profile</a>
+                      <div class="dropdown-divider"></div>
+                    {% endif %}
+                  {% endfor %}
+                {% endif %}
+                {% if request.user.is_authenticated %}
+                  <a class="dropdown-item" href="{% url "logout" %}">Logout</a>
+                {% else %}
+                  <a class="dropdown-item" href="{% url "login" %}">Login</a>
+                  {% comment %} <a class="dropdown-item" href="{% url "register_ask" %}">Register</a> {% endcomment %}
+                {% endif %}
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+            
+    <!--Main-Containt-->
+    {% block content %}
+    {% endblock %}
+            
+    <br>
+    <br>
+
+    <!--Footer-->
+    <div class="footer">
+      <div class="text-center" style="margin:20px 0px">
+        <!-- <img src="{% static './Images/social-1.png' %}" alt="facebook-image" class="rounded-circle"/> -->
+        <!-- <img src="{% static './Images/social-2.png' %}" alt="youtube-image" class="rounded-circle"/> -->
+        <!-- <img src="{% static './Images/social-3.png' %}" alt="twitter-image" class="rounded-circle"/> -->
+        <img src="{% static './LoginFormOtherFiles/images/img-01.png' %}" alt="logo" style="height: 100px;" class="rounded-circle"/>
+
+      </div>
+      <!-- <div class="text-center" style="margin:10px 0px">
+        <a class="btn btn-outline-success" href="#">Team</a>
+        <a class="btn btn-outline-success" href="#">About</a>
+        <a class="btn btn-outline-success" href="#">Contact</a>
+      </div> -->
+      <div class="text-center">
+        <p>Designed And Developed By: <span><a href="https://www.facebook.com/TabishAliMughal">Tabish Ali Mughal</a></span></p>
+      </div>
+    </div>
+    <script src="{% static './jquery.js' %}"></script>
+    <script src="{% static './bootstrap.min.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+      $(document).ready(function(){
+        $("#myInput").on("keyup", function() {
+          var value = $(this).val().toLowerCase();
+          $("#myTable tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+          });
+        });
+      });
+    </script>
+    <script>
+      document.getElementById('btnnext').onclick = next;
+      document.getElementById('btnprev').onclick = prev;
+        // If the user clicks in the window, set the background color of <body> to yellow
+        var counter = 0;
+        function next() {
+          
+          var div = document.getElementById('slideshow');
+          var img = div.getElementsByTagName('img')[counter].src;//.childNodes[2];
+          
+          document.getElementById("imgprev").src=img;//document.getElementById("imgprev").src;
+          
+          
+          counter++;
+          if (counter==10) counter = 0;
+        }
+        function prev() {
+          
+          var div = document.getElementById('slideshow');
+          var img = div.getElementsByTagName('img')[counter].src;//.childNodes[2];
+          
+          document.getElementById("imgprev").src=img;//document.getElementById("imgprev").src;
+          
+          
+          counter--;
+          if (counter==0) counter = 10;
+        }
+    </script>
+  </body>
 </html>

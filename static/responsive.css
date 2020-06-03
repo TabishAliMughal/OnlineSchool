@@ -80,12 +80,20 @@
     }
 
     iframe {
-        height: 274px !important;
+        height: auto !important;
         border-width: 2px;
         border-style: inset;
         border-color: initial;
         border-image: initial;
-        width: 481px !important;
+        width: 100% !important;
+    }
+    .account{
+        margin-left: 0px !important;
+        color: black !important;
+    }
+    .mar{
+        margin-left: 0px !important;
+        color: black !important;
     }
 }
 

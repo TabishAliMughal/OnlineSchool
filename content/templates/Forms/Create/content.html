@@ -35,6 +35,10 @@
                     <td>Text</td>
                     <td>{{ form1.text }}</td>
                 </tr>
+                <tr>
+                    <td>For</td>
+                    <td>{{ form1.therefor }}</td>
+                </tr>
                 <tr id="url">
                     <td>Youtube Url(Embed)</td>
                     <td><div id="div-to-add"><input type="url" name="url" required /></div><br><button type="button" onClick="clone()" id="add-row">+</button></td>
@@ -49,7 +53,6 @@
         </table>
     </div>
     {% csrf_token %}
-
 </form>
 <script>
     function clone(){

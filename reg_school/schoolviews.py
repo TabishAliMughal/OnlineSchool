@@ -5,13 +5,15 @@ from authentication.user_handeling import unauthenticated_user, allowed_users, a
 from teacher.models import *
 from checker.models import *
 from .forms import *
+from indivisuals.models import *
 
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['School'])
 def ManageSchoolProfileView(ProfileView):
-    group = Group.objects.all()
-    for i in group:
+    groups = Group.objects.all()
+    group = ''
+    for i in groups:
         if str(i) == 'Teacher':
             group = i
     user = ProfileView.user.groups.values('name')
@@ -19,6 +21,7 @@ def ManageSchoolProfileView(ProfileView):
     s = School.objects.all()
     school = []
     teachers = []
+    students = []
     v = TeacherClass.objects.all()
     for i in v:
         if str(i.school) != 'None':
@@ -29,10 +32,15 @@ def ManageSchoolProfileView(ProfileView):
             school.append(i)
     if school == []:
         school = 'No'
+    for i in Indivisuals.objects.all():
+        if str(i.school) != 'None':
+            if str(i.school.user.pk) == str(log_school.pk):
+                students.append(i)
     context = {
         'group' : group ,
         'school': school ,
         'teachers': teachers ,
+        'students': students ,
         'user': user ,
     }
     return render(ProfileView,'School/Profile.html',context)

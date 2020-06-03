@@ -39,10 +39,11 @@ def ManageSubjectSelectView(SelectView,date,Ccode):
     FClassSubjects = []
     if SelectView.user.is_authenticated:
         for i in user:
-            if str(i.get('name')) == 'Teacher':
-                for i in Content.objects.all():
-                    if str(i.date) == str(date) and str(i.class_name) == str(Ccode):
-                        list_.append(i)
+            if str(i.get('name')) == 'Teacher' or str(i.get('name')) == 'Admin' :
+                for v in Content.objects.all():
+                    if str(v.date) == str(date) and str(v.class_name.pk) == str(Ccode):
+                        if str(v.therefor) == 'S':
+                            list_.append(v)
                 # list_ = get_list_or_404(Content , date = date , class_name = Ccode )
                 context = {
                     'list':list_,
@@ -65,14 +66,14 @@ def ManageSubjectSelectView(SelectView,date,Ccode):
 
 def ManageContentSelectView(SelectView,date,Ccode,subject):
     cont = []
-    for rows in Subjects.objects.all():
-        sub = get_object_or_404(Subjects , subject_name = subject)
+    # for rows in Subjects.objects.all():
+    sub = get_object_or_404(Subjects , subject_name = subject)
     con = Content.objects.all()
     user = SelectView.user.groups.values('name')
     for rows in con:
         Cc = get_object_or_404(Classes, class_name = rows.class_name)
         if str(Cc.code) == str(Ccode):
-            if rows.subject == sub:
+            if str(rows.subject) == str(sub):
                 if str(rows.date) == str(date):
                     FContent = get_list_or_404(Content , date = date , class_name = Ccode , subject = sub)
                     cont.append(FContent)
@@ -86,7 +87,6 @@ def ManageContentView(ContentView, code):
     for i in Videos.objects.all():
         if str(i.content.pk) == str(Contents.pk):
             videos.append(i)
-    print(videos)
     context = {
         'user':user ,
         'content' : Contents ,
