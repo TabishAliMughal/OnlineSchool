@@ -105,7 +105,6 @@ def ManageTeacherClassResultView(ResultView,id):
                         if str(q.question.exam.subject) == str(subj):
                             obtained_marks = int(obtained_marks) + int(q.obtained)
             obtained.append([subj.subject_name,obtained_marks])
-            # print(obtained_marks)
         for g in total:
             t = (total[int(k)])
             o = (obtained[int(k)])

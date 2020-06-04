@@ -30,7 +30,6 @@ def ManageIndivisualProfileView(ProfileView , pk = None):
                 else:
                     content.append({'content':i,'period':v})
                 v = v + 1
-    print(content)
     context = {
         'user':user,
         'content':content,
