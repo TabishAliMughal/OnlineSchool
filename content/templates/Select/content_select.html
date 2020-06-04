@@ -9,7 +9,7 @@
                 {% for v in content %}
                     {% for i in v %}
                         <tr>
-                            <th><a href="{% url 'content' i.code %}">{{ i.module }} > {{ i.title }}</a></th>
+                            <td><a href="{% url 'content' i.code %}">{{ i.module }} > {{ i.title }}</a></td>
                         </tr>
                     {% endfor %}
                 {% endfor %}

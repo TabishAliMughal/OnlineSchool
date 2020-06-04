@@ -5,25 +5,25 @@
    <table  class="table table-hover table-sm res-table">
         <tbody id="myTable" align="center">
                 <tr>
-                    <th><a>User Name</a></th>
-                    <th><a>{{ teacher.username }}</a></th>
+                    <td><a>User Name</a></td>
+                    <td><a>{{ teacher.username }}</a></td>
                 </tr>
                 <tr>
-                    <th><a>Email Address</a></th>
-                    <th><a>{{ teacher.email }}</a></th>
+                    <td><a>Email Address</a></td>
+                    <td><a>{{ teacher.email }}</a></td>
                 </tr>
                 <tr>
-                    <th><a>Date Joined</a></th>
-                    <th><a>{{ teacher.date_joined }}</a></th>
+                    <td><a>Date Joined</a></td>
+                    <td><a>{{ teacher.date_joined }}</a></td>
                 </tr>
                 <tr>
-                    <th><a>Date Joined</a></th>
-                    <th><a>{{ teacher.last_login }}</a></th>
+                    <td><a>Date Joined</a></td>
+                    <td><a>{{ teacher.last_login }}</a></td>
                 </tr>
                 <tr>
-                    <th><a>Classes</a></th>
+                    <td><a>Classes</a></td>
                     {% for i in classes %}
-                        <th><a>{{ i }}</a></th>
+                        <td><a>{{ i }}</a></td>
                     {% endfor %}
                 </tr>
         </tbody>

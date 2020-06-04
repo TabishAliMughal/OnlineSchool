@@ -4,6 +4,7 @@ from django.contrib.auth.models import Group , User
 from authentication.user_handeling import unauthenticated_user, allowed_users, admin_only
 from teacher.models import *
 from checker.models import *
+from indivisuals.models import *
 
 
 @login_required(login_url='login')
@@ -14,7 +15,19 @@ def ManageProfilesView(ProfileView):
     checkers = checkers.user_set.all()
     teachers = Group.objects.get(name="Teacher")
     teachers = teachers.user_set.all()
+    individualuser = Group.objects.get(name="Individuals")
+    individualuser = individualuser.user_set.all()
+    individuals = []
+    for i in Indivisuals.objects.all():
+        for v in individualuser:
+            if str(i.user.pk) == str(v.pk):
+                individuals.append(i)
+    students = []
+    for i in TeacherClassStudents.objects.all():
+        students.append(i)
     context = {
+        'students': students ,
+        'individuals': individuals ,
         'checkers': checkers ,
         'teachers': teachers ,
         'user': user ,

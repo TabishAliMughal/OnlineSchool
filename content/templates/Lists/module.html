@@ -19,9 +19,9 @@
             {% for i in list %}
             <tbody id="myTable" align="center">
                 <tr>
-                    <th>{{ i.module }}</th>
+                    <td>{{ i.module }}</td>
                     {% if request.user.is_authenticated %}
-                    <th><a class="btn btn-primary" href="{% url 'module_edit' i.pk %}">Edit</a><a href="{% url 'module_delete' i.pk %}" class="btn btn-primary" href="">Delete</a></th>
+                        <td><a class="btn btn-primary" href="{% url 'module_edit' i.pk %}">Edit</a><a href="{% url 'module_delete' i.pk %}" class="btn btn-primary" href="">Delete</a></td>
                     {% endif %}
                     </tr>
             </tbody>

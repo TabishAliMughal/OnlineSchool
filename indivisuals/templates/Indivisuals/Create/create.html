@@ -22,7 +22,8 @@
                 <tr>
                     <td>School</td>
                     {% if school != 'No'%}
-                        <td><input type='text' name='school' value='{{ school }}' readonly /></td>
+                        <td><input type='text' value='{{ school }}' readonly /></td>
+                        <input type='text' name='school' value='{{ school.pk }}' readonly hidden />
                     {% else %}
                         <td>{{ form.school }}</td>
                     {% endif %}

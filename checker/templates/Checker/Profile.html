@@ -7,7 +7,7 @@
             <tbody id="myTable" align="center">
                 {% for i in class %}
                     <tr>
-                        <th><a href="{% url 'full_class' i.checker.pk i.pk %}" >{{ i.subject }}</a></th>
+                        <td><a href="{% url 'full_class' i.checker.pk i.pk %}" >{{ i.subject }}</a></td>
                     </tr>
                 {% endfor %}
             </tbody>

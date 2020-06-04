@@ -6,7 +6,14 @@ import random
 from django.contrib.auth.models import User , Group
 from content.models import *
 import datetime
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group , User
+from authentication.user_handeling import unauthenticated_user, allowed_users, admin_only
 
+
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Individuals'])
 def ManageIndivisualProfileView(ProfileView , pk = None):
     user = ProfileView.user.groups.values('name')
     for i in user:

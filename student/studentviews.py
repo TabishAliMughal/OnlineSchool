@@ -7,7 +7,7 @@ from exam.models import *
 from .models import *
 
 @login_required(login_url='login')
-@allowed_users(allowed_roles=['Student','Parent','Teacher'])
+@allowed_users(allowed_roles=['Admin','Student','Parent','Teacher'])
 def ManageProfileView(ProfileView,id):
     user = ProfileView.user.groups.values('name')
     student = ''

@@ -4,7 +4,13 @@ from .forms import *
 from authentication.forms import *
 import random
 from django.contrib.auth.models import Group
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group , User
+from authentication.user_handeling import unauthenticated_user, allowed_users, admin_only
 
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Admin','School'])
 def ManageIndivisualsListView(ListView , pk = None):
     user = ListView.user.groups.values('name')
     if pk:
@@ -23,6 +29,8 @@ def ManageIndivisualsListView(ListView , pk = None):
     }
     return render(ListView , 'Indivisuals/list.html' , context)
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Admin','School'])
 def ManageIndivisualsCreateView(CreateView , pk=None):
     user = CreateView.user.groups.values('name')
     if pk:
@@ -65,6 +73,7 @@ def ManageIndivisualsCreateView(CreateView , pk=None):
             'password' : password ,
             'active' : data.get('active') ,
         })
+        print(form)
         form.save()
         return redirect('indivisuals_list')
     else:
@@ -76,6 +85,8 @@ def ManageIndivisualsCreateView(CreateView , pk=None):
         }
         return render(CreateView , 'Indivisuals/Create/create.html' , context)
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Admin','School'])
 def ManageIndivisualsDetailView(DetailView , pk):
     user = DetailView.user.groups.values('name')
     indivisual = get_object_or_404(Indivisuals , pk = pk)
@@ -85,6 +96,8 @@ def ManageIndivisualsDetailView(DetailView , pk):
     }
     return render(DetailView , 'Indivisuals/detail.html' , context)
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Admin','School'])
 def ManageIndivisualsEditView(EditView , pk):
     user = EditView.user.groups.values('name')
     indivisual = get_object_or_404(Indivisuals , pk = pk)
@@ -111,6 +124,8 @@ def ManageIndivisualsEditView(EditView , pk):
         }
         return render(EditView , 'Indivisuals/edit.html' , context)
     
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Admin','School'])
 def ManageIndivisualsDeleteView(DeleteView , pk):
     indivisual = get_object_or_404(Indivisuals , pk = pk)
     user = indivisual.user

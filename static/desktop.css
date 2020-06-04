@@ -31,16 +31,13 @@ td{
     color: black;
     line-height: 1.4;
     width: 265px;
-    padding-left: 42px;
-    padding-top: 18px;
-    padding-bottom: 14px;
+    vertical-align: middle !important;
 }
 
 .footer{
     position: absolute;
     width: 100%;
-    margin-top: 20%;
-    /* margin-bottom: 0; */
+    margin-top: 17%;
     
     padding-right: 15px;
     padding-left: 15px;
