@@ -116,7 +116,6 @@ def ManageCheckerCheckView(CheckView,student,checker,clas):
         for i in rawdata:
             if str(v) >= '2':
                 question = get_object_or_404(ExamQuestions , pk = i)
-                print(question)
                 marks = CheckView.POST.get(i)
                 if str(check) == 'recheck':
                     for v in QuestionsChecked.objects.all():
@@ -211,7 +210,6 @@ def ManageCheckerCheckView(CheckView,student,checker,clas):
                         for v in ExamQuestions.objects.all():
                             if str(student.clas.clas) == str(i.exam.class_name):
                                 if str(v.exam.subject) == str(checker_class.subject.subject_name):
-                                    print(i.pk)
                                     questions.append({
                                         'pk' : v.pk ,
                                         'exam' : v.exam ,

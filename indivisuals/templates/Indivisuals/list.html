@@ -1,9 +1,14 @@
 {% extends "MainPage.html" %}
 {% load static %}
 {% block content %}
-    <link href="{% static 'css/base.css' %}"/>
     <div class="container">
-        <h2 class="text-center" style="font-family:sans-serif;">View All Indivisuals</h2><hr/>
+      <h2 class="text-center" style="font-family:sans-serif;">View All Indivisuals</h2><hr/>
+        <select name="school" onClick="schfil()">
+          <option>-------------------</option>
+          {% for i in school %}
+            <option><a href="#">{{ i }}<input type="text" id="abc" value="{% url 'indivisuals_list' i.pk %}" hidden /></option>
+          {% endfor %}
+        </select>
         {% if request.user.is_authenticated %}
           {% for i in user %}
             {% if i.name == 'Admin' %}
@@ -44,7 +49,12 @@
             </tbody>
         </table>
     </div>
-    {% csrf_token %}
-</form>
+    <script>
+      function schfil() {
+        var url = document.getElementById('abc').value;
+        window.open(url,'newwindow','width=1000,height=800')
+        alert(url);
+      }
+    </script>
 
 {% endblock %}
