@@ -85,23 +85,46 @@ def ManageContentEditView(EditView,pk):
     user = EditView.user.groups.values('name')
     data = get_object_or_404(Content, pk = pk)
     videos = []
+    k = int('0')
     for i in Videos.objects.all():
         if str(i.content.pk) == str(data.pk):
             videos.append(i)
+            k = k + 1
     if EditView.method == 'POST':
         vid = EditView.POST
         form = ContentForm(EditView.POST or None, instance=data)
         if form.is_valid:
             form.save()
             url = vid.getlist('url')
-            v = int('0')
+            p = int('0')
             for i in url:
-                form2 = VideoForm({
-                    'content' : data.pk ,
-                    'url' : url[v]
-                } or None , instance=videos[v])
-                v = v + 1
-                form2.save()
+                p = p+1
+            v = int('0')
+            if videos:
+                if str(k) <= str(v):
+                    for i in url:
+                        form2 = VideoForm({
+                            'content' : data.pk ,
+                            'url' : url[v]
+                        } or None , instance=videos[v])
+                        v = v + 1
+                        form2.save()
+                else:
+                    for i in url:
+                        form2 = VideoForm({
+                            'content' : data.pk ,
+                            'url' : url[v]
+                        })
+                        v = v + 1
+                        form2.save()
+            else:
+                for i in url:
+                    form2 = VideoForm({
+                        'content' : data.pk ,
+                        'url' : url[v]
+                    })
+                    v = v + 1
+                    form2.save()
             return redirect('content')
     else:
         form = ContentForm(instance=data)
