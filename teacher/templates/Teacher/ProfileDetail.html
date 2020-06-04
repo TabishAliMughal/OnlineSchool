@@ -5,34 +5,34 @@
    <table  class="table table-hover table-sm res-table">
         <tbody id="myTable" align="center">
                 <tr>
-                    <th><a>User Name</a></th>
-                    <th> : </th>
-                    <th><a>{{ teacher.username }}</a></th>
+                    <td><a>User Name</a></td>
+                    <td> : </td>
+                    <td><a>{{ teacher.username }}</a></td>
                 </tr>
                 <tr>
-                    <th><a>Email Address</a></th>
-                    <th> : </th>
-                    <th><a>{{ teacher.email }}</a></th>
+                    <td><a>Email Address</a></td>
+                    <td> : </td>
+                    <td><a>{{ teacher.email }}</a></td>
                 </tr>
                 <tr>
-                    <th><a>Date Joined</a></th>
-                    <th> : </th>
-                    <th><a>{{ teacher.date_joined }}</a></th>
+                    <td><a>Date Joined</a></td>
+                    <td> : </td>
+                    <td><a>{{ teacher.date_joined }}</a></td>
                 </tr>
                 <tr>
-                    <th><a>Last Login</a></th>
-                    <th> : </th>
-                    <th><a>{{ teacher.last_login }}</a></th>
+                    <td><a>Last Login</a></td>
+                    <td> : </td>
+                    <td><a>{{ teacher.last_login }}</a></td>
                 </tr>
                 <tr>
-                    <th><a>Class</a></th>
-                    <th> : </th>
-                    <th>{% for i in classes %}<a> ({{ i }}) </a>{% endfor %}</th>
+                    <td><a>Class</a></td>
+                    <td> : </td>
+                    <td>{% for i in classes %}<a> ({{ i }}) </a>{% endfor %}</td>
                 </tr>
                 <tr>
-                    <th><a>Total Students</a></th>
-                    <th> : </th>
-                    <th><a>{{ students }}</a></th>
+                    <td><a>Total Students</a></td>
+                    <td> : </td>
+                    <td><a>{{ students }}</a></td>
                 </tr>
         </tbody>
     </table>

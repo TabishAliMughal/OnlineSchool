@@ -20,10 +20,10 @@
             {% for i in list %}
             <tbody id="myTable" align="center">
                 <tr>
-                    <th>{{ i.class_name }}</th>
-                    <th>{{ i.subject_name }}</th>
+                    <td>{{ i.class_name }}</td>
+                    <td>{{ i.subject_name }}</td>
                     {% if request.user.is_authenticated %}
-                    <th><a class="btn btn-primary" href="{% url 'class_subject_edit' i.pk %}">Edit</a><a href="{% url 'class_subject_delete' i.pk %}" class="btn btn-primary" href="">Delete</a></th>
+                        <td><a class="btn btn-primary" href="{% url 'class_subject_edit' i.pk %}">Edit</a><a href="{% url 'class_subject_delete' i.pk %}" class="btn btn-primary" href="">Delete</a></td>
                     {% endif %}
                     </tr>
             </tbody>

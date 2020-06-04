@@ -19,12 +19,12 @@
             <tbody id="myTable" align="center">
                 {% for i in class %}
                     <tr>
-                        <th><a class="btn btn-primary" href="{% url 'student_profile' i.pk %}"></a></th>
-                        <th>{{ i.name }}</th>
-                        <th>{{ i.father_name }}</th>
-                        <th><a href="{% url 'edit_student' teacherclass.pk i.pk %}" class="btn btn-primary">Edit</a><a href="{% url 'delete_student' teacherclass.pk i.pk %}" class="btn btn-primary">Delete</a></th>
+                        <td><a class="btn btn-primary" href="{% url 'student_profile' i.pk %}"></a></td>
+                        <td>{{ i.name }}</td>
+                        <td>{{ i.father_name }}</td>
+                        <td><a href="{% url 'edit_student' teacherclass.pk i.pk %}" class="btn btn-primary">Edit</a><a href="{% url 'delete_student' teacherclass.pk i.pk %}" class="btn btn-primary">Delete</a></td>
                         {% if exam == 'Active' %}
-                            <th><a  href="{% url 'teacher_class_student_result' teacherclass.pk i.pk %}" class="btn btn-primary">View Result</a></th>
+                            <td><a  href="{% url 'teacher_class_student_result' teacherclass.pk i.pk %}" class="btn btn-primary">View Result</a></td>
                         {% endif %}
                     </tr>
                 {% endfor %}

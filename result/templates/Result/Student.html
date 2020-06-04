@@ -29,7 +29,7 @@
                 {% for v in numbers %}
                     <tr>
                         {% for i in v %}
-                            <th><a>{{ i }}</a></th>
+                            <td><a>{{ i }}</a></td>
                         {% endfor %}
                     </tr>
                 {% endfor %}
@@ -44,16 +44,16 @@
                     <th><a>{{ total_marks }}</a></th>
                 </tr>
                 <tr>
-                    <th><a>Total Obtained</a></th>
-                    <th><a>{{ final_marks }}</a></th>
+                    <td><a>Total Obtained</a></td>
+                    <td><a>{{ final_marks }}</a></td>
                 </tr>
                 <tr>
                     <th><a>Total Percentage</a></th>
                     <th><a>{{ total_percentage }}%</a></th>
                 </tr>
                 <tr>
-                    <th><a>Grade</a></th>
-                    <th><a>{{ grade }}</a></th>
+                    <td><a>Grade</a></td>
+                    <td><a>{{ grade }}</a></td>
                 </tr>
             </tbody>
         </table>

@@ -2,21 +2,42 @@
 {% block content %}
     <div class="container">
         <h2 class="text-center" style="font-family:sans-serif;">All Registered Teachers</h2><hr/>
-       <table  class="table table-hover table-sm res-table">
+        <table  class="table table-hover table-sm res-table">
             <tbody id="myTable" align="center">
                 {% for i in teachers %}
                     <tr>
-                        <th><a href="{% url 'teacher_profile_detail' i.pk %}" >{{ i }}</a></th>
+                        <td><a href="{% url 'teacher_profile_detail' i.pk %}" >{{ i }}</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h2 class="text-center" style="font-family:sans-serif;">All Registered Students</h2><hr/>
+        <table  class="table table-hover table-sm res-table">
+            <tbody id="myTable" align="center">
+                {% for i in students %}
+                    <tr>
+                        <td><a>{{ i.name }}</a></td>
+                        <td><a href="{% url 'teacher_profile_detail' i.clas.teacher.pk %}" >{{ i.clas.teacher }}</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h2 class="text-center" style="font-family:sans-serif;">All Registered Individual Students</h2><hr/>
+        <table  class="table table-hover table-sm res-table">
+            <tbody id="myTable" align="center">
+                {% for i in individuals %}
+                    <tr>
+                        <td><a href="{% url 'indivisuals_detail' i.pk %}" >{{ i.name }}</a></td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
         <h2 class="text-center" style="font-family:sans-serif;">All Registered Checkers</h2><hr/>
-       <table  class="table table-hover table-sm res-table">
+        <table  class="table table-hover table-sm res-table">
             <tbody id="myTable" align="center">
                 {% for i in checkers %}
                     <tr>
-                        <th><a href="{% url 'teacher_profile_detail' i.pk %}" >{{ i }}</a></th>
+                        <td><a href="{% url 'teacher_profile_detail' i.pk %}" >{{ i }}</a></td>
                     </tr>
                 {% endfor %}
             </tbody>

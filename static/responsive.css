@@ -42,6 +42,7 @@
     }
     .footer{
         position: relative;
+        margin-top: 25%;
     }
 
 
@@ -94,6 +95,13 @@
     .mar{
         margin-left: 0px !important;
         color: black !important;
+    }
+    td .btn-primary{
+        /* padding-top: 20px; */
+        margin-top: 3px;
+        margin-bottom: 3px;
+        background-color: antiquewhite;
+        /* color: aliceblue !important; */
     }
 }
 

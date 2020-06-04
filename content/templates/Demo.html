@@ -16,7 +16,7 @@
         <li data-date="8/1/2020" class="wc-calendar__days-list__item"></li>
         <li data-date="8/2/2020" class="wc-calendar__days-list__item"></li>
         {% for i in date %}
-        <li onclick="dateadd()" data-date="8/31/2020" id="date" class="wc-calendar__days-list__item"><a href="{% url 'demo_list' i %}">{{ i }}</a></li>
+          <li onclick="dateadd()" data-date="8/31/2020" id="date" class="wc-calendar__days-list__item"><a href="{% url 'demo_list' i %}">{{ i }}</a></li>
         {% endfor %}
         <li data-date="8/30/2020" class="wc-calendar__days-list__item"></li>
         <li data-date="8/31/2020" class="wc-calendar__days-list__item"></li>

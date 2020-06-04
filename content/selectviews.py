@@ -2,7 +2,13 @@ from django.shortcuts import render , redirect , get_object_or_404 , get_list_or
 from requirments.models import *
 from .models import *
 from teacher.models import *
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group
+from authentication.user_handeling import unauthenticated_user, allowed_users, admin_only
 
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Admin','Teacher'])
 def ManageDateSelectView(SelectView):
     user = SelectView.user.groups.values('name')
     if SelectView.method == 'POST':
@@ -13,6 +19,8 @@ def ManageDateSelectView(SelectView):
     }
     return render(SelectView , 'Select/date.html',context)
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Admin','Teacher'])
 def ManageClassSelectView(SelectView,date):
     user = SelectView.user.groups.values('name')
     teacher = []
@@ -33,18 +41,19 @@ def ManageClassSelectView(SelectView,date):
     }
     return render(SelectView , 'Select/class.html' , context)
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Admin','Teacher'])
 def ManageSubjectSelectView(SelectView,date,Ccode):
     user = SelectView.user.groups.values('name')
     list_ = []
     FClassSubjects = []
     if SelectView.user.is_authenticated:
         for i in user:
-            if str(i.get('name')) == 'Teacher' or str(i.get('name')) == 'Admin' :
+            if str(i.get('name')) == 'Teacher':
                 for v in Content.objects.all():
                     if str(v.date) == str(date) and str(v.class_name.pk) == str(Ccode):
-                        if str(v.therefor) == 'S':
+                        if str(v.therefor) == 'O':
                             list_.append(v)
-                # list_ = get_list_or_404(Content , date = date , class_name = Ccode )
                 context = {
                     'list':list_,
                     'user':user ,
@@ -55,7 +64,6 @@ def ManageSubjectSelectView(SelectView,date,Ccode):
     for i in ClassSubjects.objects.all():
         if str(i.class_name.pk) == str(Ccode):
             FClassSubjects.append(i)
-    # FClassSubjects = get_list_or_404(ClassSubjects , class_name = Ccode)
     context = {
         'user':user ,
         'date' : FDate,
@@ -64,9 +72,10 @@ def ManageSubjectSelectView(SelectView,date,Ccode):
     }
     return render(SelectView , 'Select/subject.html' , context)
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Admin','Teacher'])
 def ManageContentSelectView(SelectView,date,Ccode,subject):
     cont = []
-    # for rows in Subjects.objects.all():
     sub = get_object_or_404(Subjects , subject_name = subject)
     con = Content.objects.all()
     user = SelectView.user.groups.values('name')
@@ -75,11 +84,14 @@ def ManageContentSelectView(SelectView,date,Ccode,subject):
         if str(Cc.code) == str(Ccode):
             if str(rows.subject) == str(sub):
                 if str(rows.date) == str(date):
-                    FContent = get_list_or_404(Content , date = date , class_name = Ccode , subject = sub)
-                    cont.append(FContent)
+                    if str(rows.therefor) == 'O':
+                        FContent = get_list_or_404(Content , date = date , class_name = Ccode , subject = sub)
+                        cont.append(FContent)
     context = {'user':user ,'content' : cont,}
     return render(SelectView , 'Select/content_select.html' , context)
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Admin','Teacher'])
 def ManageContentView(ContentView, code):
     Contents = get_object_or_404(Content,code = code)
     user = ContentView.user.groups.values('name')

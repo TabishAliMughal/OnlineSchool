@@ -18,8 +18,8 @@
                 <th><h4 class="text-center" style="font-family:sans-serif;">Answers</h4><hr/></th>
             </tr>
             <tr>
-                <th><h6 class="text-center" style="font-family:sans-serif;">Total Marks = {{ marks }}</h6></th>
-                <th><h6 class="text-center" style="font-family:sans-serif;"></h6></th>
+                <td><h6 class="text-center" style="font-family:sans-serif;">Total Marks = {{ marks }}</h6></td>
+                <td><h6 class="text-center" style="font-family:sans-serif;"></h6></td>
             </tr>
             <tr>
                 <th>
@@ -39,8 +39,8 @@
                                     {% endfor %}
                                 {% else %}
                                     <tr>
-                                        <th style="width: 400px;"><a>{{ i.question }} ( {{ i.marks }} ){{i.pk}}</a></th>
-                                        <th><input type="number" name='{{i.pk}}' min="0" max="{{i.marks}}" value='{{i.mar}}' required/></th>
+                                        <td style="width: 400px;"><a>{{ i.question }} ( {{ i.marks }} ){{i.pk}}</a></td>
+                                        <td><input type="number" name='{{i.pk}}' min="0" max="{{i.marks}}" value='{{i.mar}}' required/></td>
                                         <input type='text' name="d" value="{{i.che}}" hidden/>
                                     </tr>
                                 {% endif %}
@@ -62,8 +62,8 @@
                 </th>
             </tr>
             <tr>
-                <th><input type="submit" class="btn btn-primary" value="Save"/></th>
-                <th><a id="btnprev" class="btn btn-primary">Previous</a><a id="btnnext" class="btn btn-primary">Next</a></th>
+                <td><input type="submit" class="btn btn-primary" value="Save"/></td>
+                <td><a id="btnprev" class="btn btn-primary">Previous</a><a id="btnnext" class="btn btn-primary">Next</a></td>
             </tr>
         </table>
     </div>

@@ -6,15 +6,15 @@
             <tbody id="myTable" align="center">
                 {% if school == 'No' %}
                 <tr>
-                    <th><a href="{% url 'school_create' %}">Add School Info</a></th>
+                    <td><a class="btn btn-primary" style="width: 100%;" href="{% url 'school_create' %}">Add School Info</a></td>
                 </tr>
                 {% else %}
                 {% for i in school %}
                         <tr>
-                            <th><a>{{ i.school }}</a></th>
+                            <td><a>{{ i.school }}</a></td>
                         </tr>
                         <tr>
-                            <th><a>{{ i.address }}</a></th>
+                            <td><a>{{ i.address }}</a></td>
                         </tr>
                     {% endfor %}
                 {% endif %}
@@ -26,10 +26,10 @@
         {% endfor %}
        <table  class="table table-hover table-sm res-table">
             <tbody id="myTable" align="center">
-                {% for i in teachers %}
+                {% for i in students %}
                     <tr>
-                        <th><a href="{% url 'teacher_profile_detail' i.teacher.pk %}" >{{ i.teacher }}</a></th>
-                        <th><a>{{ i.clas }}</a></th>
+                        <td><a href="{% url 'indivisuals_detail' i.pk %}" >{{ i.name }}</a></td>
+                        <td><a>{{ i.clas }}</a></td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -40,8 +40,8 @@
             <tbody id="myTable" align="center">
                 {% for i in teachers %}
                     <tr>
-                        <th><a href="{% url 'teacher_profile_detail' i.teacher.pk %}" >{{ i.teacher }}</a></th>
-                        <th><a>{{ i.clas }}</a></th>
+                        <td><a href="{% url 'teacher_profile_detail' i.teacher.pk %}" >{{ i.teacher }}</a></td>
+                        <td><a>{{ i.clas }}</a></td>
                     </tr>
                 {% endfor %}
             </tbody>

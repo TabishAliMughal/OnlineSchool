@@ -278,6 +278,8 @@ def ManageCheckerCheckView(CheckView,student,checker,clas):
         }
         return render(CheckView,'Checker/CopyCheck.html',context)
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Teacher'])
 def ManageCheckerStudentCopyCheckClaimView(ClaimView,exam,student):
     user = ClaimView.user.groups.values('name')
     exam = get_object_or_404(ExamStatus , pk = exam)

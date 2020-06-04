@@ -15,10 +15,10 @@
             <tbody id="myTable" align="center">
                 {% for i in class %}
                     <tr>
-                        <th>{{ i.name }}</th>
-                        <th>{{ i.father_name }}</th>
-                        <th><a class='btn' href="{% url 'exam_upload_pictures' exam.pk i.pk %}">Upload Answers</a></th>
-                        <th>{{ i.picsqty }} Uploaded</th>
+                        <td>{{ i.name }}</td>
+                        <td>{{ i.father_name }}</td>
+                        <td><a class='btn' href="{% url 'exam_upload_pictures' exam.pk i.pk %}">Upload Answers</a></td>
+                        <td>{{ i.picsqty }} Uploaded</td>
                     </tr>
                 {% endfor %}
             </tbody>

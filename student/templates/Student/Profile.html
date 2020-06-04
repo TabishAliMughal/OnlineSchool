@@ -15,21 +15,21 @@
        <table  class="table table-hover table-sm res-table">
             <tbody id="myTable" align="center">
                 <tr>
-                    <th><a>Name</a></th>
+                    <td><a>Name</a></td>
                     <td><a>{{ student.name }}</a></td>
                 </tr>
                 <tr>
-                    <th><a>Father</a></th>
+                    <td><a>Father</a></td>
                     <td><a>{{ student.father_name }}</a></td>
                 </tr>
                 <tr>
-                    <th><a>Teacher</a></th>
+                    <td><a>Teacher</a></td>
                     <td><a>{{ student.clas.teacher }}</a></td>
                 </tr>
                 {% if student.clas.school == None %}
                 {% else %}
                     <tr>
-                        <th><a>School</a></th>
+                        <td><a>School</a></td>
                         <td><a>{{ student.clas.school }}</a></td>
                     </tr>
                 {% endif %}

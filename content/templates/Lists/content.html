@@ -18,7 +18,7 @@
                     <th>Class</th>
                     <th>Subject</th>
                     <th>Module</th>
-                    <th>Detail</th>
+                    <!-- <th>Detail</th> -->
                     {% if request.user.is_authenticated %}
                       {% for i in user %}
                         {% if i.name == 'Admin' %}
@@ -34,7 +34,7 @@
                     <td><a href="{% url 'content' i.pk %}">{{ i.class_name }}</a></td>
                     <td>{{ i.subject }}</td>
                     <td>{{ i.module }}</td>
-                    <td><font size="-1">{{ i.text }}</font></td>
+                    <!-- <td><font size="-1">{{ i.text }}</font></td> -->
                     {% if request.user.is_authenticated %}
                       {% for v in user %}
                         {% if v.name == 'Admin' %}
