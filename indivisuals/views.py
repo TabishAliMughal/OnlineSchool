@@ -5,10 +5,19 @@ from authentication.forms import *
 import random
 from django.contrib.auth.models import Group
 
-def ManageIndivisualsListView(ListView):
+def ManageIndivisualsListView(ListView , pk = None):
     user = ListView.user.groups.values('name')
-    indivisual = Indivisuals.objects.all()
+    if pk:
+        indivisual = []
+        for i in Indivisuals.objects.all():
+            if i.school:
+                if str(i.school.pk) == pk:
+                    indivisual.append(i)
+    else:
+        indivisual = Indivisuals.objects.all()
+    school = School.objects.all()
     context = {
+        'school' : school ,
         'user' : user ,
         'indivisual' : indivisual ,
     }

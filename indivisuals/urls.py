@@ -4,6 +4,7 @@ from . import indivisualviews
 
 urlpatterns = [
     path(r'',views.ManageIndivisualsListView, name='indivisuals_list'),
+    path(r'school/<pk>/all/',views.ManageIndivisualsListView, name='indivisuals_list'),
     path(r'detail/<pk>',views.ManageIndivisualsDetailView, name='indivisuals_detail'),
     path(r'create',views.ManageIndivisualsCreateView, name='indivisuals_create'),
     path(r'edit/<pk>',views.ManageIndivisualsEditView, name='indivisuals_edit'),
