@@ -5,69 +5,69 @@
     <h1 class="text-center main-heading" style="font-family:sans-initial;font-style: oblique;">Online Helping Tool For All Schools And Parents</h1>
     <script src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;key=AIzaSyACgTHo7SLBqnZANd406ZF6h2xNMH58Flw" type="text/javascript"></script>
 
-        <h3 class="text-center heading" style="font-family:sans-inherit;">Our Available Teachers</h3>
-        <script type="text/javascript">
-                    
-            function addEvent(obj, evType, fn){ 
-            if (obj.addEventListener){ 
-            obj.addEventListener(evType, fn, false); 
-            return true; 
-            } else if (obj.attachEvent){ 
-            var r = obj.attachEvent("on"+evType, fn); 
-            return r; 
-            } else { 
-            return false; 
-            } 
-            }
-            addEvent(window, 'load', gmap_load);	
+    <h3 class="text-center heading" style="font-family:sans-inherit;">Our Available Teachers</h3>
+    <script type="text/javascript">
                 
-                
-            var map_gmap;
-            var geocoder_gmap = new GClientGeocoder();
-            var marker_gmap = [];
+        function addEvent(obj, evType, fn){ 
+        if (obj.addEventListener){ 
+        obj.addEventListener(evType, fn, false); 
+        return true; 
+        } else if (obj.attachEvent){ 
+        var r = obj.attachEvent("on"+evType, fn); 
+        return r; 
+        } else { 
+        return false; 
+        } 
+        }
+        addEvent(window, 'load', gmap_load);	
             
-                
-            function openMarkerInfoWindow_gmap(num) { GEvent.trigger(marker_gmap[num],"click"); }
             
-            function gmap_load() {
-            var center_marker = false;
-            var drag_marker;
-            var drag_point;
-                var bounds = new GLatLngBounds();
-                
-            if (GBrowserIsCompatible()) {
-                var div = document.getElementById("gmap");
-                if (!div) return;
-                map_gmap = new GMap2(div);    map_gmap.setCenter(new GLatLng(0,0),13);	
-                map_gmap.addControl(new GLargeMapControl());
-            map_gmap.addControl(new GMapTypeControl());
-            {% for i in locator %}
-            icon{{ i.num }} = new GIcon();
-            icon{{ i.num }}.image = "{% static './Images/3.png' %}";
-            icon{{ i.num }}.iconSize = new GSize(60,80);
-            icon{{ i.num }}.iconAnchor = new GPoint(1,18);
-            icon{{ i.num }}.infoWindowAnchor = new GPoint(15,1);
-                    
-                var point = new GLatLng({{i.lat}},{{i.lon}});
-                marker_gmap{{ i.num }}	= new GMarker(point,{icon:icon{{ i.num }},title:"{{ i.num }}"});
-                    bounds.extend(point);
-                        GEvent.addListener(marker_gmap{{ i.num }}, "click", function() { marker_gmap{{ i.num }}.openInfoWindowHtml('{{ i.teacher.teacher }} ( {{ i.teacher.clas }} )');});			  				
-                    map_gmap.addOverlay(marker_gmap{{ i.num }});
-            {% endfor %}
-                
-                    map_gmap.setCenter(bounds.getCenter(),map_gmap.getBoundsZoomLevel(bounds));					
-                    
-            }
-            }
+        var map_gmap;
+        var geocoder_gmap = new GClientGeocoder();
+        var marker_gmap = [];
+        
             
-        </script>
+        function openMarkerInfoWindow_gmap(num) { GEvent.trigger(marker_gmap[num],"click"); }
+        
+        function gmap_load() {
+        var center_marker = false;
+        var drag_marker;
+        var drag_point;
+            var bounds = new GLatLngBounds();
+            
+        if (GBrowserIsCompatible()) {
+            var div = document.getElementById("gmap");
+            if (!div) return;
+            map_gmap = new GMap2(div);    map_gmap.setCenter(new GLatLng(0,0),13);	
+            map_gmap.addControl(new GLargeMapControl());
+        map_gmap.addControl(new GMapTypeControl());
+        {% for i in locator %}
+        icon{{ i.num }} = new GIcon();
+        icon{{ i.num }}.image = "{% static './Images/3.png' %}";
+        icon{{ i.num }}.iconSize = new GSize(60,80);
+        icon{{ i.num }}.iconAnchor = new GPoint(1,18);
+        icon{{ i.num }}.infoWindowAnchor = new GPoint(15,1);
+                
+            var point = new GLatLng({{i.lat}},{{i.lon}});
+            marker_gmap{{ i.num }}	= new GMarker(point,{icon:icon{{ i.num }},title:"{{ i.num }}"});
+                bounds.extend(point);
+                    GEvent.addListener(marker_gmap{{ i.num }}, "click", function() { marker_gmap{{ i.num }}.openInfoWindowHtml('{{ i.teacher.teacher }} ( {{ i.teacher.clas }} )');});			  				
+                map_gmap.addOverlay(marker_gmap{{ i.num }});
+        {% endfor %}
+            
+                map_gmap.setCenter(bounds.getCenter(),map_gmap.getBoundsZoomLevel(bounds));					
+                
+        }
+        }
+        
+    </script>
 
-        <div align="center" id="gmap" class="mw-map"></div>
-        <br>
-        <br>
-        <a class="btn btn-primary" style="text-align: center; width: 100%; height: 50px; font-size: 20px;" href="{% url 'demo' %}">Start Demo</a>
-        <br><br>
-        <br>
-    </div>
+    <div align="center" id="gmap" class="mw-map"></div>
+    <br>
+    <br>
+    <a class="btn btn-primary" style="text-align: center; width: 100%; height: 50px; font-size: 20px;" href="{% url 'demo' %}">Start Demo</a>
+    <br><br>
+    <br>
+</div>
 
 {% endblock %}

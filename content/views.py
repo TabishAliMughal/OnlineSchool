@@ -77,21 +77,25 @@ def ManageDemoListView(ListView,date):
         date = str("2020-07-0{}".format(date))
     elif str(v) == '2':
         date = str("2020-07-{}".format(date))
-    k = int('0')
     content = []
-    for i in Content.objects.all():
-        if str(i.date) == str(date):
-            k = k + 1
-            content.append({
-                'period' : k ,
-                'pk': i.pk ,
-                'class_name' : i.class_name ,
-                'subject' : i.subject ,
-                'module' : i.module ,
-            })
+    for v in Classes.objects.all():
+        k = int('0')
+        abc = []
+        for i in Content.objects.all():
+            if str(v.pk) == str(i.class_name.pk):
+                if str(i.date) == str(date):
+                    k = k + 1
+                    abc.append({
+                        'period' : k ,
+                        'pk': i.pk ,
+                        'class_name' : i.class_name ,
+                        'subject' : i.subject ,
+                        'module' : i.module ,
+                    })
+        content.append({'class':v , 'content' : abc})
     context = {
         'date' : date ,
-        'list' : content,
+        'content' : content,
         'user': user ,
     }
     return render(ListView , 'Lists/DemoContent.html' , context)
