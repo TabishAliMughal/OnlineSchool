@@ -3,30 +3,31 @@
 {% block content %}
     <link href="{% static 'css/base.css' %}"/>
     <div class="container">
+        <br>
+        <h6>If You Are A Teacher <a class ="btn btn-primary" href="{% url 'visited_Teachers_create' %}">Click Here</a></h6>
+        <h6>If You Own A School <a class ="btn btn-primary" href="{% url 'visited_Schools_create' %}">Click Here</a></h6>
+        <h6>If You Are A Parent <a class ="btn btn-primary" href="{% url 'visited_Parents_create' %}">Click Here</a></h6>
         <h2 class="text-center" style="font-family:sans-serif;">All Periods Of {{ date }}</h2><hr/>
-        <a><button class="btn btn-primary" onclick="sortTable()">Sort</button></a>
-       <table class="table table-hover table-sm res-table " id="results"   id="myTable">
-            <thead align="center">
-                <tr>
-                    <th>Period</th>
-                    <th>Class</th>
-                    <th>Subject</th>
-                    <th>Module</th>
-                </tr>
-            </thead>
-            {% for i in list %}
-            <tbody id="myTable" align="center">
-                <tr>
-                    <td><a href="{% url 'content' i.pk %}">Period = {{ i.period }}</a></td>
-                    <td>{{ i.class_name }}</td>
-                    <td>{{ i.subject }}</td>
-                    <td>{{ i.module }}</td>
-                </tr>
-            </tbody>
-            {% endfor %}
-        </table>
+        {% for i in content %}
+            <h4 class="text-center" style="font-family:sans-serif;">Class = {{ i.class }}</h4>
+            <table class="table table-hover table-sm res-table " id="results"   id="myTable">
+                <thead align="center">
+                    <tr>
+                        <th>Period</th>
+                        <th>Subject</th>
+                        <th>Module</th>
+                    </tr>
+                </thead>
+                {% for i in i.content %}
+                <tbody id="myTable" align="center">
+                    <tr>
+                        <td><a href="{% url 'content' i.pk %}">Period = {{ i.period }}</a></td>
+                        <td>{{ i.subject }}</td>
+                        <td>{{ i.module }}</td>
+                    </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+        {% endfor %}
     </div>
-    {% csrf_token %}
-</form>
-
 {% endblock %}

@@ -90,8 +90,6 @@ def ManageContentSelectView(SelectView,date,Ccode,subject):
     context = {'user':user ,'content' : cont,}
     return render(SelectView , 'Select/content_select.html' , context)
 
-@login_required(login_url='login')
-@allowed_users(allowed_roles=['Admin','Teacher'])
 def ManageContentView(ContentView, code):
     Contents = get_object_or_404(Content,code = code)
     user = ContentView.user.groups.values('name')
