@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'd-l2zy=3aqe=$b4@kgp$gw#4gz-5d+udh&(t52fmx8stef3fe('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['limitless-school.herokuapp.com']
 
 
 # Application definition
