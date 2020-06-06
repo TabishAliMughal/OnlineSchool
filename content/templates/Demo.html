@@ -1,8 +1,9 @@
 {% extends "MainPage.html" %}
 {% block content %}
-<h2 class="text-center" style="font-family:sans-serif;">Demo</h2><hr/>
+<h2 class="text-center" style="font-family:sans-serif;">Demo</h2>
+  <h6 class="text-center">Click on any Date</h6><hr/>
   <div class="container">
-    <h6 align="center">July 2019</h6><br>
+    <h6 align="center">July</h6><br>
       <ul class="wc-calendar__days-names">
         <li class="wc-calendar__days-names__item">Mon</li>
         <li class="wc-calendar__days-names__item">Tue</li>
@@ -12,22 +13,16 @@
         <li class="wc-calendar__days-names__item">Sat</li>
         <li class="wc-calendar__days-names__item">Sun</li>
       </ul>
+      <br>
       <ul class="wc-calendar__days-list">
-        <li data-date="8/1/2020" class="wc-calendar__days-list__item"></li>
-        <li data-date="8/2/2020" class="wc-calendar__days-list__item"></li>
-        {% for i in date %}
-          <li onclick="dateadd()" data-date="8/31/2020" id="date" class="wc-calendar__days-list__item"><a href="{% url 'demo_list' i %}">{{ i }}</a></li>
+        {% for i in date1 %}
+            <a role="button" href="{% url 'demo_list' i %}" class="wc-calendar__days-list__item">{{ i }}</a>
         {% endfor %}
-        <li data-date="8/30/2020" class="wc-calendar__days-list__item"></li>
-        <li data-date="8/31/2020" class="wc-calendar__days-list__item"></li>
       </ul>
-      <p id="demo"></p>
-
-      <script>
-        function dateadd() {
-            var x = dateadd.getElementById("date").value
-        document.getElementById("demo").innerHTML = "Hello World";
-        }
-      </script>
+      <ul class="wc-calendar__days-list">
+        {% for i in date2 %}
+            <a role="button" href="{% url 'demo_list' i %}" class="wc-calendar__days-list__item">{{ i }}</a>
+        {% endfor %}
+      </ul>
     </div>
 {% endblock %}
