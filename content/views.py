@@ -60,10 +60,14 @@ def ManageAllView(SelectView):
 def ManageDemoView(DemoView):
     user = DemoView.user.groups.values('name')
     f = []
-    for i in range(1,32):
+    for i in range(6,13):
         f.append(i)
+    k = []
+    for i in range(13,20):
+        k.append(i)
     context = {
-        'date': f ,
+        'date1': f ,
+        'date2': k ,
         'user': user ,
     }
     return render(DemoView , 'Demo.html' , context)

@@ -4,9 +4,26 @@
     <link href="{% static 'css/base.css' %}"/>
     <div class="container">
         <br>
-        <h6>If You Are A Teacher <a class ="btn btn-primary" href="{% url 'visited_Teachers_create' %}">Click Here</a></h6>
-        <h6>If You Own A School <a class ="btn btn-primary" href="{% url 'visited_Schools_create' %}">Click Here</a></h6>
-        <h6>If You Are A Parent <a class ="btn btn-primary" href="{% url 'visited_Parents_create' %}">Click Here</a></h6>
+        <table>
+            <thead>
+                <tr>
+                    <td style="width: 70%;">* If You Are A Teacher</td>
+                    <td><a class ="btn btn-primary" href="{% url 'visited_Teachers_create' %}">Click Here</a></td>
+                </tr>
+                <tr>
+                    <td>* If You Are A School Owner</td>
+                    <td><a class ="btn btn-primary" href="{% url 'visited_Schools_create' %}">Click Here</a></td>
+                </tr>
+                <tr>
+                    <td>* If You Are A Parent</td>
+                    <td><a class ="btn btn-primary" href="{% url 'visited_Parents_create' %}">Click Here</a></td>
+                </tr>
+            </thead>
+        </table>
+        <br>
+        <h6></h6>
+        <h6></h6>
+        <h6></h6>
         <h2 class="text-center" style="font-family:sans-serif;">All Periods Of {{ date }}</h2><hr/>
         {% for i in content %}
             <h4 class="text-center" style="font-family:sans-serif;">Class = {{ i.class }}</h4>
@@ -19,13 +36,13 @@
                     </tr>
                 </thead>
                 {% for i in i.content %}
-                <tbody id="myTable" align="center">
-                    <tr>
-                        <td><a href="{% url 'content' i.pk %}">Period = {{ i.period }}</a></td>
-                        <td>{{ i.subject }}</td>
-                        <td>{{ i.module }}</td>
-                    </tr>
-                </tbody>
+                    <tbody id="myTable" align="center">
+                        <tr>
+                            <td><a href="{% url 'content' i.pk %}">Period = {{ i.period }}</a></td>
+                            <td>{{ i.subject }}</td>
+                            <td>{{ i.module }}</td>
+                        </tr>
+                    </tbody>
                 {% endfor %}
             </table>
         {% endfor %}
