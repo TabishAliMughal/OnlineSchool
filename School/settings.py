@@ -54,6 +54,9 @@ INSTALLED_APPS = [
     'mapwidgets',
 ]
 
+GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = 'static/my-shop-277711-284fa265f773.json'
+GOOGLE_DRIVE_STORAGE_MEDIA_ROOT = 'Online-School/' # OPTIONAL
+
 MAP_WIDGETS = {
     "GooglePointFieldWidget": (
         ("zoom", 15),

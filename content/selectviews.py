@@ -97,9 +97,15 @@ def ManageContentView(ContentView, code):
     for i in Videos.objects.all():
         if str(i.content.pk) == str(Contents.pk):
             videos.append(i)
+    images = []
+    for i in Images.objects.all():
+        if str(i.content.pk) == str(Contents.pk):
+            images.append(i)
+    print(images)
     context = {
         'user':user ,
         'content' : Contents ,
         'videos' : videos ,
+        'images' : images ,
     }
     return render(ContentView , 'Select/content.html' , context)

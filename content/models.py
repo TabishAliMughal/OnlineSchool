@@ -1,5 +1,10 @@
 from django.db import models
 from requirments.models import *
+from gdstorage.storage import GoogleDriveStorage
+
+# Define Google Drive Storage
+gd_storage = GoogleDriveStorage()
+
 
 class Module(models.Model):
     code = models.AutoField(primary_key = True)
@@ -21,7 +26,8 @@ class Content(models.Model):
 
 class Videos(models.Model):
     content = models.ForeignKey(Content , on_delete = models.CASCADE)
-    url = models.URLField(max_length=500 , null = True)
+    url = models.URLField(max_length=500)
 
-
-    
+class Images(models.Model):
+    content = models.ForeignKey(Content , on_delete = models.CASCADE)
+    image = models.ImageField(upload_to='static/products/', storage=gd_storage)
