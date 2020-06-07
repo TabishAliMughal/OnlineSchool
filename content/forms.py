@@ -54,4 +54,12 @@ class VideoForm(forms.ModelForm):
             'content' ,
             'url' ,
         ]
+        
+class ImageForm(forms.ModelForm):
+    class Meta:
+        model = Images
+        fields = [
+            'content' ,
+            'image' ,
+        ]
 

@@ -138,6 +138,16 @@ def ManageContentCreateView(CreateView):
                 })
                 v = v + 1
                 form2.save()
+            image = CreateView.FILES.getlist('image')
+            l = int('0')
+            for v in image:
+                form3 = ImageForm({
+                    'content' : k ,
+                },{
+                    'image' : image[l] ,
+                })
+                l = l + 1
+                form3.save()
             context = { 
                 'user':user ,
                 'return': 'Has Been Added SuccessFully'
@@ -152,9 +162,11 @@ def ManageContentCreateView(CreateView):
     else:
         form1 = ContentForm()
         form2 = VideoForm()
+        form3 = ImageForm()
         context = { 
             'user':user ,
             'form1': form1,
             'form2': form2,
+            'form3': form3,
         }
         return render(CreateView ,'Forms/Create/content.html', context)

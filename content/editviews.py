@@ -90,6 +90,12 @@ def ManageContentEditView(EditView,pk):
         if str(i.content.pk) == str(data.pk):
             videos.append(i)
             k = k + 1
+    images = []
+    l = int('0')
+    for i in Images.objects.all():
+        if str(i.content.pk) == str(data.pk):
+            images.append(i)
+            l = l + 1
     if EditView.method == 'POST':
         vid = EditView.POST
         form = ContentForm(EditView.POST or None, instance=data)
@@ -125,6 +131,39 @@ def ManageContentEditView(EditView,pk):
                     })
                     v = v + 1
                     form2.save()
+            img = []
+            image = EditView.FILES.getlist('image')
+            for i in image:
+                img.append(i)
+            p = int('0')
+            if img:
+                if str(k) <= str(v):
+                    for i in img:
+                        print(i)
+                        form2 = ImageForm({
+                            'content' : data.pk ,},{
+                            'image' : img[p]
+                        } or None , instance=images[p])
+                        p = p + 1
+                        print(form2)
+                        form2.save()
+                else:
+                    for i in url:
+                        form2 = ImageForm({
+                            'content' : data.pk ,},{
+                            'image' : img[p]
+                        })
+                        p = p + 1
+                        print(form2)
+                        form2.save()
+            else:
+                for i in url:
+                    form2 = ImageForm({
+                        'content' : data.pk ,},{
+                        'image' : img[p]
+                    })
+                    p = p + 1
+                    form2.save()
             return redirect('content')
     else:
         form = ContentForm(instance=data)
@@ -134,5 +173,6 @@ def ManageContentEditView(EditView,pk):
             'user':user ,
             'form' : form ,
             'videos' : videos ,
+            'images' : images ,
         }
         return render(EditView ,'Forms/Edit/content.html' , context)

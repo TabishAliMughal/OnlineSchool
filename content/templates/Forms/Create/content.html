@@ -1,6 +1,6 @@
 {% extends "MainPage.html" %}
 {% block content %}
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
     <div class="container">
         <h2 class="text-center" style="font-family:sans-serif;">Class Add Form</h2><hr/>
        <table  class="table table-hover table-sm res-table">
@@ -41,9 +41,15 @@
                 </tr>
                 <tr id="url">
                     <td>Youtube Url(Embed)</td>
-                    <td><div id="div-to-add"><input type="url" name="url" required /></div><br><button type="button" onClick="clone()" id="add-row">+</button></td>
+                    <td><div id="div-to-add-url"><input type="url" name="url" required /></div><br><button type="button" onClick="clone1()" id="add-row">+</button></td>
 
-                    <input type="hidden" value="1" id="total_chq">
+                    <input type="hidden" value="1" id="total-url-fields">
+                </tr>
+                <tr id="image">
+                    <td>Image</td>
+                    <td><div id="div-to-add-image"><input type="file" name="image" accept="image/*" capture="camera" required /></div><br><button type="button" onClick="clone2()" id="add-row">+</button></td>
+
+                    <input type="hidden" value="1" id="total-image-fields">
                 </tr>
                 <tr>
                     <td>Submit</td>
@@ -55,10 +61,17 @@
     {% csrf_token %}
 </form>
 <script>
-    function clone(){
-        var new_chq_no = parseInt($('#total_chq').val()) + 1;
+    function clone1(){
+        var new_chq_no = parseInt($('#total-url-fields').val()) + 1;
         var new_input = "<input type='text' name='url' id=" + new_chq_no + " />";
-        $('#div-to-add').append('<br><br>'+new_input);
+        $('#div-to-add-url').append('<br><br>'+new_input);
+    };        
+</script>
+<script>
+    function clone2(){
+        var new_chq_no = parseInt($('#total-image-fields').val()) + 1;
+        var new_input = "<input type='file' name='image' accept='image/*' capture='camera' " + new_chq_no + " required />";
+        $('#div-to-add-image').append('<br><br>'+new_input);
     };        
 </script>
 
