@@ -137,27 +137,24 @@ def ManageContentEditView(EditView,pk):
                 img.append(i)
             p = int('0')
             if img:
-                if str(k) <= str(v):
+                if str(l) < str(p):
                     for i in img:
-                        print(i)
                         form2 = ImageForm({
                             'content' : data.pk ,},{
                             'image' : img[p]
                         } or None , instance=images[p])
                         p = p + 1
-                        print(form2)
                         form2.save()
                 else:
-                    for i in url:
+                    for i in img:
                         form2 = ImageForm({
                             'content' : data.pk ,},{
                             'image' : img[p]
                         })
                         p = p + 1
-                        print(form2)
                         form2.save()
             else:
-                for i in url:
+                for i in img:
                     form2 = ImageForm({
                         'content' : data.pk ,},{
                         'image' : img[p]

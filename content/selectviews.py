@@ -101,7 +101,6 @@ def ManageContentView(ContentView, code):
     for i in Images.objects.all():
         if str(i.content.pk) == str(Contents.pk):
             images.append(i)
-    print(images)
     context = {
         'user':user ,
         'content' : Contents ,
