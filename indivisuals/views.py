@@ -73,7 +73,6 @@ def ManageIndivisualsCreateView(CreateView , pk=None):
             'password' : password ,
             'active' : data.get('active') ,
         })
-        print(form)
         form.save()
         return redirect('indivisuals_list')
     else:
