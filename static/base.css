@@ -1,0 +1,17 @@
+
+
+.ytp-chrome-top {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    left: 12px;
+    right: 12px;
+    top: 0;
+    z-index: 59;
+    display: none !important;
+}
