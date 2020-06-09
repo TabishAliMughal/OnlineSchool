@@ -10234,3 +10234,33 @@ a.text-dark:hover, a.text-dark:focus {
 }
 /*# sourceMappingURL=bootstrap.css.map */
 
+
+
+.ytp-chrome-top {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  left: 12px;
+  right: 12px;
+  top: 0;
+  z-index: 59;
+  display: none !important;
+}
+
+.ytp-title-channel {
+  background: transparent;
+  border-radius: 25px;
+  display: none !important;
+  height: 50px;
+  margin-left: -5px;
+  overflow: hidden;
+  position: absolute;
+  top: 7px;
+  left: 0;
+  width: 50px;
+}
