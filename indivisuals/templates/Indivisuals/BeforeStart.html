@@ -1,0 +1,10 @@
+{% extends "MainPage.html" %}
+{% load static %}
+{% block content %}
+    {% csrf_token %}
+    <img src="img_snow_wide.jpg" alt="Snow" style="width:100%;">
+    <h2 class="text-center" style="font-family:sans-serif;">Wellcome To <br> Digital School</h2>
+    {% include 'Indivisuals/TimeTable.html' %}
+      <h6 class="text-center">Your Classes Will Be Started From 6th Of July</h6>
+    </div>
+{% endblock %}

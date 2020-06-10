@@ -30,10 +30,15 @@ def ManageIndivisualProfileView(ProfileView , pk = None):
                 if pk:
                     if str(i.pk) == str(pk):
                         videos = []
+                        images = []
                         for vid in Videos.objects.all():
                             if str(i.pk) == str(vid.content.pk):
                                 videos.append(vid)
-                        content.append({'content':i,'period':v,'videos':videos})
+                        for img in Images.objects.all():
+                            if str(img.content.pk) == str(i.pk):
+                                images.append(img)
+                        content.append({'content':i,'period':v,'videos':videos , 'images':images})
+                        print(images)
                 else:
                     content.append({'content':i,'period':v})
                 v = v + 1
@@ -44,4 +49,9 @@ def ManageIndivisualProfileView(ProfileView , pk = None):
     if pk:
         return render(ProfileView,'Indivisuals/Period.html',context)
     else:
-        return render(ProfileView,'Indivisuals/Profile.html',context)
+        if str(datetime.date.today()) <= str('2020-07-06'):
+            return render(ProfileView,'Indivisuals/BeforeStart.html',context)
+        elif str(individual.active) == str('False'):
+            return render(ProfileView,'Indivisuals/FeeNotSubmited.html',context)            
+        else:
+            return render(ProfileView,'Indivisuals/Profile.html',context)

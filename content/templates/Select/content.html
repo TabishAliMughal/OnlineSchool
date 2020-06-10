@@ -28,8 +28,7 @@
                 {% endfor %}
                 {% for i in images %}
                     <tr>
-                        <!-- <td><img src="{% static './products/1591511519780-949639637.jpg' %}" width="1000px"></td> -->
-                        <td><img class="img" src="{% if i.image %}{{ i.image.url }}{% else %}{% static 'img/noimg.png' %}{% endif %}"></td>
+                        <td><img width="50%" class="img" src="{% if i.image %}{{ i.image.url }}{% else %}{% static 'img/noimg.png' %}{% endif %}"></td>
                     </tr>
                     <tr>
                         <td></td>

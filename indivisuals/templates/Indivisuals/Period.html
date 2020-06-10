@@ -24,6 +24,11 @@
                             <td class="video"><iframe src="{{ v.url }}" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
                         </tr>
                     {% endfor %}
+                    {% for v in i.images %}
+                        <tr>
+                            <td><img width="50%" class="img" src="{{ v.image.url }}"></td>
+                        </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         {% endfor %}
