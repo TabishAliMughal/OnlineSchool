@@ -2,8 +2,12 @@
 {% load static %}
 {% block content %}
     {% csrf_token %}
-    <img src="img_snow_wide.jpg" alt="Snow" style="width:100%;">
-    <h2 class="text-center" style="font-family:sans-serif;">Wellcome To <br> Digital School</h2>
+    <img src="{% static './Images/texture.jpg' %}" style="width:100%;">
+    <h2 style="    color: darkorange;
+    left: 25%;
+    font-size: 50px;
+    top: 20%;
+" class="text-center" style="font-family:sans-serif;">Digital School</h2>
     {% include 'Indivisuals/TimeTable.html' %}
       <h6 class="text-center">Your Classes Will Be Started From 6th Of July</h6>
     </div>

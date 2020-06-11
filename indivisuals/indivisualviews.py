@@ -34,10 +34,7 @@ def ManageIndivisualProfileView(ProfileView , pk = None):
                         for vid in Videos.objects.all():
                             if str(i.pk) == str(vid.content.pk):
                                 videos.append(vid)
-                        for img in Images.objects.all():
-                            if str(img.content.pk) == str(i.pk):
-                                images.append(img)
-                        content.append({'content':i,'period':v,'videos':videos , 'images':images})
+                        content.append({'content':i,'period':v,'videos':videos })
                         print(images)
                 else:
                     content.append({'content':i,'period':v})
@@ -55,3 +52,17 @@ def ManageIndivisualProfileView(ProfileView , pk = None):
             return render(ProfileView,'Indivisuals/FeeNotSubmited.html',context)            
         else:
             return render(ProfileView,'Indivisuals/Profile.html',context)
+
+def ManageIndivisualDocumentsView(DocumentView , pk):
+    user = DocumentView.user.groups.values('name')
+    content = get_object_or_404(Content , pk = int(pk))
+    images = []
+    for img in Images.objects.all():
+        if str(img.content.pk) == str(content.pk):
+            images.append(img)
+    context = {
+        'user':user,
+        'content':content,
+        'images':images,
+    }
+    return render(DocumentView,'Indivisuals/Documents.html',context)
