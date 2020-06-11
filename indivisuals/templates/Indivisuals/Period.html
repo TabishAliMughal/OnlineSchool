@@ -19,14 +19,12 @@
                     <tr>
                         <td><a>{{ i.content.text }}</a><br><br></td>
                     </tr>
+                    <tr>
+                        <td><a onclick="window.open('{% url 'content-image' i.content.pk %}','newwindow','width=1000,height=800');" class="btn btn-primary">Documents</a></td>
+                    </tr>
                     {% for v in i.videos %}
                         <tr>
                             <td class="video"><iframe src="{{ v.url }}" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
-                        </tr>
-                    {% endfor %}
-                    {% for v in i.images %}
-                        <tr>
-                            <td><img width="50%" class="img" src="{{ v.image.url }}"></td>
                         </tr>
                     {% endfor %}
                 </tbody>

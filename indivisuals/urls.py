@@ -16,4 +16,5 @@ urlpatterns = [
 
     path(r'individual',indivisualviews.ManageIndivisualProfileView, name='indivisual_profile'),
     path(r'individual/content/<pk>',indivisualviews.ManageIndivisualProfileView, name='indivisual_content'),
+    path(r'individual/content/<pk>/documents',indivisualviews.ManageIndivisualDocumentsView, name='content-image'),
 ]
