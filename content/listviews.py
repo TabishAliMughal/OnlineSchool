@@ -21,13 +21,29 @@ def ManageClassListView(ListView):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Admin'])
 def ManageContentListView(ListView):
-    list_ = Content.objects.all()
     user = ListView.user.groups.values('name')
-    context = {
-        'list':list_,
-        'user':user ,
-    }
-    return render (ListView,'Lists/content.html',context)
+    if ListView.method == 'POST':
+        list_ = []
+        for i in Content.objects.all():
+            if str(i.class_name.pk) == str(ListView.POST.get('class')):
+                if str(i.date) == str(ListView.POST.get('date')):
+                    list_.append(i)
+        classes = Classes.objects.all()
+        context = {
+            'list':list_,
+            'user':user ,
+            'classes':classes ,
+        }
+        return render (ListView,'Lists/content.html',context)
+    else:
+        list_ = Content.objects.all()
+        classes = Classes.objects.all()
+        context = {
+            'list':list_,
+            'user':user ,
+            'classes':classes ,
+        }
+        return render (ListView,'Lists/content.html',context)
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Admin'])

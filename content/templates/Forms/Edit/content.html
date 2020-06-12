@@ -61,7 +61,8 @@
                 {% for i in images %}
                     <tr id="image">
                         <td>Currently = <a href="{{ i.image.url }}">{{ i.image }}</a></td>
-                        <td><div id="div-to-add-image"><input type="file" name="image" accept="image/*" capture="camera" /></div></td>
+                        <input type="text" name="pre-image" value="{{ i.pk }}" hidden />
+                        <td><input type="file" name="image" accept="image/*" capture="camera" /></div></td>
                     </tr>
                 {% endfor %}
                 <tr>
@@ -83,14 +84,14 @@
     function clone1(){
         var new_chq_no = parseInt($('#total-url-fields').val()) + 1;
         var new_input = "<input type='text' name='url' id=" + new_chq_no + " />";
-        $('#div-to-add-url').append(new_input+'<br><br>');
+        $('#div-to-add-url').append(new_input+'<br>');
     };        
 </script>
 <script>
     function clone2(){
         var new_chq_no = parseInt($('#total-image-fields').val()) + 1;
         var new_input = "<input type='file' name='image' accept='image/*' capture='camera' />";
-        $('#div-to-add-image').append(new_input+'<br><br>');
+        $('#div-to-add-image').append(new_input+'<br>');
     };        
 </script>
 
