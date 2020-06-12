@@ -30,9 +30,6 @@
                     <tr>
                         <td><img width="50%" class="img" src="{% if i.image %}{{ i.image.url }}{% else %}{% static 'img/noimg.png' %}{% endif %}"></td>
                     </tr>
-                    <tr>
-                        <td></td>
-                    </tr>
                 {% endfor %}
             </tbody>
         </table>

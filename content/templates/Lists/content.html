@@ -3,15 +3,26 @@
 {% block content %}
     <link href="{% static 'css/base.css' %}"/>
     <div class="container">
-        <h2 class="text-center" style="font-family:sans-serif;">View All Contents</h2><hr/>
-        {% if request.user.is_authenticated %}
-          {% for i in user %}
-            {% if i.name == 'Admin' %}
-              <a class="btn btn-primary" href="{% url "content_form" %}">Add Another</a>
-            {% endif %}
-          {% endfor %}
-        {% endif %}
-        <a><button class="btn btn-primary" onclick="sortTable()">Sort</button></a>
+      <h2 class="text-center" style="font-family:sans-serif;">View All Contents</h2><hr/>
+      {% if request.user.is_authenticated %}
+        {% for i in user %}
+          {% if i.name == 'Admin' %}
+            <a class="btn btn-primary" href="{% url 'content_form' %}">Add Another</a>
+            <a class="btn btn-primary" href="{% url 'content' %}">All</a><br><br>
+            <form method="POST">
+              <select required id="myclass" name="class">
+                <option>-------------------</option> 
+                {% for i in classes %}
+                  <option value="{{ i.pk }}">{{ i }}</option>
+                {% endfor %}
+              </select>
+              <input type="date" required name="date" >
+              <input type="submit" value="Search">
+              {% csrf_token %}
+            </form>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
        <table class="table table-hover table-sm res-table " id="results"   id="myTable">
             <thead align="center">
                 <tr>
@@ -34,7 +45,7 @@
                     <td><a href="{% url 'content' i.pk %}">{{ i.class_name }}</a></td>
                     <td>{{ i.subject }}</td>
                     <td>{{ i.module }}</td>
-                    <!-- <td><font size="-1">{{ i.text }}</font></td> -->
+                    <td hidden>{{ i.date }}</td>
                     {% if request.user.is_authenticated %}
                       {% for v in user %}
                         {% if v.name == 'Admin' %}

@@ -106,61 +106,32 @@ def ManageContentEditView(EditView,pk):
             for i in url:
                 p = p+1
             v = int('0')
-            if videos:
-                if str(k) <= str(v):
-                    for i in url:
-                        form2 = VideoForm({
-                            'content' : data.pk ,
-                            'url' : url[v]
-                        } or None , instance=videos[v])
-                        v = v + 1
-                        form2.save()
-                else:
-                    for i in url:
-                        form2 = VideoForm({
-                            'content' : data.pk ,
-                            'url' : url[v]
-                        })
-                        v = v + 1
-                        form2.save()
-            else:
-                for i in url:
-                    form2 = VideoForm({
-                        'content' : data.pk ,
-                        'url' : url[v]
-                    })
-                    v = v + 1
-                    form2.save()
+            for i in videos:
+                i.delete()
+            for i in url:
+                form2 = VideoForm({
+                    'content' : data.pk ,
+                    'url' : url[v]
+                })
+                v = v + 1
+                form2.save()
             img = []
             image = EditView.FILES.getlist('image')
+            preimage = EditView.POST.getlist('pre-image')
             for i in image:
                 img.append(i)
             p = int('0')
-            if img:
-                if str(l) < str(p):
-                    for i in img:
-                        form2 = ImageForm({
-                            'content' : data.pk ,},{
-                            'image' : img[p]
-                        } or None , instance=images[p])
-                        p = p + 1
-                        form2.save()
-                else:
-                    for i in img:
-                        form2 = ImageForm({
-                            'content' : data.pk ,},{
-                            'image' : img[p]
-                        })
-                        p = p + 1
-                        form2.save()
-            else:
-                for i in img:
-                    form2 = ImageForm({
-                        'content' : data.pk ,},{
-                        'image' : img[p]
-                    })
-                    p = p + 1
-                    form2.save()
+            for i in images:
+                for v in preimage:
+                    if str(v) != str(i.pk):
+                        i.delete()
+            for i in img:
+                form2 = ImageForm({
+                    'content' : data.pk ,},{
+                    'image' : img[p]
+                })
+                p = p + 1
+                form2.save()
             return redirect('content')
     else:
         form = ContentForm(instance=data)
