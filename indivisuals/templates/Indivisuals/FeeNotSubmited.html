@@ -5,6 +5,14 @@
     <div class="container">
         <h2 class="text-center" style="font-family:sans-serif;">Your Fees Is Not Submited</h2><hr/>
         <h4 class="text-center">Plese Submit Fees As Soon As Possible</h4>
-        {% include 'Indivisuals/TimeTable.html' %}
+        {% if clas == 'pre' %}
+            {% include 'Indivisuals/M-PTimeTable.html' %}
+        {% elif clas == 'primary' %}
+            {% include 'Indivisuals/1-8TimeTable.html' %}
+        {% elif clas == 'ninth' %}
+            {% include 'Indivisuals/9TimeTable.html' %}
+        {% elif clas == 'tenth' %}
+            {% include 'Indivisuals/10TimeTable.html' %}
+        {% endif %}
     </div>
 {% endblock %}
