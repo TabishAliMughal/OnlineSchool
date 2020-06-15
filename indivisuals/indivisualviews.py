@@ -35,13 +35,23 @@ def ManageIndivisualProfileView(ProfileView , pk = None):
                             if str(i.pk) == str(vid.content.pk):
                                 videos.append(vid)
                         content.append({'content':i,'period':v,'videos':videos })
-                        print(images)
                 else:
                     content.append({'content':i,'period':v})
                 v = v + 1
+    g = str(individual.clas)
+    if g == str('Prep I') or g == str('Prep I') or g == str('Prep II'):
+        v = 'pre'
+    elif g == str('First') or g == str('Second') or g == str('Third') or g == str('Fourth') or g == str('Fifth') or g == str('Sixth') or g == str('Seventh') or g == str('Eighth'):
+        v = 'primary'
+    elif g == str('Ninth'):
+        v = 'ninth'
+    elif g == str('Tenth'):
+        v = 'tenth'
     context = {
         'user':user,
         'content':content,
+        'clas':v,
+        'individual':individual,
     }
     if pk:
         return render(ProfileView,'Indivisuals/Period.html',context)
