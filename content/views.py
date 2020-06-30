@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from authentication.user_handeling import unauthenticated_user, allowed_users, admin_only
 from teacher.models import *
+from .forms import *
 
 def ManageMainView(SelectView):
     user = SelectView.user.groups.values('name')
@@ -81,6 +82,19 @@ def ManageDemoListView(ListView,date):
         date = str("2020-07-0{}".format(date))
     elif str(v) == '2':
         date = str("2020-07-{}".format(date))
+    for i in Content.objects.all():
+        date = (str(i.date)[8:])
+        form = ContentForm({
+                'class_name' : i.class_name ,
+                'subject' : i.subject ,
+                'module' : i.module ,
+                'date' : i.date ,
+                'day': (int(date) - 5) ,
+                'title' : i.title ,
+                'text' : i.text ,
+                'therefor' : i.therefor ,
+            } or None , instance = i)
+        form.save()
     content = []
     for v in Classes.objects.all():
         k = int('0')
