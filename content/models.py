@@ -18,7 +18,7 @@ class Content(models.Model):
     subject = models.ForeignKey(Subjects , on_delete = models.CASCADE)
     module = models.ForeignKey(Module , on_delete = models.CASCADE)
     date = models.DateField()
-    day = models.IntegerField(blank = True , null = True)
+    day = models.IntegerField()
     title = models.CharField(max_length=250)
     text = models.TextField(null = True)
     therefor = models.CharField(max_length = 20 ,choices=(('S','Self-Paced'),('O','Online-School')))
