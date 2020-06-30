@@ -39,7 +39,6 @@ def ManageMainView(SelectView):
             return redirect('indivisual_profile')
     return render(SelectView , 'Main.html',context)
 
-
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Admin'])
 def ManageSelectToAddView(SelectView):
@@ -49,14 +48,12 @@ def ManageSelectToAddView(SelectView):
     }
     return render(SelectView , 'MainSelect.html' , context)
 
-
 def ManageAllView(SelectView):
     user = SelectView.user.groups.values('name')
     context = {
         'user':user ,
     }
     return render(SelectView , 'All.html' , context)
-
 
 def ManageDemoView(DemoView):
     user = DemoView.user.groups.values('name')
@@ -76,19 +73,14 @@ def ManageDemoView(DemoView):
 def ManageDemoListView(ListView,date):
     user = ListView.user.groups.values('name')
     v = '0'
-    for i in date:
-        v = int(v) + 1
-    if str(v) == '1':
-        date = str("2020-07-0{}".format(date))
-    elif str(v) == '2':
-        date = str("2020-07-{}".format(date))
+    day = int(date) - 5
     content = []
     for v in Classes.objects.all():
         k = int('0')
         abc = []
         for i in Content.objects.all():
             if str(v.pk) == str(i.class_name.pk):
-                if str(i.date) == str(date):
+                if str(day) == str(i.day):
                     k = k + 1
                     abc.append({
                         'period' : k ,
