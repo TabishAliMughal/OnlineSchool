@@ -4,3 +4,4 @@ from .models import *
 admin.site.register(Classes)
 admin.site.register(Subjects)
 admin.site.register(ClassSubjects)
+admin.site.register(Session)

@@ -26,7 +26,7 @@ def ManageContentListView(ListView):
         list_ = []
         for i in Content.objects.all():
             if str(i.class_name.pk) == str(ListView.POST.get('class')):
-                if str(i.date) == str(ListView.POST.get('date')):
+                if str(i.date) == str(ListView.POST.get('day')):
                     list_.append(i)
         classes = Classes.objects.all()
         context = {

@@ -10,6 +10,7 @@ class IndivisualsForm(forms.ModelForm):
         model = Indivisuals
         fields = [
             'user' ,
+            'session',
             'name' ,
             'father_name' ,
             'mobile' ,

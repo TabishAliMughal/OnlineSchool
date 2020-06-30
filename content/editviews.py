@@ -115,6 +115,9 @@ def ManageContentEditView(EditView,pk):
                 })
                 v = v + 1
                 form2.save()
+            for i in Images.objects.all():
+                if str(i.content.pk) == str(data.pk):
+                    i.delete()
             img = []
             image = EditView.FILES.getlist('image')
             preimage = EditView.POST.getlist('pre-image')
@@ -135,9 +138,9 @@ def ManageContentEditView(EditView,pk):
             return redirect('content')
     else:
         form = ContentForm(instance=data)
-        date = str(data.date)
+        day = str(data.day)
         context = {
-            'date' : date ,
+            'day' : day ,
             'user':user ,
             'form' : form ,
             'videos' : videos ,

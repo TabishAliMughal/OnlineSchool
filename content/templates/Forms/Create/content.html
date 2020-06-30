@@ -24,8 +24,8 @@
                     <td>{{ form1.module }}</td>
                 </tr>
                 <tr>
-                    <td>Date</td>
-                    <td><input type="date" name="date" /></td>
+                    <td>Day</td>
+                    <td><input type="number" name="day" /></td>
                 </tr>
                 <tr>
                     <td>Title</td>
@@ -47,7 +47,7 @@
                 </tr>
                 <tr id="image">
                     <td>Image</td>
-                    <td><div id="div-to-add-image"><input type="file" name="image" accept="image/*" capture="camera" /></div><br><button type="button" onClick="clone2()" id="add-row">+</button></td>
+                    <td><div id="div-to-add-image"><input type="file" name="image" accept="image/*" capture="camera/*" /></div><br><button type="button" onClick="clone2()" id="add-row">+</button></td>
 
                     <input type="hidden" value="1" id="total-image-fields">
                 </tr>
@@ -70,7 +70,7 @@
 <script>
     function clone2(){
         var new_chq_no = parseInt($('#total-image-fields').val()) + 1;
-        var new_input = "<input type='file' name='image' accept='image/*' capture='camera' " + new_chq_no + " required />";
+        var new_input = "<input type='file' name='image' accept='image/*' capture='camera/*' required />";
         $('#div-to-add-image').append('<br><br>'+new_input);
     };        
 </script>

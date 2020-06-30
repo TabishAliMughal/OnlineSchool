@@ -41,7 +41,6 @@ class ContentForm(forms.ModelForm):
             'class_name',
             'subject',
             'module',
-            'date',
             'day',
             'title',
             'text',

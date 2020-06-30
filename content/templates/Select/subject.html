@@ -8,7 +8,7 @@
             <tbody id="myTable" align="center">
                 {% for i in class_subjects %}
                     <tr>
-                        <td><a href="{% url 'content_select' date class.code i.subject_name %}">{{ i.subject_name }}</a></td>
+                        <td><a href="{% url 'session_select' date class.code i.subject_name %}">{{ i.subject_name }}</a></td>
                     </tr>
                 {% endfor %}
             </tbody>

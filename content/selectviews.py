@@ -5,6 +5,8 @@ from teacher.models import *
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from authentication.user_handeling import unauthenticated_user, allowed_users, admin_only
+from datetime import timedelta
+import datetime
 
 
 @login_required(login_url='login')
@@ -71,21 +73,35 @@ def ManageSubjectSelectView(SelectView,date,Ccode):
         'class_subjects' : FClassSubjects,
     }
     return render(SelectView , 'Select/subject.html' , context)
+    
+def ManageSessionSelectView(SelectView,date,Ccode,subject):
+    user = SelectView.user.groups.values('name')
+    session = Session.objects.all()
+    context = {
+        'user':user ,
+        'date' : date,
+        'class' : Ccode,
+        'class_subjects' : subject,
+        'session' : session ,
+    }
+    return render(SelectView , 'Select/session.html' , context)
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Admin','Teacher'])
-def ManageContentSelectView(SelectView,date,Ccode,subject):
+def ManageContentSelectView(SelectView,date,Ccode,subject,session):
     cont = []
     sub = get_object_or_404(Subjects , subject_name = subject)
     con = Content.objects.all()
+    session = get_object_or_404(Session , pk = session)
     user = SelectView.user.groups.values('name')
     for rows in con:
         Cc = get_object_or_404(Classes, class_name = rows.class_name)
         if str(Cc.code) == str(Ccode):
             if str(rows.subject) == str(sub):
-                if str(rows.date) == str(date):
-                    if str(rows.therefor) == 'O':
-                        FContent = get_list_or_404(Content , date = date , class_name = Ccode , subject = sub)
+                if str(str(session.session_start_date + timedelta(days=rows.day-1))) == str(date):
+                    conday = str((datetime.date(int(date[:4]),int(date[5:7]),int(date[8:10]))) - session.session_start_date + timedelta(days = 1))[:2]
+                    FContent = get_list_or_404(Content , day = conday , class_name = Ccode , subject = sub , therefor = 'O')
+                    if FContent not in cont:
                         cont.append(FContent)
     context = {'user':user ,'content' : cont,}
     return render(SelectView , 'Select/content_select.html' , context)

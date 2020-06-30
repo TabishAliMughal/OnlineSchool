@@ -45,7 +45,7 @@
                     <td><a href="{% url 'content' i.pk %}">{{ i.class_name }}</a></td>
                     <td>{{ i.subject }}</td>
                     <td>{{ i.module }}</td>
-                    <td hidden>{{ i.date }}</td>
+                    <td hidden>{{ i.day }}</td>
                     {% if request.user.is_authenticated %}
                       {% for v in user %}
                         {% if v.name == 'Admin' %}
