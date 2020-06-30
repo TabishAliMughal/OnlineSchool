@@ -47,6 +47,7 @@ urlpatterns = [
     path(r'teach/\d12345<date>910\d/',selectviews.ManageClassSelectView, name ='class_select'),
     path(r'teach/content/\d12345<code>910\d/',selectviews.ManageContentView, name ='content'),
     path(r'teach/\d12345<date>910\d/\d12345<Ccode>910\d/',selectviews.ManageSubjectSelectView, name ='subject_select'),
-    path(r'teach/\d12345<date>910\d/\d12345<Ccode>910\d/\d12345<subject>910\d/',selectviews.ManageContentSelectView, name ='content_select'),
+    path(r'teach/\d12345<date>910\d/\d12345<Ccode>910\d/\d12345<subject>910\d/',selectviews.ManageSessionSelectView, name ='session_select'),
+    path(r'teach/\d12345<date>910\d/\d12345<Ccode>910\d/\d12345<subject>910\d/\d12345<session>910\d/',selectviews.ManageContentSelectView, name ='content_select'),
 
 ]

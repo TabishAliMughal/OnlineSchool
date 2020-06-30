@@ -63,6 +63,7 @@ def ManageIndivisualsCreateView(CreateView , pk=None):
         group = Group.objects.get(name='Individuals')
         user.groups.add(group)
         form = IndivisualsForm({
+            'session' : data.get('session') ,
             'user' : user.pk ,
             'name' : data.get('name') ,
             'father_name' : data.get('father_name') ,

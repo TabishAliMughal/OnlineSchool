@@ -6,6 +6,7 @@ from reg_school.models import *
 
 class Indivisuals(models.Model):
     code = models.AutoField(primary_key = True , unique = True)
+    session = models.ForeignKey(Session , on_delete = models.CASCADE)
     user = models.ForeignKey(User , on_delete = models.CASCADE)
     name = models.CharField(max_length = 50)
     father_name = models.CharField(max_length = 50)

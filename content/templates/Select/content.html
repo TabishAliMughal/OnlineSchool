@@ -13,9 +13,6 @@
                     <td><a>Subject : {{ content.subject }}</a><br><br></td>
                 </tr>
                 <tr>
-                    <td><a>Date : {{ content.date }}</a><br><br></td>
-                </tr>
-                <tr>
                     <td><a>Content Title : {{ content.title }}</a><br><br></td>
                 </tr>
                 <tr>
@@ -23,7 +20,7 @@
                 </tr>
                 {% for i in videos %}
                     <tr>
-                        <td class="video"><iframe src="{{ i.url }}" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
+                        <td class="video"><iframe style="width: 100%; height:auto" src="{{ i.url }}" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
                     </tr>
                 {% endfor %}
                 {% for i in images %}

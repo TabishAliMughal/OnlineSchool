@@ -7,6 +7,7 @@ from django.contrib.gis.db import models as p
 
 class TeacherClass(models.Model):
     id = models.AutoField(primary_key = True , unique = True)
+    session = models.ForeignKey(Session , on_delete = models.CASCADE)
     teacher = models.ForeignKey(User , on_delete = models.CASCADE)
     clas = models.ForeignKey(Classes , on_delete = models.CASCADE)
     limit = models.CharField(max_length=2)
