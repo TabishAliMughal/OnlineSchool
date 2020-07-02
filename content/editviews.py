@@ -138,12 +138,12 @@ def ManageContentEditView(EditView,pk):
             return redirect('content')
     else:
         form = ContentForm(instance=data)
-        day = str(data.day)
+        descr = data.text
         context = {
-            'day' : day ,
             'user':user ,
             'form' : form ,
             'videos' : videos ,
             'images' : images ,
+            'descr' : descr ,
         }
         return render(EditView ,'Forms/Edit/content.html' , context)
