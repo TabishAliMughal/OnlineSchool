@@ -8,7 +8,8 @@
         {% for i in user %}
           {% if i.name == 'Admin' %}
             <a class="btn btn-primary" href="{% url 'content_form' %}">Add Another</a>
-            <a class="btn btn-primary" href="{% url 'content' %}">All</a><br><br>
+            <a class="btn btn-primary" href="{% url 'content' %}">All</a>
+            <a class="btn btn-primary" onclick="sortTable()">Sort</a><br><br>
             <form method="POST">
               <select required id="myclass" name="class">
                 <option>-------------------</option> 
@@ -39,7 +40,7 @@
           {% endif %}
         {% endfor %}
       {% endif %}
-       <table class="table table-hover table-sm res-table " id="results"   id="myTable">
+       <table class="table table-hover table-sm res-table " id="myTable">
             <thead align="center">
                 <tr>
                   <th>Class<br>Subject</th>
@@ -57,6 +58,7 @@
             <tbody id="myTable" align="center">
                 <tr>
                   <td><a href="{% url 'content' i.pk %}">{{ i.class_name }}</a></td>
+                  <td hidden>{{ i.day }}</td>
                   <td>{{ i.subject }}</td>
                   {% if request.user.is_authenticated %}
                     {% for v in user %}
@@ -67,8 +69,8 @@
                   {% endif %}
                 </tr>
                 <tr>
-                    <td>{{ i.module }}</td>
-                    <td>{{ i.day }}</td>
+                  <td>{{ i.module }}</td>
+                  <td id="day">{{ i.day }}</td>
                     {% if request.user.is_authenticated %}
                       {% for v in user %}
                         {% if v.name == 'Admin' %}
@@ -79,6 +81,7 @@
                 </tr>
                 <tr>
                   <td><hr></td>
+                  <td hidden>{{ i.day }}</td>
                   <td><hr></td>
                   <td><hr></td>
                 </tr>
