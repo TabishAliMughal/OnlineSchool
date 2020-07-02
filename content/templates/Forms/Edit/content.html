@@ -25,7 +25,7 @@
                 </tr>
                 <tr>
                     <td>Day</td>
-                    <td><input type="number" name="day" value="{{ day }}" /></td>
+                    <td>{{ form.day }}</td>
                 </tr>
                 <tr>
                     <td>Title</td>
@@ -33,7 +33,7 @@
                 </tr>
                 <tr>
                     <td>Text</td>
-                    <td>{{ form.text }}</td>
+                    <td><input type="text" value="{{ descr }}" required /></td>
                 </tr>
                 <tr>
                     <td>For</td>
@@ -90,7 +90,7 @@
 <script>
     function clone2(){
         var new_chq_no = parseInt($('#total-image-fields').val()) + 1;
-        var new_input = "<input type='file' name='image' accept='image/*' capture='camera' />";
+        var new_input = "<input type='file' name='image' accept='image/*' capture='camera/*' />";
         $('#div-to-add-image').append(new_input+'<br><br>');
     };        
 </script>
