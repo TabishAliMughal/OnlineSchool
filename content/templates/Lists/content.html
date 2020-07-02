@@ -42,33 +42,45 @@
        <table class="table table-hover table-sm res-table " id="results"   id="myTable">
             <thead align="center">
                 <tr>
-                    <th>Class</th>
-                    <th>Subject</th>
-                    <th>Module</th>
-                    <!-- <th>Detail</th> -->
-                    {% if request.user.is_authenticated %}
-                      {% for i in user %}
-                        {% if i.name == 'Admin' %}
-                          <th>Action</th>
-                        {% endif %}
-                      {% endfor %}
-                    {% endif %}
+                  <th>Class<br>Subject</th>
+                  <th>Module<br>Day</th>
+                  {% if request.user.is_authenticated %}
+                    {% for i in user %}
+                      {% if i.name == 'Admin' %}
+                        <th rowspan="2">Action</th>
+                      {% endif %}
+                    {% endfor %}
+                  {% endif %}
                 </tr>
             </thead>
             {% for i in list %}
             <tbody id="myTable" align="center">
                 <tr>
-                    <td><a href="{% url 'content' i.pk %}">{{ i.class_name }}</a></td>
-                    <td>{{ i.subject }}</td>
+                  <td><a href="{% url 'content' i.pk %}">{{ i.class_name }}</a></td>
+                  <td>{{ i.subject }}</td>
+                  {% if request.user.is_authenticated %}
+                    {% for v in user %}
+                      {% if v.name == 'Admin' %}
+                        <td><a class="btn btn-primary" href="{% url 'content_edit' i.pk %}">Edit</a></td>
+                      {% endif %}
+                    {% endfor %}
+                  {% endif %}
+                </tr>
+                <tr>
                     <td>{{ i.module }}</td>
-                    <td hidden>{{ i.day }}</td>
+                    <td>{{ i.day }}</td>
                     {% if request.user.is_authenticated %}
                       {% for v in user %}
                         {% if v.name == 'Admin' %}
-                          <td><a class="btn btn-primary" href="{% url 'content_edit' i.pk %}">Edit</a><a href="{% url 'content_delete' i.pk %}" class="btn btn-primary">Delete</a></td>
+                          <td><a href="{% url 'content_delete' i.pk %}" class="btn btn-primary">Delete</a></td>
                         {% endif %}
                       {% endfor %}
                     {% endif %}
+                </tr>
+                <tr>
+                  <td><hr></td>
+                  <td><hr></td>
+                  <td><hr></td>
                 </tr>
             </tbody>
             {% endfor %}
