@@ -4,7 +4,8 @@ from .models import *
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group , User
 from authentication.user_handeling import unauthenticated_user, allowed_users, admin_only
-
+import datetime
+from datetime import timedelta
 
 
 @login_required(login_url='login')
@@ -22,26 +23,37 @@ def ManageClassListView(ListView):
 @allowed_users(allowed_roles=['Admin'])
 def ManageContentListView(ListView):
     user = ListView.user.groups.values('name')
+    session = get_object_or_404(Session , session_number = '1')
     if ListView.method == 'POST':
         list_ = []
-        for i in Content.objects.all():
-            if str(i.class_name.pk) == str(ListView.POST.get('class')):
-                if str(i.date) == str(ListView.POST.get('day')):
-                    list_.append(i)
+        if ListView.POST.get('date'):
+            for i in Content.objects.all():
+                if str(i.class_name.pk) == str(ListView.POST.get('class')):
+                    if str(ListView.POST.get('date')) == str(str(session.session_start_date + timedelta(days=i.day-1))):
+                        list_.append(i)
+        if ListView.POST.get('subject'):
+            for i in Content.objects.all():
+                if str(i.class_name.pk) == str(ListView.POST.get('class')):
+                    if str(ListView.POST.get('subject')) == str(i.subject.pk):
+                        list_.append(i)
         classes = Classes.objects.all()
+        subjects = Subjects.objects.all()
         context = {
             'list':list_,
             'user':user ,
             'classes':classes ,
+            'subjects':subjects ,
         }
         return render (ListView,'Lists/content.html',context)
     else:
         list_ = Content.objects.all()
         classes = Classes.objects.all()
+        subjects = Subjects.objects.all()
         context = {
             'list':list_,
             'user':user ,
             'classes':classes ,
+            'subjects':subjects ,
         }
         return render (ListView,'Lists/content.html',context)
 
