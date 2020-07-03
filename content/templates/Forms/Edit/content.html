@@ -1,6 +1,6 @@
 {% extends "MainPage.html" %}
 {% block content %}
-<form method="POST" enctype="multipart/form-data">
+<form method="POST" enctype="multipart/form-data" runat="server">
     <div class="container">
         <h2 class="text-center" style="font-family:sans-serif;">Class Add Form</h2><hr/>
        <table  class="table table-hover table-sm res-table">
@@ -33,7 +33,7 @@
                 </tr>
                 <tr>
                     <td>Text</td>
-                    <td><input type="text" value="{{ descr }}" required /></td>
+                    <td><input type="text" name="text" value="{{ descr }}" required /></td>
                 </tr>
                 <tr>
                     <td>For</td>
@@ -46,7 +46,7 @@
                 {% for i in videos %}
                 <tr>
                     <td></td>
-                    <td><input style="width: 80%;" type="url" value="{{ i.url }}" name="url" /></td>
+                    <td><input style="width: 100%;" type="url" value="{{ i.url }}" name="url" /></td>
                 </tr>
                 {% endfor %}
                 <tr>
@@ -67,9 +67,13 @@
                 {% endfor %}
                 <tr>
                     <td></td>
-                    <td><div id="div-to-add-image"></div><button type="button" onClick="clone2()" id="add-row">+</button></td>
-                    <input type="hidden" value="1" id="total-image-fields">
+                    <td><div id="div-to-add-image"></div></td>
                 </tr>
+                <tr>
+                    <td></td>
+                    <td><button type="button" onClick="clone2()" id="add-row">+</button></td>
+                </tr>
+                    <input type="hidden" value="1" id="total-image-fields">
                 <tr>
                     <td>Submit</td>
                     <td><input class="btn btn-primary" type="submit" value="Add to Contents"></td>
@@ -84,15 +88,14 @@
     function clone1(){
         var new_chq_no = parseInt($('#total-url-fields').val()) + 1;
         var new_input = "<input type='text' name='url' id=" + new_chq_no + " />";
-        $('#div-to-add-url').append(new_input+'<br>');
+        $('#div-to-add-url').append(new_input+'<br><br>');
     };        
 </script>
 <script>
     function clone2(){
         var new_chq_no = parseInt($('#total-image-fields').val()) + 1;
-        var new_input = "<input type='file' name='image' accept='image/*' capture='camera/*' />";
+        var new_input = "<input type='file' name='image' accept='image/*' />";
         $('#div-to-add-image').append(new_input+'<br><br>');
     };        
 </script>
-
 {% endblock %}
