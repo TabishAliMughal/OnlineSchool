@@ -38,6 +38,24 @@
               {% csrf_token %}
             </form>
           {% endif %}
+          {% if i.name == 'datahandler' %}
+            <form method="POST">
+              <select required id="myclass" name="class">
+                <option>-------------------</option> 
+                {% for i in classes %}
+                  <option value="{{ i.pk }}">{{ i }}</option>
+                {% endfor %}
+              </select>
+              <select required id="myclass" name="subject">
+                <option>-------------------</option> 
+                {% for i in subjects %}
+                  <option value="{{ i.pk }}">{{ i }}</option>
+                {% endfor %}
+              </select>
+              <input type="submit" value="Search">
+              {% csrf_token %}
+            </form>
+          {% endif %}
         {% endfor %}
       {% endif %}
        <table class="table table-hover table-sm res-table " id="myTable">
