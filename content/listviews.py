@@ -20,7 +20,7 @@ def ManageClassListView(ListView):
     return render (ListView,'Lists/classes.html',context)
 
 @login_required(login_url='login')
-@allowed_users(allowed_roles=['Admin'])
+@allowed_users(allowed_roles=['Admin','datahandler'])
 def ManageContentListView(ListView):
     user = ListView.user.groups.values('name')
     session = get_object_or_404(Session , session_number = '1')

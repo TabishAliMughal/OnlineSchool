@@ -96,6 +96,16 @@
                   </div>
                 </li>
               {% endif %}
+              {% if i.name == 'datahandler' %}
+                <li class="nav-item dropdown">
+                  <a class="btn btn-outline-secondary nav-link dropdown-toggle d-sm-inline-block mar" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Content
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'content' %}" >View Content</a>
+                  </div>
+                  </li>  
+              {% endif %}
             {% endfor %}
           {% endif %}
         </ul>

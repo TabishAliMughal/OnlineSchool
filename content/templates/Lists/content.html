@@ -49,6 +49,8 @@
                     {% for i in user %}
                       {% if i.name == 'Admin' %}
                         <th rowspan="2">Action</th>
+                      {% elif i.name == 'datahandler' %}
+                        <th>Action</th>
                       {% endif %}
                     {% endfor %}
                   {% endif %}
@@ -64,6 +66,8 @@
                     {% for v in user %}
                       {% if v.name == 'Admin' %}
                         <td><a class="btn btn-primary" href="{% url 'content_edit' i.pk %}">Edit</a></td>
+                      {% elif v.name == 'datahandler' %}
+                        <td><a class="btn btn-primary" href="{% url 'content_edit' i.pk %}">Edit</a></td>
                       {% endif %}
                     {% endfor %}
                   {% endif %}
@@ -75,6 +79,8 @@
                       {% for v in user %}
                         {% if v.name == 'Admin' %}
                           <td><a href="{% url 'content_delete' i.pk %}" class="btn btn-primary">Delete</a></td>
+                        {% elif v.name == 'datahandler' %}
+                          <td></td>
                         {% endif %}
                       {% endfor %}
                     {% endif %}

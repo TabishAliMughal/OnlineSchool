@@ -80,7 +80,7 @@ def ManageModuleEditView(EditView,pk):
         return render(EditView ,'Forms/Edit/module.html' , context)
 
 @login_required(login_url='login')
-@allowed_users(allowed_roles=['Admin'])
+@allowed_users(allowed_roles=['Admin','datahandler'])
 def ManageContentEditView(EditView,pk):
     user = EditView.user.groups.values('name')
     data = get_object_or_404(Content, pk = pk)
