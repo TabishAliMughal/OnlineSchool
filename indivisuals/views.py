@@ -11,16 +11,16 @@ from authentication.user_handeling import unauthenticated_user, allowed_users, a
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Admin','School'])
-def ManageIndivisualsListView(ListView , pk = None):
+def ManageIndivisualsListView(ListView):
     user = ListView.user.groups.values('name')
-    if pk:
-        indivisual = []
-        for i in Indivisuals.objects.all():
-            if i.school:
-                if str(i.school.pk) == pk:
-                    indivisual.append(i)
-    else:
-        indivisual = Indivisuals.objects.all()
+    indivisual = Indivisuals.objects.all()
+    if ListView.method == 'POST':
+        if str(ListView.POST.get('school')) != str('None'):
+            indivisual = []
+            for i in Indivisuals.objects.all():
+                if i.school :
+                    if str(ListView.POST.get('school')) == str(i.school.pk):
+                        indivisual.append(i)
     school = School.objects.all()
     context = {
         'school' : school ,
@@ -108,6 +108,7 @@ def ManageIndivisualsEditView(EditView , pk):
             'name' : data.get('name') ,
             'father_name' : data.get('father_name') ,
             'school' : data.get('school') ,
+            'session': data.get('session') ,
             'mobile' : data.get('mobile') ,
             'clas' : data.get('clas') ,
             'fees' : data.get('fees') ,
