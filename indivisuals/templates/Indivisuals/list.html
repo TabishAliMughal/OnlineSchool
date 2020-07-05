@@ -6,6 +6,7 @@
       <form method="POST">
         <select name="school">
           <option value="None">-------------------</option>
+          <option value="Digital-School">Individuals</option>
           {% for i in school %}
             <option value="{{ i.pk }}">{{ i }}</option>
           {% endfor %}
