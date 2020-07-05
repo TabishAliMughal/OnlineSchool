@@ -21,11 +21,15 @@ def ManageIndivisualsListView(ListView):
                 if i.school :
                     if str(ListView.POST.get('school')) == str(i.school.pk):
                         indivisual.append(i)
+    v = int('0')
+    for i in indivisual:
+        v = v + 1
     school = School.objects.all()
     context = {
         'school' : school ,
         'user' : user ,
         'indivisual' : indivisual ,
+        'total' : v ,
     }
     return render(ListView , 'Indivisuals/list.html' , context)
 
