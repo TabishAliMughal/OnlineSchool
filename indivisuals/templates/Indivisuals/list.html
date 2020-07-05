@@ -3,12 +3,16 @@
 {% block content %}
     <div class="container">
       <h2 class="text-center" style="font-family:sans-serif;">View All Indivisuals</h2><hr/>
-        <select name="school" onClick="schfil()">
-          <option>-------------------</option>
+      <form method="POST">
+        <select name="school">
+          <option value="None">-------------------</option>
           {% for i in school %}
-            <option><a href="#">{{ i }}<input type="text" id="abc" value="{% url 'indivisuals_list' i.pk %}" hidden /></option>
+            <option value="{{ i.pk }}">{{ i }}</option>
           {% endfor %}
         </select>
+        <input type="submit" value="Search">
+        {% csrf_token %}
+      </form>
         {% if request.user.is_authenticated %}
           {% for i in user %}
             {% if i.name == 'Admin' %}
@@ -49,11 +53,11 @@
             </tbody>
         </table>
     </div>
-    <script>
+    <!-- <script>
       function schfil() {
         var url = document.getElementById('abc').value;
         window.open(url,'newwindow','width=1000,height=800')
       }
-    </script>
+    </script> -->
 
 {% endblock %}
