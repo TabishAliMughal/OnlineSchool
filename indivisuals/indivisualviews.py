@@ -17,6 +17,7 @@ from authentication.user_handeling import unauthenticated_user, allowed_users, a
 @allowed_users(allowed_roles=['Individuals'])
 def ManageIndivisualProfileView(ProfileView , pk = None):
     user = ProfileView.user.groups.values('name')
+    individual = []
     for i in user:
         if str(i.get('name')) == 'Individuals':
             curuser = ProfileView.user

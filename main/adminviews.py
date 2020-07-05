@@ -17,17 +17,30 @@ def ManageProfilesView(ProfileView):
     teachers = teachers.user_set.all()
     individualuser = Group.objects.get(name="Individuals")
     individualuser = individualuser.user_set.all()
-    individuals = []
+    k = int('0')
     for i in Indivisuals.objects.all():
-        for v in individualuser:
-            if str(i.user.pk) == str(v.pk):
-                individuals.append(i)
+        if i.school == None :
+            k = k + 1
+    schools = []
+    for s in School.objects.all():
+        f = int('0')
+        for i in Indivisuals.objects.all():
+            if i.school != None:
+                if str(s.pk) == str(i.school.pk):
+                    f = f + 1
+        schools.append({'school':s,'students':f})
     students = []
-    for i in TeacherClassStudents.objects.all():
-        students.append(i)
+    for i in TeacherClass.objects.all():
+        stud = int('0')
+        for stu in TeacherClassStudents.objects.all():
+            if str(i.pk) == str(stu.clas.pk):
+                stud = stud + 1
+        students.append({'teacher':i.teacher,'students':stud})
+        
     context = {
         'students': students ,
-        'individuals': individuals ,
+        'individuals': k ,
+        'schoolstudents': schools,
         'checkers': checkers ,
         'teachers': teachers ,
         'user': user ,
