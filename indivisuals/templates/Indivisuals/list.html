@@ -16,7 +16,7 @@
         {% if request.user.is_authenticated %}
           {% for i in user %}
             {% if i.name == 'Admin' %}
-              <a class="btn btn-primary" href="{% url 'indivisuals_create' %}">Add Another</a>
+              <div><a style="position: absolute;padding-top:5px;">Total {{ total }}</a><div style="text-align: right;padding-bottom:5px;"><a class="btn btn-primary" href="{% url 'indivisuals_create' %}">Add Another</a></div></div>
             {% endif %}
           {% endfor %}
         {% endif %}
