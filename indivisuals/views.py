@@ -21,6 +21,13 @@ def ManageIndivisualsListView(ListView):
                 if i.school :
                     if str(ListView.POST.get('school')) == str(i.school.pk):
                         indivisual.append(i)
+        if str(ListView.POST.get('school')) == str('Digital-School'):
+            indivisual = []
+            for i in Indivisuals.objects.all():
+                if i.school :
+                    pass
+                else:
+                    indivisual.append(i)
     v = int('0')
     for i in indivisual:
         v = v + 1
