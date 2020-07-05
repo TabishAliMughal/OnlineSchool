@@ -26,30 +26,33 @@
         <h2 class="text-center" style="font-family:sans-serif;">All Registered Teachers</h2><hr/>
         <table  class="table table-hover table-sm res-table">
             <tbody id="myTable" align="center">
-                {% for i in teachers %}
-                    <tr>
-                        <td><a href="{% url 'teacher_profile_detail' i.pk %}" >{{ i }}</a></td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <h2 class="text-center" style="font-family:sans-serif;">All Registered Students</h2><hr/>
-        <table  class="table table-hover table-sm res-table">
-            <tbody id="myTable" align="center">
+                <tr>
+                    <th>Teacher</th>
+                    <th>Students</th>
+                </tr>
                 {% for i in students %}
                     <tr>
-                        <td><a>{{ i.name }}</a></td>
-                        <td><a href="{% url 'teacher_profile_detail' i.clas.teacher.pk %}" >{{ i.clas.teacher }}</a></td>
+                        <td><a>{{ i.teacher }}</a></td>
+                        <td><a>{{ i.students }}</a></td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
-        <h2 class="text-center" style="font-family:sans-serif;">All Registered Individual Students</h2><hr/>
+        <h2 class="text-center" style="font-family:sans-serif;">All Registered Schools</h2><hr/>
         <table  class="table table-hover table-sm res-table">
             <tbody id="myTable" align="center">
-                {% for i in individuals %}
+                <tr>
+                    <th>School</th>
+                    <th>Students</th>
+                </tr>
+                <tr>
+                    <td>Digital School</td>
+                    <td>{{ individuals }}</td>
+                </tr>
+                {% for i in schoolstudents %}
                     <tr>
-                        <td><a href="{% url 'indivisuals_detail' i.pk %}" >{{ i.name }}</a></td>
+                        <td>{{ i.school }}</td>
+                        <td>{{ i.students }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
