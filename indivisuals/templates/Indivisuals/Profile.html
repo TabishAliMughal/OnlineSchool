@@ -17,7 +17,8 @@
             <tbody id="myTable" align="center">
                 {% for i in content %}
                     <tr>
-                        <td><a onclick="window.open('{% url 'indivisual_content' i.content.pk %}','newwindow','width=1000,height=800');" href="">Period : {{ i.period }}</a><br><br></td>
+                        <td><a href="{% url 'indivisual_content' i.content.pk %}">Period : {{ i.period }}</a><br><br></td>
+                        <td><a href="{% url 'indivisual_content' i.content.pk %}">{{ i.content.subject }}</a><br><br></td>
                     </tr>
                 {% endfor %}
             </tbody>

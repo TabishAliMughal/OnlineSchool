@@ -20,7 +20,7 @@
                         <td><a>{{ i.content.text }}</a><br><br></td>
                     </tr>
                     <tr>
-                        <td><a onclick="window.open('{% url 'content-image' i.content.pk %}','newwindow','width=1000,height=800');" class="btn btn-primary">Documents</a></td>
+                        <td><a href="{% url 'content-image' i.content.pk %}" class="btn btn-primary">Documents</a></td>
                     </tr>
                     {% for v in i.videos %}
                         <tr>
