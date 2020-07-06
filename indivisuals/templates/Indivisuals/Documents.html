@@ -9,23 +9,30 @@
             <tbody id="myTable" align="center">
                 {% for i in images %}
                     <tr>
-                        <td><div style="text-align: left;position:absolute;"><a style="width: 75px;" class="btn btn-primary" href="#" onClick="zoomOut()" >-</a></div><div style="text-align: right;"><a style="width: 75px;" class="btn btn-primary" href="#" onClick="zoomIn()" >+</a></div></td>
+                        <td>
+                            <div style="text-align: left;position:absolute;">
+                                <a style="width: 75px;" class="btn btn-primary" href="#" onClick="zoomOut('{{i}}')" >-</a>
+                            </div>
+                            <div style="text-align: right;">
+                                <a style="width: 75px;" class="btn btn-primary" href="#" onClick="zoomIn('{{i}}')" >+</a>
+                            </div>
+                        </td>
                     </tr>
                     <tr>
-                        <td><img id='pix' style="width: 50%;" class="text-center" class="img" src="{{ i.image.url }}"></td>
+                        <td><img id='{{i}}' style="width: 50%;" class="text-center" class="img" src="{{ i.image.url }}"></td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
     <script type="text/javascript">
-        function zoomIn() {
-            var img = document.getElementById("pix");
-            img.style.width = (img.clientWidth + 25) ;
+        function zoomIn(x) {
+            var img = document.getElementById(x);
+            img.style.width = (img.clientWidth + 30) ;
         }
-        function zoomOut() {
-            var img = document.getElementById("pix");
-            img.style.width = (img.clientWidth - 25) ;
+        function zoomOut(x) {
+            var img = document.getElementById(x);
+            img.style.width = (img.clientWidth - 30) ;
         }
     </script>
 {% endblock %}
