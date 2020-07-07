@@ -25,26 +25,280 @@
         <h6></h6>
         <h6></h6>
         <h2 class="text-center" style="font-family:sans-serif;">All Periods Of {{ date }}</h2><hr/>
-        {% for i in content %}
-            <h4 class="text-center" style="font-family:sans-serif;">Class = {{ i.class }}</h4>
-            <table class="table table-hover table-sm res-table " id="results"   id="myTable">
-                <thead align="center">
-                    <tr>
-                        <th>Period</th>
-                        <th>Subject</th>
-                        <th>Module</th>
-                    </tr>
-                </thead>
-                {% for i in i.content %}
-                    <tbody id="myTable" align="center">
+        {% for v in content %}
+            {% if v.class.class_name == 'Nursery' %}
+                <h4 class="text-center" style="font-family:sans-serif;">Class = {{ v.class }}</h4>
+                <table class="table table-hover table-sm res-table " id="results"   id="myTable">
+                    <thead align="center">
                         <tr>
-                            <td><a href="{% url 'content' i.pk %}">Period = {{ i.period }}</a></td>
-                            <td>{{ i.subject }}</td>
-                            <td>{{ i.module }}</td>
+                            <th>Period</th>
+                            <th>Subject</th>
+                            <th>Module</th>
                         </tr>
-                    </tbody>
-                {% endfor %}
-            </table>
+                    </thead>
+                    {% for i in v.content %}
+                        <tbody id="myTable" align="center">
+                            <tr>
+                                <td><a href="{% url 'content' i.pk %}">Period = {{ i.period }}</a></td>
+                                <td>{{ i.subject }}</td>
+                                <td>{{ i.module }}</td>
+                            </tr>
+                        </tbody>
+                    {% endfor %}
+                </table>
+            {% endif %}
+            {% if v.class.class_name == 'Prep I' %}
+                <h4 class="text-center" style="font-family:sans-serif;">Class = {{ v.class }}</h4>
+                <table class="table table-hover table-sm res-table " id="results"   id="myTable">
+                    <thead align="center">
+                        <tr>
+                            <th>Period</th>
+                            <th>Subject</th>
+                            <th>Module</th>
+                        </tr>
+                    </thead>
+                    {% for i in v.content %}
+                        <tbody id="myTable" align="center">
+                            <tr>
+                                <td><a href="{% url 'content' i.pk %}">Period = {{ i.period }}</a></td>
+                                <td>{{ i.subject }}</td>
+                                <td>{{ i.module }}</td>
+                            </tr>
+                        </tbody>
+                    {% endfor %}
+                </table>
+            {% endif %}
+            {% if v.class.class_name == 'Prep II' %}
+                <h4 class="text-center" style="font-family:sans-serif;">Class = {{ v.class }}</h4>
+                <table class="table table-hover table-sm res-table " id="results"   id="myTable">
+                    <thead align="center">
+                        <tr>
+                            <th>Period</th>
+                            <th>Subject</th>
+                            <th>Module</th>
+                        </tr>
+                    </thead>
+                    {% for i in v.content %}
+                        <tbody id="myTable" align="center">
+                            <tr>
+                                <td><a href="{% url 'content' i.pk %}">Period = {{ i.period }}</a></td>
+                                <td>{{ i.subject }}</td>
+                                <td>{{ i.module }}</td>
+                            </tr>
+                        </tbody>
+                    {% endfor %}
+                </table>
+            {% endif %}
+            {% if v.class.class_name == 'First' %}
+                <h4 class="text-center" style="font-family:sans-serif;">Class = {{ v.class }}</h4>
+                <table class="table table-hover table-sm res-table " id="results"   id="myTable">
+                    <thead align="center">
+                        <tr>
+                            <th>Period</th>
+                            <th>Subject</th>
+                            <th>Module</th>
+                        </tr>
+                    </thead>
+                    {% for i in v.content %}
+                        <tbody id="myTable" align="center">
+                            <tr>
+                                <td><a href="{% url 'content' i.pk %}">Period = {{ i.period }}</a></td>
+                                <td>{{ i.subject }}</td>
+                                <td>{{ i.module }}</td>
+                            </tr>
+                        </tbody>
+                    {% endfor %}
+                </table>
+            {% endif %}
+            {% if v.class.class_name == 'Second' %}
+                <h4 class="text-center" style="font-family:sans-serif;">Class = {{ v.class }}</h4>
+                <table class="table table-hover table-sm res-table " id="results"   id="myTable">
+                    <thead align="center">
+                        <tr>
+                            <th>Period</th>
+                            <th>Subject</th>
+                            <th>Module</th>
+                        </tr>
+                    </thead>
+                    {% for i in v.content %}
+                        <tbody id="myTable" align="center">
+                            <tr>
+                                <td><a href="{% url 'content' i.pk %}">Period = {{ i.period }}</a></td>
+                                <td>{{ i.subject }}</td>
+                                <td>{{ i.module }}</td>
+                            </tr>
+                        </tbody>
+                    {% endfor %}
+                </table>
+            {% endif %}
+            {% if v.class.class_name == 'Third' %}
+                <h4 class="text-center" style="font-family:sans-serif;">Class = {{ v.class }}</h4>
+                <table class="table table-hover table-sm res-table " id="results"   id="myTable">
+                    <thead align="center">
+                        <tr>
+                            <th>Period</th>
+                            <th>Subject</th>
+                            <th>Module</th>
+                        </tr>
+                    </thead>
+                    {% for i in v.content %}
+                        <tbody id="myTable" align="center">
+                            <tr>
+                                <td><a href="{% url 'content' i.pk %}">Period = {{ i.period }}</a></td>
+                                <td>{{ i.subject }}</td>
+                                <td>{{ i.module }}</td>
+                            </tr>
+                        </tbody>
+                    {% endfor %}
+                </table>
+            {% endif %}
+            {% if v.class.class_name == 'Fourth' %}
+                <h4 class="text-center" style="font-family:sans-serif;">Class = {{ v.class }}</h4>
+                <table class="table table-hover table-sm res-table " id="results"   id="myTable">
+                    <thead align="center">
+                        <tr>
+                            <th>Period</th>
+                            <th>Subject</th>
+                            <th>Module</th>
+                        </tr>
+                    </thead>
+                    {% for i in v.content %}
+                        <tbody id="myTable" align="center">
+                            <tr>
+                                <td><a href="{% url 'content' i.pk %}">Period = {{ i.period }}</a></td>
+                                <td>{{ i.subject }}</td>
+                                <td>{{ i.module }}</td>
+                            </tr>
+                        </tbody>
+                    {% endfor %}
+                </table>
+            {% endif %}
+            {% if v.class.class_name == 'Fifth' %}
+                <h4 class="text-center" style="font-family:sans-serif;">Class = {{ v.class }}</h4>
+                <table class="table table-hover table-sm res-table " id="results"   id="myTable">
+                    <thead align="center">
+                        <tr>
+                            <th>Period</th>
+                            <th>Subject</th>
+                            <th>Module</th>
+                        </tr>
+                    </thead>
+                    {% for i in v.content %}
+                        <tbody id="myTable" align="center">
+                            <tr>
+                                <td><a href="{% url 'content' i.pk %}">Period = {{ i.period }}</a></td>
+                                <td>{{ i.subject }}</td>
+                                <td>{{ i.module }}</td>
+                            </tr>
+                        </tbody>
+                    {% endfor %}
+                </table>
+            {% endif %}
+            {% if v.class.class_name == 'Sixth' %}
+                <h4 class="text-center" style="font-family:sans-serif;">Class = {{ v.class }}</h4>
+                <table class="table table-hover table-sm res-table " id="results"   id="myTable">
+                    <thead align="center">
+                        <tr>
+                            <th>Period</th>
+                            <th>Subject</th>
+                            <th>Module</th>
+                        </tr>
+                    </thead>
+                    {% for i in v.content %}
+                        <tbody id="myTable" align="center">
+                            <tr>
+                                <td><a href="{% url 'content' i.pk %}">Period = {{ i.period }}</a></td>
+                                <td>{{ i.subject }}</td>
+                                <td>{{ i.module }}</td>
+                            </tr>
+                        </tbody>
+                    {% endfor %}
+                </table>
+            {% endif %}
+            {% if v.class.class_name == 'Seventh' %}
+                <h4 class="text-center" style="font-family:sans-serif;">Class = {{ v.class }}</h4>
+                <table class="table table-hover table-sm res-table " id="results"   id="myTable">
+                    <thead align="center">
+                        <tr>
+                            <th>Period</th>
+                            <th>Subject</th>
+                            <th>Module</th>
+                        </tr>
+                    </thead>
+                    {% for i in v.content %}
+                        <tbody id="myTable" align="center">
+                            <tr>
+                                <td><a href="{% url 'content' i.pk %}">Period = {{ i.period }}</a></td>
+                                <td>{{ i.subject }}</td>
+                                <td>{{ i.module }}</td>
+                            </tr>
+                        </tbody>
+                    {% endfor %}
+                </table>
+            {% endif %}
+            {% if v.class.class_name == 'Eighth' %}
+                <h4 class="text-center" style="font-family:sans-serif;">Class = {{ v.class }}</h4>
+                <table class="table table-hover table-sm res-table " id="results"   id="myTable">
+                    <thead align="center">
+                        <tr>
+                            <th>Period</th>
+                            <th>Subject</th>
+                            <th>Module</th>
+                        </tr>
+                    </thead>
+                    {% for i in v.content %}
+                        <tbody id="myTable" align="center">
+                            <tr>
+                                <td><a href="{% url 'content' i.pk %}">Period = {{ i.period }}</a></td>
+                                <td>{{ i.subject }}</td>
+                                <td>{{ i.module }}</td>
+                            </tr>
+                        </tbody>
+                    {% endfor %}
+                </table>
+            {% endif %}
+            {% if v.class.class_name == 'Ninth' %}
+                <h4 class="text-center" style="font-family:sans-serif;">Class = {{ v.class }}</h4>
+                <table class="table table-hover table-sm res-table " id="results"   id="myTable">
+                    <thead align="center">
+                        <tr>
+                            <th>Period</th>
+                            <th>Subject</th>
+                            <th>Module</th>
+                        </tr>
+                    </thead>
+                    {% for i in v.content %}
+                        <tbody id="myTable" align="center">
+                            <tr>
+                                <td><a href="{% url 'content' i.pk %}">Period = {{ i.period }}</a></td>
+                                <td>{{ i.subject }}</td>
+                                <td>{{ i.module }}</td>
+                            </tr>
+                        </tbody>
+                    {% endfor %}
+                </table>
+            {% endif %}
+            {% if v.class.class_name == 'Tenth' %}
+                <h4 class="text-center" style="font-family:sans-serif;">Class = {{ v.class }}</h4>
+                <table class="table table-hover table-sm res-table " id="results"   id="myTable">
+                    <thead align="center">
+                        <tr>
+                            <th>Period</th>
+                            <th>Subject</th>
+                            <th>Module</th>
+                        </tr>
+                    </thead>
+                    {% for i in v.content %}
+                        <tbody id="myTable" align="center">
+                            <tr>
+                                <td><a href="{% url 'content' i.pk %}">Period = {{ i.period }}</a></td>
+                                <td>{{ i.subject }}</td>
+                                <td>{{ i.module }}</td>
+                            </tr>
+                        </tbody>
+                    {% endfor %}
+                </table>
+            {% endif %}
         {% endfor %}
     </div>
 {% endblock %}
