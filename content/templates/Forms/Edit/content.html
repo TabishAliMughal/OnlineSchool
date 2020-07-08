@@ -61,8 +61,7 @@
                 {% for i in images %}
                     <tr id="image">
                         <td>Currently = <a href="{{ i.image.url }}">{{ i.image }}</a></td>
-                        <input type="text" name="pre-image" value="{{ i.pk }}" hidden />
-                        <td><input type="file" name="image" accept="image/*" capture="camera" /></div></td>
+                        <td><a href="{% url 'content_picture_delete' i.pk %}" >Delete</a></td>
                     </tr>
                 {% endfor %}
                 <tr>
@@ -82,7 +81,6 @@
         </table>
     </div>
     {% csrf_token %}
-
 </form>
 <script>
     function clone1(){

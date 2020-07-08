@@ -4,6 +4,7 @@ from django.db import models
 
 class Classes(models.Model):
     code = models.AutoField(primary_key = True)
+    serial = models.IntegerField()
     class_name = models.CharField(max_length=200 , unique = True)
     def __str__(self):
         return self.class_name

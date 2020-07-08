@@ -10,6 +10,7 @@
        <table class="table table-hover table-sm res-table">
             <thead align="center">
                 <tr class="row100">
+                    <th>Serial</th>
                     <th>Name</th>
                     {% if request.user.is_authenticated %}
                     <th>Action</th>
@@ -19,6 +20,7 @@
             {% for i in list %}
             <tbody id="myTable" align="center">
                 <tr class="row100">
+                    <td>{{ i.serial }}</td>
                     <td>{{ i.class_name }}</td>
                     {% if request.user.is_authenticated %}
                     <td><a class="btn btn-primary" href="{% url 'class_edit' i.pk %}">Edit</a><a href="{% url 'class_delete' i.pk %}" class="btn btn-primary" href="">Delete</a></td>

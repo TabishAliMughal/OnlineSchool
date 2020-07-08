@@ -38,6 +38,7 @@ urlpatterns = [
     # Delete
     path(r'class/delete/\d12345<pk>910\d/',deleteviews.ManageClassDeleteView, name ='class_delete'),
     path(r'content/delete/\d12345<pk>910\d/',deleteviews.ManageContentDeleteView, name ='content_delete'),
+    path(r'content/picture/delete/\d12345<pk>910\d/',deleteviews.ManageContentPictureDeleteView, name ='content_picture_delete'),
     path(r'subject/delete/\d12345<pk>910\d/',deleteviews.ManageSubjectDeleteView, name ='subject_delete'),
     path(r'module/delete/\d12345<pk>910\d/',deleteviews.ManageModuleDeleteView, name ='module_delete'),
     path(r'classsubject/delete/\d12345<pk>910\d/',deleteviews.ManageClassSubjectsDeleteView, name ='class_subject_delete'),
