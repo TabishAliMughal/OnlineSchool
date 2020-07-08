@@ -89,7 +89,7 @@ def ManageDemoListView(ListView,date):
                         'subject' : i.subject ,
                         'module' : i.module ,
                     })
-        content.append({'class':v , 'content' : abc})
+        content.append({'clas':v , 'content' : abc})
     context = {
         'date' : date ,
         'content' : content,

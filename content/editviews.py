@@ -115,19 +115,11 @@ def ManageContentEditView(EditView,pk):
                 })
                 v = v + 1
                 form2.save()
-            for i in Images.objects.all():
-                if str(i.content.pk) == str(data.pk):
-                    i.delete()
             img = []
             image = EditView.FILES.getlist('image')
-            preimage = EditView.POST.getlist('pre-image')
             for i in image:
                 img.append(i)
             p = int('0')
-            for i in images:
-                for v in preimage:
-                    if str(v) != str(i.pk):
-                        i.delete()
             for i in img:
                 form2 = ImageForm({
                     'content' : data.pk ,},{

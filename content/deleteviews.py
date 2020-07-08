@@ -35,3 +35,9 @@ def ManageModuleDeleteView(DeleteView,pk):
 def ManageContentDeleteView(DeleteView,pk):
     data = Content.objects.filter(pk = pk).delete()
     return redirect('content')
+
+def ManageContentPictureDeleteView(DeleteView,pk):
+    data = get_object_or_404(Images , pk = pk)
+    content = data.content.pk
+    data.delete()
+    return redirect('content_edit',content)

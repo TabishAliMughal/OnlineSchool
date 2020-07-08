@@ -5,6 +5,21 @@
     <div class="container">
         <img src="{% static './Images/texture.jpg' %}" style="width:100%;">
         <h3 class="text-center">Hello {{ individual }}</h3>
+        <div style="text-align: center;">
+        <iframe style="width: 50%;height:40%;" src="https://www.youtube-nocookie.com/embed/X4DpywWlRbM" ></iframe>
+        <iframe style="width: 50%;height:40%;" src="https://www.youtube-nocookie.com/embed/38UUz15fEzo" ></iframe>
+        </div>
+        <h2 class="text-center" style="font-family:sans-serif;">Content</h2><hr/>
+        <table  class="table table-hover table-sm res-table">
+            <tbody id="myTable" align="center">
+                {% for i in content %}
+                <tr>
+                    <td><a href="{% url 'indivisual_content' i.content.pk %}">Period : {{ i.period }}</a><br><br></td>
+                    <td><a href="{% url 'indivisual_content' i.content.pk %}">{{ i.content.subject }}</a><br><br></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
         {% if clas == 'pre' %}
             {% include 'Indivisuals/M-PTimeTable.html' %}
         {% elif clas == 'primary' %}
@@ -14,16 +29,5 @@
         {% elif clas == 'tenth' %}
             {% include 'Indivisuals/10TimeTable.html' %}
         {% endif %}
-        <h2 class="text-center" style="font-family:sans-serif;">Content</h2><hr/>
-        <table  class="table table-hover table-sm res-table">
-            <tbody id="myTable" align="center">
-                {% for i in content %}
-                    <tr>
-                        <td><a href="{% url 'indivisual_content' i.content.pk %}">Period : {{ i.period }}</a><br><br></td>
-                        <td><a href="{% url 'indivisual_content' i.content.pk %}">{{ i.content.subject }}</a><br><br></td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
     </div>
 {% endblock %}
