@@ -1,0 +1,53 @@
+{% extends "MainPage.html" %}
+{% load static %}
+{% block content %}
+    <link href="{% static 'css/base.css' %}"/>
+    <div class="container">
+        <form method="POST">
+            <h2 class="text-center" style="font-family:serif;">Active And Deactive</h2><hr/>
+            <br>
+            <a class="btn btn-primary" style="text-align: center; width: 100%; height: 50px; font-size: 20px;" href="{% url 'active_deactive_by_school' %}">Schools</a>
+            <br>
+            <br>
+            <select name="school" required>
+                <option value="None">--------------------</option>
+                {% for i in school %}
+                    <option value="{{ i.pk }}">{{ i }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Search" />
+            <br>
+            <br>
+            {% csrf_token %}
+        </form>
+        <form method="POST">
+            <table class="table table-hover table-sm res-table" id="act">
+                <thead align="center">
+                    <tr class="row100">
+                        <th>Name<br>Father</th>
+                        <th>Class<br>Fees</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                {% for i in individuals %}
+                    <tbody id="myTable" align="center">
+                        <tr class="row100">
+                            <td hidden><input type="number" name="pk" value="{{ i.pk }}" /></td>
+                            <td>{{ i.name }}</td>
+                            <td>{{ i.clas }}</td>
+                            <td>
+                                {% if i.active == True %}
+                                    <input type="checkbox" name="{{ i.pk }}" checked />
+                                {% else %}
+                                    <input type="checkbox" name="{{ i.pk }}" />
+                                {% endif %}
+                            </td>
+                        </tr>
+                    </tbody>
+                {% endfor %}
+            </table>
+            <input class="btn btn-primary" type="submit" value="Change All" />
+            {% csrf_token %}
+        </form>
+    </div>
+{% endblock %}

@@ -5,6 +5,7 @@ from authentication.user_handeling import unauthenticated_user, allowed_users, a
 from teacher.models import *
 from checker.models import *
 from indivisuals.models import *
+from indivisuals.forms import *
 
 
 @login_required(login_url='login')
@@ -36,7 +37,6 @@ def ManageProfilesView(ProfileView):
             if str(i.pk) == str(stu.clas.pk):
                 stud = stud + 1
         students.append({'teacher':i.teacher,'students':stud})
-        
     context = {
         'students': students ,
         'individuals': k ,
@@ -46,3 +46,133 @@ def ManageProfilesView(ProfileView):
         'user': user ,
     }
     return render(ProfileView,'Admin/Profiles.html',context)
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Admin'])
+def ManageActiveAndDeactiveView(View):
+    user = View.user.groups.values('name')
+    school = School.objects.all()
+    individuals = Indivisuals.objects.all()
+    if View.method == 'POST':
+        data = View.POST
+        if data.getlist('pk'):
+            for i in data.getlist('pk'):
+                individual = get_object_or_404(Indivisuals , pk = i)
+                if str(data.get(i)) == 'on':
+                    active = True
+                else:
+                    active = False
+                form = IndivisualsForm({
+                    'user' : individual.user ,
+                    'session' : individual.session ,
+                    'name' : individual.name ,
+                    'father_name' : individual.father_name ,
+                    'mobile' : individual.mobile ,
+                    'school' : individual.school ,
+                    'clas' : individual.clas ,
+                    'fees' : individual.fees ,
+                    'password' : individual.password ,
+                    'active' : active ,
+                } or None , instance = individual)
+                form.save()
+            return redirect('active_deactive')
+        if data.get('school'):
+            if str(data.get('school')) != 'None':
+                individuals = []
+                for i in Indivisuals.objects.all():
+                    if str(i.school) != 'None':
+                        if str(i.school.pk) == str(data.get('school')):
+                            individuals.append(i)
+            context = {
+                'school': school ,
+                'individuals': individuals ,
+                'user': user ,
+            }
+            return render(View,'Admin/Activation/ByList.html',context)
+    else:
+        school = School.objects.all()
+        individuals = Indivisuals.objects.all()
+        context = {
+            'school': school ,
+            'individuals': individuals ,
+            'user': user ,
+        }
+        return render(View,'Admin/Activation/ByList.html',context)
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Admin'])
+def ManageActiveAndDeactiveBySchoolView(View):
+    user = View.user.groups.values('name')
+    context = {
+        'user': user ,
+    }
+    return render(View,'Admin/Activation/BySchool.html',context)
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Admin'])
+def ManageActivateSchoolView(View):
+    user = View.user.groups.values('name')
+    if View.method == 'POST':
+        data = View.POST
+        school = data.get('school')
+        school = get_object_or_404(School , pk = school)
+        for i in Indivisuals.objects.all():
+            if str(i.school) != 'None':
+                if str(i.school.pk) == str(school.pk):
+                    individual = i
+                    form = IndivisualsForm({
+                        'user' : individual.user ,
+                        'session' : individual.session ,
+                        'name' : individual.name ,
+                        'father_name' : individual.father_name ,
+                        'mobile' : individual.mobile ,
+                        'school' : individual.school ,
+                        'clas' : individual.clas ,
+                        'fees' : individual.fees ,
+                        'password' : individual.password ,
+                        'active' : True ,
+                    } or None , instance = individual)
+                    form.save()
+        return redirect('/')
+    else:
+        school = School.objects.all()
+        context = {
+            'school': school ,
+            'user': user ,
+        }
+        return render(View,'Admin/Activation/ActivateSchool.html',context)
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Admin'])
+def ManageDeactivateSchoolView(View):
+    user = View.user.groups.values('name')
+    if View.method == 'POST':
+        data = View.POST
+        school = data.get('school')
+        school = get_object_or_404(School , pk = school)
+        for i in Indivisuals.objects.all():
+            if str(i.school) != 'None':
+                if str(i.school.pk) == str(school.pk):
+                    individual = i
+                    form = IndivisualsForm({
+                        'user' : individual.user ,
+                        'session' : individual.session ,
+                        'name' : individual.name ,
+                        'father_name' : individual.father_name ,
+                        'mobile' : individual.mobile ,
+                        'school' : individual.school ,
+                        'clas' : individual.clas ,
+                        'fees' : individual.fees ,
+                        'password' : individual.password ,
+                        'active' : False ,
+                    } or None , instance = individual)
+                    form.save()
+        return redirect('/')
+    else:
+        school = School.objects.all()
+        context = {
+            'school': school ,
+            'user': user ,
+        }
+        return render(View,'Admin/Activation/DeactivateSchool.html',context)
+
