@@ -58,7 +58,10 @@ def ManageIndivisualProfileView(ProfileView , pk = None):
     if pk:
         return render(ProfileView,'Indivisuals/Period.html',context)
     else:
-        if str(datetime.date.today()) <= str(individual.session.session_start_date - timedelta(days=1)):
+        day = datetime.datetime.now().strftime("%A")
+        if str(day) == 'Saturday' or str(day) == 'Sunday' :
+            return render(ProfileView,'Indivisuals/Weekend.html',context)
+        elif str(datetime.date.today()) <= str(individual.session.session_start_date - timedelta(days=1)):
             return render(ProfileView,'Indivisuals/BeforeStart.html',context)
         elif str(individual.active) == str('False'):
             return render(ProfileView,'Indivisuals/FeeNotSubmited.html',context)            

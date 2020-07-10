@@ -44,15 +44,23 @@
                 <tr>
                     <th>School</th>
                     <th>Students</th>
+                    <th>Active-Students</th>
+                    <th>Deactive-Students</th>
                 </tr>
-                <tr>
-                    <td>Digital School</td>
-                    <td>{{ individuals }}</td>
-                </tr>
+                {% for i in individuals %}
+                    <tr>
+                        <td>Digital School</td>
+                        <td>{{ i.students.total }}</td>
+                        <td>{{ i.students.active }}</td>
+                        <td>{{ i.students.deactive }}</td>
+                    </tr>
+                {% endfor %}
                 {% for i in schoolstudents %}
                     <tr>
                         <td>{{ i.school }}</td>
-                        <td>{{ i.students }}</td>
+                        <td>{{ i.students.total }}</td>
+                        <td>{{ i.students.active }}</td>
+                        <td>{{ i.students.deactive }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
