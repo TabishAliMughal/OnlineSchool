@@ -18,18 +18,30 @@ def ManageProfilesView(ProfileView):
     teachers = teachers.user_set.all()
     individualuser = Group.objects.get(name="Individuals")
     individualuser = individualuser.user_set.all()
-    k = int('0')
+    individuals = []
+    i_act = int('0')
+    i_deact = int('0')
     for i in Indivisuals.objects.all():
         if i.school == None :
-            k = k + 1
+            if i.active == True:
+                i_act = i_act + 1
+            else:
+                i_deact = i_deact + 1
+    stud = {'active':i_act,'deactive':i_deact,'total':(i_act)+(i_deact)}
+    individuals.append({'students':stud})
     schools = []
     for s in School.objects.all():
-        f = int('0')
+        act = int('0')
+        deact = int('0')
         for i in Indivisuals.objects.all():
             if i.school != None:
                 if str(s.pk) == str(i.school.pk):
-                    f = f + 1
-        schools.append({'school':s,'students':f})
+                    if i.active == True:
+                        act = act + 1
+                    else:
+                        deact = deact + 1
+        stud = {'active':act,'deactive':deact,'total':(act)+(deact)}
+        schools.append({'school':s,'students':stud})
     students = []
     for i in TeacherClass.objects.all():
         stud = int('0')
@@ -39,7 +51,7 @@ def ManageProfilesView(ProfileView):
         students.append({'teacher':i.teacher,'students':stud})
     context = {
         'students': students ,
-        'individuals': k ,
+        'individuals': individuals ,
         'schoolstudents': schools,
         'checkers': checkers ,
         'teachers': teachers ,
@@ -78,11 +90,18 @@ def ManageActiveAndDeactiveView(View):
             return redirect('active_deactive')
         if data.get('school'):
             if str(data.get('school')) != 'None':
-                individuals = []
-                for i in Indivisuals.objects.all():
-                    if str(i.school) != 'None':
-                        if str(i.school.pk) == str(data.get('school')):
+                if str(data.get('school')) == 'Digital-School':
+                    individuals = []
+                    for i in Indivisuals.objects.all():
+                        if str(i.school) == 'None':
                             individuals.append(i)
+                else:
+                    individuals = []
+                    for i in Indivisuals.objects.all():
+                        if str(i.school) != 'None':
+                            if str(i.school.pk) == str(data.get('school')):
+                                individuals.append(i)
+
             context = {
                 'school': school ,
                 'individuals': individuals ,
