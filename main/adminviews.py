@@ -6,6 +6,8 @@ from teacher.models import *
 from checker.models import *
 from indivisuals.models import *
 from indivisuals.forms import *
+import datetime
+from .current import get_all_logged_in_users
 
 
 @login_required(login_url='login')
@@ -49,7 +51,14 @@ def ManageProfilesView(ProfileView):
             if str(i.pk) == str(stu.clas.pk):
                 stud = stud + 1
         students.append({'teacher':i.teacher,'students':stud})
+    log_count = User.objects.filter(last_login__startswith=datetime.datetime.now().date()).count()
+    users = (get_all_logged_in_users())
+    p = int('0')
+    for i in users:
+        p = p + 1
     context = {
+        'num_users': p ,
+        'log_count': log_count ,
         'students': students ,
         'individuals': individuals ,
         'schoolstudents': schools,
@@ -195,3 +204,24 @@ def ManageDeactivateSchoolView(View):
         }
         return render(View,'Admin/Activation/DeactivateSchool.html',context)
 
+
+def ManageLoggedInUsersView(View):
+    user = View.user.groups.values('name')
+    today_users = User.objects.filter(last_login__startswith=datetime.datetime.now().date())
+    context = {
+        'today_users': today_users ,
+        'user': user ,
+    }
+    return render(View,'Admin/Users/Today.html',context)
+
+    
+def ManageLoggedInUsersAtThisTimeView(View):
+    user = View.user.groups.values('name')
+    cur_users = (get_all_logged_in_users())
+    context = {
+        'cur_users': cur_users ,
+        'user': user ,
+    }
+    return render(View,'Admin/Users/ThisTime.html',context)    
+
+    

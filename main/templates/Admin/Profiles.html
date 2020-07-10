@@ -78,5 +78,14 @@
         <br>
         <a class="btn btn-primary" style="text-align: center; width: 100%; height: 50px; font-size: 20px;" href="{% url 'active_deactive' %}">Active And Deactive</a>
         <br>
+        <br>
+        <br>
+        <hr>
+        <a href="{% url 'login_user' %}">
+            <h4 class="text-center" style="font-family:sans-serif;">{{ log_count }} Users Log In Today</h4><hr/>
+        </a>
+        <a href="{% url 'current_login_user' %}">
+            <h4 class="text-center" style="font-family:sans-serif;">{{ num_users }} Users Logged In At This Time</h4><hr/>
+        </a>
     </div>
 {% endblock %}
