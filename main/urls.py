@@ -7,5 +7,7 @@ urlpatterns = [
     path('activation/by/school',adminviews.ManageActiveAndDeactiveBySchoolView, name='active_deactive_by_school'),
     path('activation/by/school/activete',adminviews.ManageActivateSchoolView, name='activate_school'),
     path('activation/by/school/deactivate',adminviews.ManageDeactivateSchoolView, name='deactivate_school'),
+    path('users/log-in',adminviews.ManageLoggedInUsersView, name='login_user'),
+    path('users/log-in/at-this-time',adminviews.ManageLoggedInUsersAtThisTimeView, name='current_login_user'),
     
 ]
