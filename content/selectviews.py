@@ -89,20 +89,16 @@ def ManageSessionSelectView(SelectView,date,Ccode,subject):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['Admin','Teacher'])
 def ManageContentSelectView(SelectView,date,Ccode,subject,session):
-    cont = []
-    sub = get_object_or_404(Subjects , subject_name = subject)
-    con = Content.objects.all()
-    session = get_object_or_404(Session , pk = session)
     user = SelectView.user.groups.values('name')
-    for rows in con:
-        Cc = get_object_or_404(Classes, class_name = rows.class_name)
-        if str(Cc.code) == str(Ccode):
-            if str(rows.subject) == str(sub):
-                if str(str(session.session_start_date + timedelta(days=rows.day-1))) == str(date):
-                    conday = str((datetime.date(int(date[:4]),int(date[5:7]),int(date[8:10]))) - session.session_start_date + timedelta(days = 1))[:2]
-                    FContent = get_list_or_404(Content , day = conday , class_name = Ccode , subject = sub , therefor = 'O')
-                    if FContent not in cont:
-                        cont.append(FContent)
+    class_ = get_object_or_404(Classes , pk = Ccode)
+    subject = get_object_or_404(Subjects , subject_name = subject)
+    session = get_object_or_404(Session , pk = session)
+    cont = []
+    for i in Content.objects.all():
+        if str(i.subject.pk) == str(subject.pk):
+            if str(i.class_name.pk) == str(class_.pk):
+                if str(str(session.session_start_date + timedelta(days=i.day-1))) == str(date):
+                    cont.append(i)
     context = {'user':user ,'content' : cont,}
     return render(SelectView , 'Select/content_select.html' , context)
 

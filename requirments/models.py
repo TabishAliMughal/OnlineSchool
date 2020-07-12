@@ -28,4 +28,12 @@ class Session(models.Model):
     session_start_date = models.DateField()
     def __str__(self):
         return '{}'.format(str(self.session_number))
+
+class Visits(models.Model):
+    code = models.AutoField(primary_key = True)
+    page = models.CharField(max_length = 50)
+    visits = models.IntegerField()
+    date = models.DateField()
+    def __str__(self):
+        return '{}'.format(str(self.page))
     
