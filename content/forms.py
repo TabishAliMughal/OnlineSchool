@@ -64,3 +64,11 @@ class ImageForm(forms.ModelForm):
             'image' ,
         ]
 
+class VisitsForm(forms.ModelForm):
+    class Meta:
+        model = Visits
+        fields = [
+            'page' ,
+            'visits' ,
+            'date' ,
+        ]

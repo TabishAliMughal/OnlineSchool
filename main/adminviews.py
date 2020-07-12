@@ -56,7 +56,9 @@ def ManageProfilesView(ProfileView):
     p = int('0')
     for i in users:
         p = p + 1
+    visit = Visits.objects.all()
     context = {
+        'visit': visit ,
         'num_users': p ,
         'log_count': log_count ,
         'students': students ,

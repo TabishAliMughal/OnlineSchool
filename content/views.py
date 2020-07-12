@@ -6,6 +6,7 @@ from django.contrib.auth.models import Group
 from authentication.user_handeling import unauthenticated_user, allowed_users, admin_only
 from teacher.models import *
 from .forms import *
+import datetime
 
 def ManageMainView(SelectView):
     user = SelectView.user.groups.values('name')
@@ -90,6 +91,20 @@ def ManageDemoListView(ListView,date):
                         'module' : i.module ,
                     })
         content.append({'clas':v , 'content' : abc})
+    visit = get_object_or_404(Visits,page = 'DemoList')
+    if str(visit.date) != str(datetime.date.today()):
+        form = VisitsForm({
+        'page' : 'DemoList' ,
+        'visits' : 1 ,
+        'date' : datetime.date.today() ,
+        } or None , instance = visit)
+    else:
+        form = VisitsForm({
+            'page' : 'DemoList' ,
+            'visits' : visit.visits + 1 ,
+            'date' : datetime.date.today() ,
+        } or None , instance = visit)
+        form.save()
     context = {
         'date' : date ,
         'content' : content,

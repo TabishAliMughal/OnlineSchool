@@ -87,5 +87,13 @@
         <a href="{% url 'current_login_user' %}">
             <h4 class="text-center" style="font-family:sans-serif;">{{ num_users }} Users Logged In At This Time</h4><hr/>
         </a>
+        {% for i in visit %}
+        <br>
+        <br>
+        <hr>
+        <a>
+            <h6 style="text-align:center; font-family:fantasy;">We Got <span style="font-size:25px; font-weight:bolder;">{{ i.visits }}</span> Visits On <span style="font-size:25px; font-weight:bolder;">{{ i.page }}</span> Page Today</h6><hr/>
+        </a>
+        {% endfor %}
     </div>
 {% endblock %}
