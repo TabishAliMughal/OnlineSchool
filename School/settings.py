@@ -78,6 +78,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django_session_timeout.middleware.SessionTimeoutMiddleware',
 ]
 
 ROOT_URLCONF = 'School.urls'
@@ -159,6 +161,9 @@ STATICFILES_DIRS = [
 ]
 
 
+SESSION_EXPIRE_SECONDS = 300  # 300 seconds = 5 minutes
+
+SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
 
 import django_heroku
 

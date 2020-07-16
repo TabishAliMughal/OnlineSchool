@@ -12,3 +12,4 @@ django-google-maps
 django-location
 xhtml2pdf
 django-googledrive-storage
+django-session-timeout

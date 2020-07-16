@@ -54,6 +54,8 @@ def logoutUser(request):
 	logout(request)
 	return redirect('main')
 
+
+
 # @admin_only
 # @login_required(login_url='login')
 # @allowed_users(allowed_roles=['admin'])

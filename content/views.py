@@ -94,10 +94,11 @@ def ManageDemoListView(ListView,date):
     visit = get_object_or_404(Visits,page = 'DemoList')
     if str(visit.date) != str(datetime.date.today()):
         form = VisitsForm({
-        'page' : 'DemoList' ,
-        'visits' : 1 ,
-        'date' : datetime.date.today() ,
+            'page' : 'DemoList' ,
+            'visits' : 1 ,
+            'date' : datetime.date.today() ,
         } or None , instance = visit)
+        form.save()
     else:
         form = VisitsForm({
             'page' : 'DemoList' ,
