@@ -57,17 +57,17 @@ INSTALLED_APPS = [
 GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = 'static/my-shop-277711-284fa265f773.json'
 GOOGLE_DRIVE_STORAGE_MEDIA_ROOT = 'Online-School/' # OPTIONAL
 
-MAP_WIDGETS = {
-    "GooglePointFieldWidget": (
-        ("zoom", 15),
-        ("mapCenterLocationName", "london"),
-        ("GooglePlaceAutocompleteOptions", {'componentRestrictions': {'country': 'uk'}}),
-        ("markerFitZoom", 12),
-    ),
-    "GOOGLE_MAP_API_KEY": "AIzaSyACgTHo7SLBqnZANd406ZF6h2xNMH58Flw"
-}
+# MAP_WIDGETS = {
+#     "GooglePointFieldWidget": (
+#         ("zoom", 15),
+#         ("mapCenterLocationName", "london"),
+#         ("GooglePlaceAutocompleteOptions", {'componentRestrictions': {'country': 'uk'}}),
+#         ("markerFitZoom", 12),
+#     ),
+#     "GOOGLE_MAP_API_KEY": "AIzaSyACgTHo7SLBqnZANd406ZF6h2xNMH58Flw"
+# }
 
-GOOGLE_MAPS_API_KEY =  "AIzaSyACgTHo7SLBqnZANd406ZF6h2xNMH58Flw"
+# GOOGLE_MAPS_API_KEY =  "AIzaSyACgTHo7SLBqnZANd406ZF6h2xNMH58Flw"
 
 
 MIDDLEWARE = [
