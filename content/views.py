@@ -91,18 +91,20 @@ def ManageDemoListView(ListView,date):
                         'module' : i.module ,
                     })
         content.append({'clas':v , 'content' : abc})
+    num_visits = ListView.session.get('num_visits', 0)
+    ListView.session['num_visits'] = num_visits + 1
     visit = get_object_or_404(Visits,page = 'DemoList')
     if str(visit.date) != str(datetime.date.today()):
         form = VisitsForm({
             'page' : 'DemoList' ,
-            'visits' : 1 ,
+            'visits' : num_visits ,
             'date' : datetime.date.today() ,
         } or None , instance = visit)
         form.save()
     else:
         form = VisitsForm({
             'page' : 'DemoList' ,
-            'visits' : visit.visits + 1 ,
+            'visits' : num_visits ,
             'date' : datetime.date.today() ,
         } or None , instance = visit)
         form.save()
