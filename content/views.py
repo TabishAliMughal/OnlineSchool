@@ -80,8 +80,7 @@ def ManageDemoListView(ListView,date):
         k = int('0')
         abc = []
         for i in Content.objects.all():
-            if str(v.pk) == str(i.class_name.pk):
-                if str(day) == str(i.day):
+            if str(v.pk) == str(i.class_name.pk) and str(day) == str(i.day):
                     k = k + 1
                     abc.append({
                         'period' : k ,
