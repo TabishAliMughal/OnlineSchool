@@ -27,10 +27,7 @@ def ManageContentListView(ListView):
     if ListView.method == 'POST':
         list_ = []
         if ListView.POST.get('date'):
-            for i in Content.objects.all():
-                if str(i.class_name.pk) == str(ListView.POST.get('class')):
-                    if str(ListView.POST.get('date')) == str(str(session.session_start_date + timedelta(days=i.day-1))):
-                        list_.append(i)
+            return redirect('content_by_date',ListView.POST.get('date'))
         if ListView.POST.get('subject'):
             for i in Content.objects.all():
                 if str(i.class_name.pk) == str(ListView.POST.get('class')):
@@ -46,7 +43,13 @@ def ManageContentListView(ListView):
         }
         return render (ListView,'Lists/content.html',context)
     else:
-        list_ = Content.objects.all()
+        cont = Content.objects.all().order_by('-code')
+        list_ = []
+        k = int('0')
+        for i in cont:
+            if k <= 4 :
+                list_.append(i)
+                k = k + 1
         classes = Classes.objects.all()
         subjects = Subjects.objects.all()
         context = {

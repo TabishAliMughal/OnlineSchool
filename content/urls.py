@@ -11,7 +11,8 @@ urlpatterns = [
     path('',views.ManageMainView, name ='main'),
     path('view/',views.ManageAllView, name ='all'),
     path('demo',views.ManageDemoView, name ='demo'),
-    path('demo/<date>',views.ManageDemoListView, name ='demo_list'),
+    path('demo/<demodate>',views.ManageDemoListView, name ='demo_list'),
+    path('demo/<fildate>/filter',views.ManageDemoListView, name ='content_by_date'),
     path('select/add',views.ManageSelectToAddView, name ='select_to_add'),
 
     # Create

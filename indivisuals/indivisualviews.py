@@ -25,7 +25,9 @@ def ManageIndivisualProfileView(ProfileView , pk = None):
         if str(i.user.pk) == str(curuser.pk):
             individual = i
     content = []
+    prev_content = []
     v = int('1')
+    d = int('1')
     for i in Content.objects.all():
         if str(i.class_name.pk) == str(individual.clas.pk):
             if str(str(individual.session.session_start_date + timedelta(days=i.day-1))) == str(datetime.date.today()):
@@ -40,6 +42,18 @@ def ManageIndivisualProfileView(ProfileView , pk = None):
                 else:
                     content.append({'content':i,'period':v})
                     v = v + 1
+            if str(str(individual.session.session_start_date + timedelta(days=i.day-2))) == str(datetime.date.today()):
+                if pk:
+                    if str(i.pk) == str(pk):
+                        videos = []
+                        images = []
+                        for vid in Videos.objects.all():
+                            if str(i.pk) == str(vid.content.pk):
+                                videos.append(vid)
+                        prev_content.append({'content':i,'period':d,'videos':videos })
+                else:
+                    prev_content.append({'content':i,'period':d})
+                    d = d + 1
     g = str(individual.clas)
     if g == str('Prep I') or g == str('Prep I') or g == str('Prep II'):
         v = 'pre'
@@ -52,6 +66,7 @@ def ManageIndivisualProfileView(ProfileView , pk = None):
     context = {
         'user':user,
         'content':content,
+        'prev_content':prev_content,
         'clas':v,
         'individual':individual,
     }
