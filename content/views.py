@@ -7,6 +7,7 @@ from authentication.user_handeling import unauthenticated_user, allowed_users, a
 from teacher.models import *
 from .forms import *
 import datetime
+from datetime import timedelta
 
 def ManageMainView(SelectView):
     user = SelectView.user.groups.values('name')
@@ -71,10 +72,19 @@ def ManageDemoView(DemoView):
     }
     return render(DemoView , 'Demo.html' , context)
 
-def ManageDemoListView(ListView,date):
+def ManageDemoListView(ListView,demodate=None,fildate=None):
     user = ListView.user.groups.values('name')
-    v = '0'
-    day = int(date) - 5
+    if fildate:
+        ses_day = str(get_object_or_404(Session , session_number = '1').session_start_date + timedelta(days = 1))
+        d1 = datetime.datetime.strptime(str(ses_day), "%Y-%m-%d").date()
+        d2 = datetime.datetime.strptime(str(fildate), "%Y-%m-%d").date()
+        day = int(str((d1 - d2))[:-12])
+        print(day)
+        date = fildate
+    else:
+        v = '0'
+        day = int(demodate) - 5
+        date = fildate
     content = []
     for v in Classes.objects.all():
         k = int('0')
