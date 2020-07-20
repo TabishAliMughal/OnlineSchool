@@ -75,10 +75,10 @@ def ManageDemoView(DemoView):
 def ManageDemoListView(ListView,demodate=None,fildate=None):
     user = ListView.user.groups.values('name')
     if fildate:
-        ses_day = str(get_object_or_404(Session , session_number = '1').session_start_date + timedelta(days = 1))
+        ses_day = str(get_object_or_404(Session , session_number = '1').session_start_date - timedelta(days = 1))
         d1 = datetime.datetime.strptime(str(ses_day), "%Y-%m-%d").date()
         d2 = datetime.datetime.strptime(str(fildate), "%Y-%m-%d").date()
-        day = int(str((d1 - d2))[:-13])
+        day = str((d2 - d1))[:-14]
         print(day)
         date = fildate
     else:
@@ -91,14 +91,14 @@ def ManageDemoListView(ListView,demodate=None,fildate=None):
         abc = []
         for i in Content.objects.all():
             if str(v.pk) == str(i.class_name.pk) and str(day) == str(i.day):
-                    k = k + 1
-                    abc.append({
-                        'period' : k ,
-                        'pk': i.pk ,
-                        'class_name' : i.class_name ,
-                        'subject' : i.subject ,
-                        'module' : i.module ,
-                    })
+                k = k + 1
+                abc.append({
+                    'period' : k ,
+                    'pk': i.pk ,
+                    'class_name' : i.class_name ,
+                    'subject' : i.subject ,
+                    'module' : i.module ,
+                })
         content.append({'clas':v , 'content' : abc})
     num_visits = ListView.session.get('num_visits', 0)
     ListView.session['num_visits'] = num_visits + 1
