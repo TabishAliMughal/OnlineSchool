@@ -78,7 +78,7 @@ def ManageDemoListView(ListView,demodate=None,fildate=None):
         ses_day = str(get_object_or_404(Session , session_number = '1').session_start_date + timedelta(days = 1))
         d1 = datetime.datetime.strptime(str(ses_day), "%Y-%m-%d").date()
         d2 = datetime.datetime.strptime(str(fildate), "%Y-%m-%d").date()
-        day = int(str((d1 - d2))[:-12])
+        day = int(str((d1 - d2))[:-13])
         print(day)
         date = fildate
     else:
