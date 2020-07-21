@@ -79,7 +79,6 @@ def ManageDemoListView(ListView,demodate=None,fildate=None):
         d1 = datetime.datetime.strptime(str(ses_day), "%Y-%m-%d").date()
         d2 = datetime.datetime.strptime(str(fildate), "%Y-%m-%d").date()
         day = str((d2 - d1))[:-14]
-        print(day)
         date = fildate
     else:
         v = '0'
