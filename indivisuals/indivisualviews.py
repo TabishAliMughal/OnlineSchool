@@ -42,7 +42,7 @@ def ManageIndivisualProfileView(ProfileView , pk = None):
                 else:
                     content.append({'content':i,'period':v})
                     v = v + 1
-            if str(str(individual.session.session_start_date + timedelta(days=i.day-2))) == str(datetime.date.today()):
+            if str(str(individual.session.session_start_date + timedelta(days=i.day))) == str(datetime.date.today()):
                 if pk:
                     if str(i.pk) == str(pk):
                         videos = []
