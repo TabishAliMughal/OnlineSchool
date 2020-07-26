@@ -1,4 +1,4 @@
-from django.shortcuts import render , redirect , get_object_or_404
+from django.shortcuts import render , redirect , get_object_or_404 , get_list_or_404
 from .models import *
 from .forms import *
 from authentication.forms import *
@@ -55,7 +55,15 @@ def ManageIndivisualProfileView(ProfileView , pk = None):
         v = 'ninth'
     elif g == str('Tenth'):
         v = 'tenth'
+    class_subjects = []
+    if content == [] and prev_content == []:
+        for i in ClassSubjects.objects.all():
+            if individual.clas.code == i.class_name.code:
+                class_subjects.append(i)
+        content = 'No'
+        prev_content = 'No'
     context = {
+        'class_subjects':class_subjects,
         'user':user,
         'content':content,
         'prev_content':prev_content,
@@ -66,15 +74,30 @@ def ManageIndivisualProfileView(ProfileView , pk = None):
         return render(ProfileView,'Indivisuals/Period.html',context)
     else:
         day = datetime.datetime.now().strftime("%A")
-        if str(day) == 'Saturday' or str(day) == 'Sunday' :
-            return render(ProfileView,'Indivisuals/Weekend.html',context)
-        elif str(datetime.date.today()) <= str(individual.session.session_start_date - timedelta(days=1)):
+        if str(datetime.date.today()) <= str(individual.session.session_start_date - timedelta(days=1)):
             return render(ProfileView,'Indivisuals/BeforeStart.html',context)
         elif str(individual.active) == str('False'):
             return render(ProfileView,'Indivisuals/FeeNotSubmited.html',context)            
         else:
             return render(ProfileView,'Indivisuals/Profile.html',context)
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Individuals'])
+def ManageIndivisualRevisionSubjectView(View , individual , clas , subject):
+    user = View.user.groups.values('name')
+    individual = get_object_or_404(Indivisuals , code = individual)
+    clas = get_object_or_404(Classes , code = clas)
+    subject = get_object_or_404(Subjects , code = subject)
+    content = get_list_or_404(Content , class_name = clas , subject = subject )
+    context = {
+        'user':user,
+        'content':content,
+        'individual':individual,
+    }
+    return render(View,'Indivisuals/Revision.html',context)
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Individuals'])
 def ManageIndivisualDocumentsView(DocumentView , pk):
     user = DocumentView.user.groups.values('name')
     content = get_object_or_404(Content , pk = int(pk))
