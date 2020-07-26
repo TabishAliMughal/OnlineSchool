@@ -3,9 +3,8 @@ from .models import *
 
 # Register your models here.
 
-admin.site.register(Semester)
-admin.site.register(Session)
 admin.site.register(ExamStatus)
 admin.site.register(ExamQuestions)
 admin.site.register(ExamAnswers)
 admin.site.register(QuestionsChecked)
+admin.site.register(Guide)
