@@ -9,36 +9,50 @@
         <iframe style="width: 50%;height:40%;" src="https://www.youtube-nocookie.com/embed/X4DpywWlRbM" ></iframe>
         <iframe style="width: 50%;height:40%;" src="https://www.youtube-nocookie.com/embed/38UUz15fEzo" ></iframe>
         </div>
-        <h2 class="text-center" style="font-family:sans-serif;">Content</h2><hr/>
-        <table  class="table table-hover table-sm res-table">
-            <tbody id="myTable" align="center">
-                {% for i in content %}
-                <tr>
-                    <td><a href="{% url 'indivisual_content' i.content.pk %}">Period : {{ i.period }}</a><br><br></td>
-                    <td><a href="{% url 'indivisual_content' i.content.pk %}">{{ i.content.subject }}</a><br><br></td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        {% if clas == 'pre' %}
-            {% include 'Indivisuals/M-PTimeTable.html' %}
-        {% elif clas == 'primary' %}
-            {% include 'Indivisuals/1-8TimeTable.html' %}
-        {% elif clas == 'ninth' %}
-            {% include 'Indivisuals/9TimeTable.html' %}
-        {% elif clas == 'tenth' %}
-            {% include 'Indivisuals/10TimeTable.html' %}
+        {% if content == 'No' and prev_content == 'No' %}
+            <h2 style="color: grey;" class="text-center">Today Is Revision</h2>
+            <h3 class="text-center">Select Subject</h3><hr/>
+            <table  class="table table-hover table-sm res-table">
+                <tbody id="myTable" align="center">
+                    {% for i in class_subjects %}
+                        <tr>
+                            <td><a href="{% url 'revision_subject' individual.code individual.clas.code i.subject_name.code %}">{{ i.subject_name }}</a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <h2 class="text-center" style="font-family:sans-serif;">Content</h2><hr/>
+            <table  class="table table-hover table-sm res-table">
+                <tbody id="myTable" align="center">
+                    {% for i in content %}
+                    <tr>
+                        <td><a href="{% url 'indivisual_content' i.content.pk %}">Period : {{ i.period }}</a><br><br></td>
+                        <td><a href="{% url 'indivisual_content' i.content.pk %}">{{ i.content.subject }}</a><br><br></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% if clas == 'pre' %}
+                {% include 'Indivisuals/M-PTimeTable.html' %}
+            {% elif clas == 'primary' %}
+                {% include 'Indivisuals/1-8TimeTable.html' %}
+            {% elif clas == 'ninth' %}
+                {% include 'Indivisuals/9TimeTable.html' %}
+            {% elif clas == 'tenth' %}
+                {% include 'Indivisuals/10TimeTable.html' %}
+            {% endif %}
+            <h2 class="text-center" style="font-family:sans-serif;">Previous</h2><hr/>
+            <table  class="table table-hover table-sm res-table">
+                <tbody id="myTable" align="center">
+                    {% for i in prev_content %}
+                    <tr>
+                        <td><a href="{% url 'indivisual_content' i.content.pk %}">Period : {{ i.period }}</a><br><br></td>
+                        <td><a href="{% url 'indivisual_content' i.content.pk %}">{{ i.content.subject }}</a><br><br></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         {% endif %}
-        <h2 class="text-center" style="font-family:sans-serif;">Previous</h2><hr/>
-        <table  class="table table-hover table-sm res-table">
-            <tbody id="myTable" align="center">
-                {% for i in prev_content %}
-                <tr>
-                    <td><a href="{% url 'indivisual_content' i.content.pk %}">Period : {{ i.period }}</a><br><br></td>
-                    <td><a href="{% url 'indivisual_content' i.content.pk %}">{{ i.content.subject }}</a><br><br></td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
     </div>
 {% endblock %}

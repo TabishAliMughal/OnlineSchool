@@ -56,8 +56,8 @@
        <table class="table table-hover table-sm res-table " id="myTable">
             <thead align="center">
                 <tr>
-                  <th>Class<br>Subject</th>
-                  <th>Module<br>Day</th>
+                  <th>Class<br>Module</th>
+                  <th>Subject<br>Day</th>
                   {% if request.user.is_authenticated %}
                     {% for i in user %}
                       {% if i.name == 'Admin' %}
