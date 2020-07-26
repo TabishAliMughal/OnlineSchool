@@ -10,6 +10,7 @@ from datetime import timedelta
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group , User
 from authentication.user_handeling import unauthenticated_user, allowed_users, admin_only
+from exam.models import *
 
 
 
@@ -36,6 +37,13 @@ def ManageIndivisualProfileView(ProfileView , pk = None):
             if str(str(individual.session.session_start_date + timedelta(days=i.day))) == str(datetime.date.today()):
                 prev_content.append({'content':i,'period':d})
                 d = d + 1
+    exam = []
+    for i in ExamStatus.objects.all():
+        if str(individual.clas.code) == str(i.class_name.pk):
+            if str(individual.session.pk) == str(i.session.pk):
+                if str(i.status) == 'True':
+                    exam.append({'exam':i,'period':v})
+                    v = v + 1
     if pk:
         content = []
         for i in Content.objects.all():
@@ -48,27 +56,28 @@ def ManageIndivisualProfileView(ProfileView , pk = None):
                 content.append({'content':i,'period':v,'videos':videos })
     g = str(individual.clas)
     if g == str('Prep I') or g == str('Prep I') or g == str('Prep II'):
-        v = 'pre'
+        c = 'pre'
     elif g == str('First') or g == str('Second') or g == str('Third') or g == str('Fourth') or g == str('Fifth') or g == str('Sixth') or g == str('Seventh') or g == str('Eighth'):
-        v = 'primary'
+        c = 'primary'
     elif g == str('Ninth'):
-        v = 'ninth'
+        c = 'ninth'
     elif g == str('Tenth'):
-        v = 'tenth'
+        c = 'tenth'
     class_subjects = []
-    if content == [] and prev_content == []:
+    if content != [] and prev_content == []:
         for i in ClassSubjects.objects.all():
             if individual.clas.code == i.class_name.code:
                 class_subjects.append(i)
-        content = 'No'
+        content = 'Yo'
         prev_content = 'No'
     context = {
         'class_subjects':class_subjects,
         'user':user,
         'content':content,
         'prev_content':prev_content,
-        'clas':v,
+        'clas':c,
         'individual':individual,
+        'exam':exam,
     }
     if pk:
         return render(ProfileView,'Indivisuals/Period.html',context)

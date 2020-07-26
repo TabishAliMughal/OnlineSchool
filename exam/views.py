@@ -8,20 +8,26 @@ from authentication.user_handeling import unauthenticated_user, allowed_users, a
 
 
 @login_required(login_url='login')
-@allowed_users(allowed_roles=['Teacher'])
+@allowed_users(allowed_roles=['Teacher','Individuals'])
 def ManageClassExamView(ExamView,id):
     user = ExamView.user.groups.values('name')
     exam = get_object_or_404(ExamStatus,pk = id)
     questions = get_list_or_404(ExamQuestions , exam = id)
+    answers = int('0')
+    for i in ExamAnswers.objects.all():
+        if str(i.exam.pk) == str(exam.pk):
+            if i.student.pk == (get_object_or_404(Indivisuals , user = ExamView.user)).pk:
+                answers = answers + 1
     context = {
         'questions' : questions ,
         'exam' : exam ,
         'user': user ,
+        'answers': answers ,
     }
     return render(ExamView,'Exam/Exam.html',context)
 
 @login_required(login_url='login')
-@allowed_users(allowed_roles=['Teacher'])
+@allowed_users(allowed_roles=['Teacher','Individuals'])
 def ManageClassExamQuestionPrintView(PrintView,id):
     user = PrintView.user.groups.values('name')
     exam = get_object_or_404(ExamStatus,pk = id)
@@ -35,7 +41,7 @@ def ManageClassExamQuestionPrintView(PrintView,id):
     return HttpResponse(pdf, content_type='application/pdf')
 
 @login_required(login_url='login')
-@allowed_users(allowed_roles=['Teacher'])
+@allowed_users(allowed_roles=['Teacher','Individuals'])
 def ManageClassExamFilePrintView(ExamView,id):
     file = get_object_or_404(ExamQuestions , exam = id)
     path = file.file
@@ -82,9 +88,12 @@ def ManageTeacherClassExamAnswersStudentSelectView(SelectView,id,pk):
     return render(SelectView,'Exam/Class.html',context)
 
 @login_required(login_url='login')
-@allowed_users(allowed_roles=['Teacher'])
-def ManageAddStudentExamPictureView(UploadView,id,pk):
-    student = get_object_or_404(TeacherClassStudents, pk = pk)
+@allowed_users(allowed_roles=['Teacher','Individuals'])
+def ManageAddStudentExamPictureView(UploadView,id,pk=None):
+    if pk:
+        student = get_object_or_404(Indivisuals, pk = pk)
+    else:
+        student = get_object_or_404(Indivisuals , user = UploadView.user)
     selectedexam = get_object_or_404(ExamStatus , pk = id)
     user = UploadView.user.groups.values('name')
     form = ManageExamAnswersForm()
@@ -97,7 +106,7 @@ def ManageAddStudentExamPictureView(UploadView,id,pk):
     if UploadView.method == 'POST':
         v = ExamAnswers.objects.count()
         filled_form  = ManageExamAnswersForm({
-            'student' : int(pk) ,
+            'student' : student.pk ,
             'exam' : int(selectedexam.pk) ,
             'checked' : 'False' ,
         },UploadView.FILES)

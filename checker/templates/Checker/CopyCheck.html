@@ -10,64 +10,91 @@
 {% else %}
 <form method="POST">
     {% csrf_token %}
-    <div>
+    <div class="container">
         <h3 class="text-center" style="font-family:sans-serif;">Checking Copy Of {{ student.name }}</h3><hr/>
        <table class="table table-hover table-sm res-table ">
             <tr>
-                <th><h4 class="text-center" style="font-family:sans-serif;">Questions</h4><hr/></th>
-                <th><h4 class="text-center" style="font-family:sans-serif;">Answers</h4><hr/></th>
+                <td><h4 class="text-center" style="font-family:sans-serif;">Questions</h4></td>
             </tr>
             <tr>
                 <td><h6 class="text-center" style="font-family:sans-serif;">Total Marks = {{ marks }}</h6></td>
-                <td><h6 class="text-center" style="font-family:sans-serif;"></h6></td>
+            </tr>
+            {% for i in questions %}
+                {% if i.question == '' %}
+                    {% for v in file %}
+                        {% if v == '' %}
+                        {% else %}
+                            <tr style="text-align: center;">
+                                <td><img src="{{ i.file.url }}" align="center" style="width:50%;"></td>
+                            </tr>
+                            <tr style="text-align: center;">
+                                <td><a style="text-align: center;">Numbers = <input type="number" name='{{i.pk}}' min="0" max="{{i.marks}}" value='{{i.mar}}' required/></a></td><br><br>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                        <tr style="text-align: center;">
+                            <td style="width: 400px;"><a>{{ i.question }} ( {{ i.marks }} )</a><input type="number" name='{{i.pk}}' min="0" max="{{i.marks}}" value='{{i.mar}}' required/></td>
+                            <!-- <input type='text' name="d" value="{{i.che}}" hidden/> -->
+                        </tr>
+                    {% endif %}
+                {% endfor %}
             </tr>
             <tr>
-                <th>
-                   <table  class="table table-hover table-sm res-table">
-                        <tbody id="myTable">
-                            {% for i in questions %}
-                                {% if i.question == '' %}
-                                    {% for v in file %}
-                                        {% if v == '' %}
-                                        {% else %}
-                                            <th>
-                                                <iframe src="{% static './' %}{{v}}" style="height: 200px; width: 700px; overflow: auto; margin-left: 0px;">
-                                                    <embed src="{% static './' %}{{v}}" width="500px" height="270px" />
-                                                </iframe>
-                                            </th>
-                                        {% endif %}
-                                    {% endfor %}
-                                {% else %}
-                                    <tr>
-                                        <td style="width: 400px;"><a>{{ i.question }} ( {{ i.marks }} ){{i.pk}}</a></td>
-                                        <td><input type="number" name='{{i.pk}}' min="0" max="{{i.marks}}" value='{{i.mar}}' required/></td>
-                                        <input type='text' name="d" value="{{i.che}}" hidden/>
-                                    </tr>
-                                {% endif %}
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </th>
-                <th>
-                    <div style="height: 400px; width: 550px; overflow: auto; text-align: left; margin-left: 0px;">
+                <td><h4 class="text-center" style="font-family:sans-serif;">Answers</h4></td>
+            </tr>
+            <tr style="text-align: center;">
+                <td>
+                    <div style="width:auto">
                         <div>
-                            <img id="imgprev" width="500px" style="align-items: left; margin-left: 20px; margin-top: 0px;"/>
+                            <img id="imgprev" style="align-items: center;"/>
                         </div>
                     </div>
                     <div id="slideshow">
                         {% for i in answers %}
-                            <img src="{% static '' %}{{i}}" width="300px" hidden/>
+                            <img src="{{ i.url }}" width="100%" hidden/>
                         {% endfor %}
+                        <input id="num_ans" type="number" value="{{num_ans}}" hidden />
                     </div>
-                </th>
+                </td>
+            </tr>
+            <tr>
+                <td><a id="btnprev" class="btn btn-primary">Previous</a><a id="btnnext" class="btn btn-primary">Next</a></td>
             </tr>
             <tr>
                 <td><input type="submit" class="btn btn-primary" value="Save"/></td>
-                <td><a id="btnprev" class="btn btn-primary">Previous</a><a id="btnnext" class="btn btn-primary">Next</a></td>
             </tr>
         </table>
     </div>
 </form>
+<script>
+  document.getElementById('btnnext').onclick = next;
+  document.getElementById('btnprev').onclick = prev;
+  var abc = document.getElementById('num_ans').value;
+    // If the user clicks in the window, set the background color of <body> to yellow
+    var counter = 0;
+    function next() {
+      
+      var div = document.getElementById('slideshow');
+      var img = div.getElementsByTagName('img')[counter].src;//.childNodes[2];
+      
+      document.getElementById("imgprev").src=img;//document.getElementById("imgprev").src;
+      
+      
+      counter++;
+      if (counter==abc) counter = 0;
+    }
+    function prev() {
+      
+      var div = document.getElementById('slideshow');
+      var img = div.getElementsByTagName('img')[counter].src;//.childNodes[2];
+      
+      document.getElementById("imgprev").src=img;//document.getElementById("imgprev").src;
+      
+      if (counter==0) counter = abc;
+      counter--;
+    }
+</script>
 {% endif %}
 {% endblock %}
 
