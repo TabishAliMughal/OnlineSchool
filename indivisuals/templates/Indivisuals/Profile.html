@@ -26,16 +26,16 @@
             <table  class="table table-hover table-sm res-table">
                 <tbody id="myTable" align="center">
                     {% for i in content %}
-                    <tr>
-                        <td><br><a href="{% url 'indivisual_content' i.content.pk %}">Period : {{ i.period }}</a><br><br></td>
-                        <td><br><a href="{% url 'indivisual_content' i.content.pk %}">{{ i.content.subject }}</a><br><br></td>
-                    </tr>
+                        <tr>
+                            <td><br><a href="{% url 'indivisual_content' i.content.pk %}">Period : {{ i.period }}</a><br><br></td>
+                            <td><br><a href="{% url 'indivisual_content' i.content.pk %}">{{ i.content.subject }}</a><br><br></td>
+                        </tr>
                     {% endfor %}
                     {% for i in exam %}
-                    <tr>
-                        <td><br><a href="{% url 'teacher_class_exam' i.exam.pk %}">Period : {{ i.period }}</a><br><br></td>
-                        <td><br><a href="{% url 'teacher_class_exam' i.exam.pk %}">{{ i.exam.subject }} Exam</a><br><br></td>
-                    </tr>
+                        <tr>
+                            <td><br><a href="{% url 'teacher_class_exam' i.exam.pk %}">Period : {{ i.period }}</a><br><br></td>
+                            <td><br><a href="{% url 'teacher_class_exam' i.exam.pk %}">{{ i.exam.subject }} Exam</a><br><br></td>
+                        </tr>
                     {% endfor %}
                 </tbody>
             </table>
