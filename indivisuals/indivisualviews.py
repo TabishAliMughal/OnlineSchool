@@ -64,12 +64,12 @@ def ManageIndivisualProfileView(ProfileView , pk = None):
     elif g == str('Tenth'):
         c = 'tenth'
     class_subjects = []
-    if content != [] and prev_content == []:
+    if content == [] and prev_content == []:
         for i in ClassSubjects.objects.all():
             if individual.clas.code == i.class_name.code:
                 class_subjects.append(i)
-        content = 'Yo'
-        prev_content = 'No'
+                content = 'No'
+                prev_content = 'No'
     context = {
         'class_subjects':class_subjects,
         'user':user,
