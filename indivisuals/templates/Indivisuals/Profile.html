@@ -27,8 +27,8 @@
                 <tbody id="myTable" align="center">
                     {% for i in content %}
                         <tr>
-                            <td><br><a href="">Period : {{ i.period }}</a><br><br></td>
-                            <td><br><a href="">{{ i.content.subject }}</a><br><br></td>
+                            <td><br><a href="{% url 'indivisual_content' i.content.pk %}">Period : {{ i.period }}</a><br><br></td>
+                            <td><br><a href="{% url 'indivisual_content' i.content.pk %}">{{ i.content.subject }}</a><br><br></td>
                         </tr>
                     {% endfor %}
                     {% for i in exam %}
@@ -53,8 +53,8 @@
                 <tbody id="myTable" align="center">
                     {% for i in prev_content %}
                     <tr>
-                        <td><a href="">Period : {{ i.period }}</a><br><br></td>
-                        <td><a href="">{{ i.content.subject }}</a><br><br></td>
+                        <td><a href="{% url 'indivisual_content' i.content.pk %}">Period : {{ i.period }}</a><br><br></td>
+                        <td><a href="{% url 'indivisual_content' i.content.pk %}">{{ i.content.subject }}</a><br><br></td>
                     </tr>
                     {% endfor %}
                 </tbody>
