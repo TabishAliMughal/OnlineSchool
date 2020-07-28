@@ -27,8 +27,17 @@ def ManageContentListView(ListView):
     if ListView.method == 'POST':
         list_ = []
         if ListView.POST.get('date'):
-            return redirect('content_by_date',ListView.POST.get('date'))
-        if ListView.POST.get('subject'):
+            for i in Content.objects.all():
+                ses_day = str(get_object_or_404(Session , session_number = '1').session_start_date)
+                d1 = datetime.datetime.strptime(str(ses_day), "%Y-%m-%d").date()
+                d2 = datetime.datetime.strptime(str(ListView.POST.get('date')), "%Y-%m-%d").date()
+                day = str((d2 - d1))[:-14]
+                if str(day) == str(i.day):
+                    # if str(ListView.POST.get('subject')) == str(i.subject.pk):
+                    if str(i.class_name.pk) == str(ListView.POST.get('class')):
+                        list_.append(i)
+            # return redirect('content_by_date',ListView.POST.get('date'))
+        if ListView.POST.get('class'):
             for i in Content.objects.all():
                 if str(i.class_name.pk) == str(ListView.POST.get('class')):
                     if str(ListView.POST.get('subject')) == str(i.subject.pk):
