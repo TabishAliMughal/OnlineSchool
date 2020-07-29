@@ -122,6 +122,6 @@ def ManageDemoContentView(View , day , clas):
         'date' : day ,
         'content' : content,
         'user': user ,
-        'clas' : clas ,
+        'clas' : get_object_or_404(Classes , pk = clas) ,
     }
     return render(View , 'Lists/DemoContent.html' , context)
