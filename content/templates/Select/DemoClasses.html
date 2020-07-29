@@ -7,7 +7,7 @@
             <tbody id="myTable" align="center">
                 {% for i in classes %}
                     <tr>
-                        <td><a style="width: 100%;" class="btn btn-primary" href="{% url 'demo_content' day i.pk %}">{{ i.class_name }}</a></td>
+                        <td><a style="width: 30%; font-size:20;" class="btn btn-primary" href="{% url 'demo_content' day i.pk %}">{{ i.class_name }}</a></td>
                     </tr>
                 {% endfor %}
             </tbody>
