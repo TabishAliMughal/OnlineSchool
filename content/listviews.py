@@ -26,15 +26,16 @@ def ManageContentListView(ListView):
     session = get_object_or_404(Session , session_number = '1')
     if ListView.method == 'POST':
         list_ = []
-        if ListView.POST.get('date'):
-            for i in Content.objects.all():
-                ses_day = str(get_object_or_404(Session , session_number = '1').session_start_date)
-                d1 = datetime.datetime.strptime(str(ses_day), "%Y-%m-%d").date()
-                d2 = datetime.datetime.strptime(str(ListView.POST.get('date')), "%Y-%m-%d").date()
-                day = str((d2 - d1))[:-14]
-                if str(day - 1) == str(i.day):
-                    if str(i.class_name.pk) == str(ListView.POST.get('class')):
-                        list_.append(i)
+        if ListView.POST.get('day'):
+            # for i in Content.objects.all():
+            #     ses_day = str(get_object_or_404(Session , session_number = '1').session_start_date)
+            #     d1 = datetime.datetime.strptime(str(ses_day), "%Y-%m-%d").date()
+            #     d2 = datetime.datetime.strptime(str(ListView.POST.get('date')), "%Y-%m-%d").date()
+            #     day = str((d2 - d1))[:-14]
+            #     if str(day - 1) == str(i.day):
+            #         if str(i.class_name.pk) == str(ListView.POST.get('class')):
+            #             list_.append(i)
+            return redirect('content_by_date',ListView.POST.get('day'))
         if ListView.POST.get('class'):
             for i in Content.objects.all():
                 if str(i.class_name.pk) == str(ListView.POST.get('class')):
