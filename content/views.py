@@ -72,33 +72,37 @@ def ManageDemoView(DemoView):
     }
     return render(DemoView , 'Demo.html' , context)
 
-def ManageDemoListView(ListView,demodate=None,filday=None):
+def ManageDemoListView(ListView , demodate = None , filday = None):
     user = ListView.user.groups.values('name')
     if filday:
-        # ses_day = str(get_object_or_404(Session , session_number = '1').session_start_date - timedelta(days = 1))
-        # d1 = datetime.datetime.strptime(str(ses_day), "%Y-%m-%d").date()
-        # d2 = datetime.datetime.strptime(str(fildate), "%Y-%m-%d").date()
         day = filday
     else:
-        # v = '0'
         day = int(demodate) - 5
+    classes = Classes.objects.all()
+    context = {
+        'user' : user ,
+        'day' : day ,
+        'classes' : classes ,
+    }
+    return render(ListView , 'Select/DemoClasses.html' , context)
+
+
+def ManageDemoContentView(View , day , clas):
+    user = View.user.groups.values('name')
     content = []
-    for v in Classes.objects.all():
-        k = int('0')
-        abc = []
-        for i in Content.objects.all():
-            if str(v.pk) == str(i.class_name.pk) and str(day) == str(i.day):
-                k = k + 1
-                abc.append({
-                    'period' : k ,
-                    'pk': i.pk ,
-                    'class_name' : i.class_name ,
-                    'subject' : i.subject ,
-                    'module' : i.module ,
-                })
-        content.append({'clas':v , 'content' : abc})
-    num_visits = ListView.session.get('num_visits', 0)
-    ListView.session['num_visits'] = num_visits + 1
+    k = int('0')
+    for i in Content.objects.all():
+        if str(clas) == str(i.class_name.pk) and str(day) == str(i.day):
+            k = k + 1
+            content.append({
+                'period' : k ,
+                'pk': i.pk ,
+                'class_name' : i.class_name ,
+                'subject' : i.subject ,
+                'module' : i.module ,
+            })
+    num_visits = View.session.get('num_visits', 0)
+    View.session['num_visits'] = num_visits + 1
     visit = get_object_or_404(Visits,page = 'DemoList')
     if str(visit.date) != str(datetime.date.today()):
         form = VisitsForm({
@@ -118,5 +122,6 @@ def ManageDemoListView(ListView,demodate=None,filday=None):
         'date' : day ,
         'content' : content,
         'user': user ,
+        'clas' : clas ,
     }
-    return render(ListView , 'Lists/DemoContent.html' , context)
+    return render(View , 'Lists/DemoContent.html' , context)

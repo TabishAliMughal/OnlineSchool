@@ -25,26 +25,23 @@
         <h6></h6>
         <h6></h6>
         <h2 class="text-center" style="font-family:sans-serif;">All Periods Of Day : {{ date }}</h2><hr/>
-        {% for v in content %}
-            <h4 class="text-center" style="font-family:sans-serif;">Class = {{ v.clas }}</h4>
-            <table class="table table-hover table-sm res-table" id="myTable">
-                <thead align="center">
+        <table class="table table-hover table-sm res-table" id="myTable">
+            <thead align="center">
+                <tr>
+                    <th>Period</th>
+                    <th>Subject</th>
+                    <th>Module</th>
+                </tr>
+            </thead>
+            {% for i in content %}
+                <tbody id="myTable" align="center">
                     <tr>
-                        <th>Period</th>
-                        <th>Subject</th>
-                        <th>Module</th>
+                        <td><a href="{% url 'content' i.pk %}">Period = {{ i.period }}</a></td>
+                        <td>{{ i.subject }}</td>
+                        <td>{{ i.module }}</td>
                     </tr>
-                </thead>
-                {% for i in v.content %}
-                    <tbody id="myTable" align="center">
-                        <tr>
-                            <td><a href="{% url 'content' i.pk %}">Period = {{ i.period }}</a></td>
-                            <td>{{ i.subject }}</td>
-                            <td>{{ i.module }}</td>
-                        </tr>
-                    </tbody>
-                {% endfor %}
-            </table>
-        {% endfor %}
+                </tbody>
+            {% endfor %}
+        </table>
     </div>
 {% endblock %}
