@@ -13,6 +13,7 @@ urlpatterns = [
     path('demo',views.ManageDemoView, name ='demo'),
     path('demo/<demodate>',views.ManageDemoListView, name ='demo_list'),
     path('demo/<filday>/filter',views.ManageDemoListView, name ='content_by_date'),
+    path('demo/<day>/<clas>',views.ManageDemoContentView, name ='demo_content'),
     path('select/add',views.ManageSelectToAddView, name ='select_to_add'),
 
     # Create
