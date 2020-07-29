@@ -11,13 +11,7 @@
             <a class="btn btn-primary" href="{% url 'content' %}">All</a>
             <a class="btn btn-primary" onclick="sortTable()">Sort</a><br><br>
             <form method="POST">
-              <select required name="class">
-                <option>-------------------</option> 
-                {% for i in classes %}
-                  <option value="{{ i.pk }}">{{ i }}</option>
-                {% endfor %}
-              </select>
-              <input type="date" required name="date" >
+              <input type="number" required name="day" >
               <input type="submit" value="Search">
               {% csrf_token %}
             </form>

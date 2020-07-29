@@ -72,18 +72,16 @@ def ManageDemoView(DemoView):
     }
     return render(DemoView , 'Demo.html' , context)
 
-def ManageDemoListView(ListView,demodate=None,fildate=None):
+def ManageDemoListView(ListView,demodate=None,filday=None):
     user = ListView.user.groups.values('name')
-    if fildate:
-        ses_day = str(get_object_or_404(Session , session_number = '1').session_start_date - timedelta(days = 1))
-        d1 = datetime.datetime.strptime(str(ses_day), "%Y-%m-%d").date()
-        d2 = datetime.datetime.strptime(str(fildate), "%Y-%m-%d").date()
-        day = str((d2 - d1))[:-14]
-        date = fildate
+    if filday:
+        # ses_day = str(get_object_or_404(Session , session_number = '1').session_start_date - timedelta(days = 1))
+        # d1 = datetime.datetime.strptime(str(ses_day), "%Y-%m-%d").date()
+        # d2 = datetime.datetime.strptime(str(fildate), "%Y-%m-%d").date()
+        day = filday
     else:
-        v = '0'
+        # v = '0'
         day = int(demodate) - 5
-        date = fildate
     content = []
     for v in Classes.objects.all():
         k = int('0')
@@ -117,7 +115,7 @@ def ManageDemoListView(ListView,demodate=None,fildate=None):
         } or None , instance = visit)
         form.save()
     context = {
-        'date' : date ,
+        'date' : day ,
         'content' : content,
         'user': user ,
     }
