@@ -25,7 +25,7 @@ SECRET_KEY = 'd-l2zy=3aqe=$b4@kgp$gw#4gz-5d+udh&(t52fmx8stef3fe('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['limitless-school.herokuapp.com']
+ALLOWED_HOSTS = ['limitless-school.herokuapp.com','*']
 
 
 # Application definition
@@ -57,17 +57,17 @@ INSTALLED_APPS = [
 GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = 'static/my-shop-277711-284fa265f773.json'
 GOOGLE_DRIVE_STORAGE_MEDIA_ROOT = 'Online-School/' # OPTIONAL
 
-# MAP_WIDGETS = {
-#     "GooglePointFieldWidget": (
-#         ("zoom", 15),
-#         ("mapCenterLocationName", "london"),
-#         ("GooglePlaceAutocompleteOptions", {'componentRestrictions': {'country': 'uk'}}),
-#         ("markerFitZoom", 12),
-#     ),
-#     "GOOGLE_MAP_API_KEY": "AIzaSyACgTHo7SLBqnZANd406ZF6h2xNMH58Flw"
-# }
+MAP_WIDGETS = {
+    "GooglePointFieldWidget": (
+        ("zoom", 15),
+        ("mapCenterLocationName", "london"),
+        ("GooglePlaceAutocompleteOptions", {'componentRestrictions': {'country': 'uk'}}),
+        ("markerFitZoom", 12),
+    ),
+    "GOOGLE_MAP_API_KEY": "AIzaSyACgTHo7SLBqnZANd406ZF6h2xNMH58Flw"
+}
 
-# GOOGLE_MAPS_API_KEY =  "AIzaSyACgTHo7SLBqnZANd406ZF6h2xNMH58Flw"
+GOOGLE_MAPS_API_KEY =  "AIzaSyACgTHo7SLBqnZANd406ZF6h2xNMH58Flw"
 
 
 MIDDLEWARE = [
@@ -106,6 +106,8 @@ WSGI_APPLICATION = 'School.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+# Local
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis' ,
@@ -116,6 +118,19 @@ DATABASES = {
         'PORT': '5432' ,
     }
 }
+
+# Server
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.contrib.gis.db.backends.postgis' ,
+#         'NAME': 'drhbit8auotoq' ,
+#         'USER': 'zsfkuxsqnvbxyj' ,
+#         'PASSWORD': 'df1f2796a62fcc21034dcbfb7996cc017af0a611a04d0c9a93c0548af20dacf2' ,
+#         'HOST': 'ec2-52-200-48-116.compute-1.amazonaws.com' ,
+#         'PORT': '5432' ,
+#     }
+# }
 
 
 # Password validation
@@ -161,7 +176,7 @@ STATICFILES_DIRS = [
 ]
 
 
-SESSION_EXPIRE_SECONDS = 1500  # 300 seconds = 5 minutes
+SESSION_EXPIRE_SECONDS = 1500  # 1500 seconds = 25 minutes
 
 SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
 

@@ -66,12 +66,17 @@ def ManageIndivisualProfileView(ProfileView , pk = None):
     class_subjects = []
     if content == [] and prev_content == []:
         for i in ClassSubjects.objects.all():
-            if individual.clas.code == i.class_name.code:
+            if str(individual.clas.code) == str(i.class_name.code):
                 class_subjects.append(i)
                 content = 'No'
                 prev_content = 'No'
+    slide = ''
+    for i in range(1,16):
+        if str(datetime.date.today().day) == str(i):
+            slide = 'Kindly Submit Your Fees Before 15 , Otherwise Your Account Will Be Inactive'
     context = {
-        'class_subjects':class_subjects,
+        'slide' : slide ,
+        'class_subjects':class_subjects,  
         'user':user,
         'content':content,
         'prev_content':prev_content,

@@ -3,8 +3,10 @@
 {% block content %}
 {% csrf_token %}
     <div class="container">
-        <img src="{% static './Images/EidMubarak.png' %}" style="width:100%;">
+        <img src="{% static './Images/Independence.png' %}" style="width:100%;">
         <h3 class="text-center">Hello {{ individual }}</h3>
+        <h5 style="text-align: center; color:white;" class="quadrat" >{{ slide }}</h5>
+        <h5 style="text-align: center;" >You Can Use <a href="#" onclick="procedure()">Easypaisa</a> Or Come To School To Submit Fees</h5>
         <div style="text-align: center;">
         <iframe style="width: 50%;height:40%;" src="https://www.youtube-nocookie.com/embed/X4DpywWlRbM" ></iframe>
         <iframe style="width: 50%;height:40%;" src="https://www.youtube-nocookie.com/embed/38UUz15fEzo" ></iframe>
@@ -61,4 +63,26 @@
             </table>
         {% endif %}
     </div>
+
+<div class="form-popup" id="way">
+    <br>
+    <h5>&nbsp &nbsp &nbsp Step # 1 : Submit 500 Rupees</h5>
+    <a>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <span style="font-size: 10px;">Easypaisa Account = </span><span style="font-size: 12px;">Zahid Ali Mughal(03123379978)</span></a>
+    <h5>&nbsp &nbsp &nbsp Step # 2:</h5>
+    <a>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<span style="font-size: 12px;">Take A Picture Of The Receipt(Or Message) And Whatsapp It To 03123379978 With </span> </a>
+    <a><br>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp < Your Name ><br>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp < Your Child Name><br>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp < Your Child Class ></span></a>
+    <br>
+    <br>
+</div>
+
+
+<script>
+    function procedure() {
+      document.getElementById("way").style.display = "block";
+    }
+    
+    function close() {
+      document.getElementById("myForm").style.display = "none";
+    }
+</script>
 {% endblock %}
